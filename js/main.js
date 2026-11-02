@@ -833,22 +833,37 @@ function renderDynamicExcelContent(lang) {
       return p[L] || p.FR || '';
     };
 
+    // Collect all active emails (supports keys named email, email_1, email_2, email_3, etc.)
+    const emailKeys = Object.keys(dynamicParams).filter(k => k.toLowerCase().startsWith('email'));
+    const emails = emailKeys.map(k => getParam(k)).filter(Boolean);
+
     // Update all [data-param] elements across all pages
     document.querySelectorAll('[data-param]').forEach(el => {
       const pKey = el.getAttribute('data-param');
       if (pKey === 'emails_pipe') {
-        const e1 = getParam('email_1');
-        const e2 = getParam('email_2');
-        const combined = [e1, e2].filter(Boolean).join(' | ');
-        if (combined) el.textContent = combined;
+        const combined = emails.join(' | ');
+        el.textContent = combined;
+        if (el.parentElement) el.parentElement.style.display = combined ? '' : 'none';
       } else if (pKey === 'emails_br') {
-        const e1 = getParam('email_1');
-        const e2 = getParam('email_2');
-        const combined = [e1, e2].filter(Boolean).join('<br/>');
-        if (combined) el.innerHTML = combined;
+        const combined = emails.join('<br/>');
+        el.innerHTML = combined;
+        const wrap = el.closest('.cinfo-item') || el.closest('li');
+        if (wrap) wrap.style.display = combined ? '' : 'none';
+      } else if (pKey === 'email_1') {
+        const val = emails[0] || '';
+        el.textContent = val;
+        const li = el.closest('li');
+        if (li) li.style.display = val ? '' : 'none';
+      } else if (pKey === 'email_2') {
+        const val = emails[1] || '';
+        el.textContent = val;
+        const li = el.closest('li');
+        if (li) li.style.display = val ? '' : 'none';
       } else {
         const val = getParam(pKey);
-        if (val) el.textContent = val;
+        if (val) {
+          el.textContent = val;
+        }
       }
     });
 
@@ -1351,9 +1366,9 @@ function renderDynamicExcelContent(lang) {
   function applySheetsData(sheets) {
     if (!sheets) return;
 
-    // 1. Apply "Parametres" sheet
+    // 1. Apply "Parametres" sheet (reset dynamicParams so deleted rows are removed)
     if (sheets.Parametres && sheets.Parametres.length) {
-      dynamicParams = dynamicParams || {};
+      dynamicParams = {};
       sheets.Parametres.forEach(row => {
         const cle = (row.Cle || '').trim();
         if (!cle) return;
@@ -1409,13 +1424,95 @@ function renderDynamicExcelContent(lang) {
     applyLanguage(currentLang);
   }
 
+  function fetchGoogleSheetViaJsonp(sheetId, sheetName) {
+    return new Promise((resolve) => {
+      const cbName = '__cciSheetCb_' + sheetName + '_' + Math.floor(Math.random() * 1e6);
+      const timer = setTimeout(() => {
+        cleanup();
+        resolve(null);
+      }, 6000);
+
+      function cleanup() {
+        clearTimeout(timer);
+        try { delete window[cbName]; } catch (_) { window[cbName] = undefined; }
+        if (script && script.parentNode) script.parentNode.removeChild(script);
+      }
+
+      window[cbName] = function(resp) {
+        cleanup();
+        try {
+          if (!resp || !resp.table || !resp.table.rows) return resolve(null);
+          const cols = (resp.table.cols || []).map(c => (c && c.label ? String(c.label).trim() : ''));
+          const rows = resp.table.rows.map(r => (r && r.c ? r.c.map(cell => (cell && cell.v != null ? String(cell.v).trim() : '')) : []));
+          let headers = cols;
+          let startIdx = 0;
+          if (!headers.some(Boolean) && rows.length > 0) {
+            headers = rows[0];
+            startIdx = 1;
+          } else if (rows.length > 0 && (rows[0][0] === 'Cle' || rows[0][0] === 'Actif')) {
+            headers = rows[0].map((h, i) => h || headers[i] || '');
+            startIdx = 1;
+          }
+          const objects = [];
+          for (let i = startIdx; i < rows.length; i++) {
+            const rArr = rows[i];
+            if (!rArr || rArr.every(c => !c)) continue;
+            const obj = {};
+            headers.forEach((h, c) => {
+              if (h) obj[h] = rArr[c] !== undefined ? rArr[c] : '';
+            });
+            objects.push(obj);
+          }
+          resolve(objects);
+        } catch (_) {
+          resolve(null);
+        }
+      };
+
+      const script = document.createElement('script');
+      script.src = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?headers=1&sheet=${encodeURIComponent(sheetName)}&tqx=out:json;responseHandler:${cbName}&t=${Date.now()}`;
+      script.onerror = () => { cleanup(); resolve(null); };
+      document.head.appendChild(script);
+    });
+  }
+
   async function loadExcelAndGoogleSheet() {
     const GOOGLE_SHEET_ID = '1Nu6DSgcqwtmlOivf51qk5Oxk2g_B9Gms6McztBpjwKM';
+    const sheetNames = ['Parametres', 'Actualites', 'Formations', 'Textes'];
+    const liveSheets = {};
+
+    // Step 1: Fetch live from Google Sheets first (with credentials: 'omit' + JSONP fallback)
+    await Promise.all(sheetNames.map(async (sheetName) => {
+      try {
+        const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}&t=${Date.now()}`;
+        const res = await fetch(url, { cache: 'no-store', credentials: 'omit' });
+        if (res.ok) {
+          const csvText = await res.text();
+          const parsed = parseCsvToObjects(csvText);
+          if (parsed && parsed.length) {
+            liveSheets[sheetName] = parsed;
+            return;
+          }
+        }
+      } catch (_) {}
+
+      // Fallback to JSONP if fetch was blocked by browser/CORS
+      const jsonpParsed = await fetchGoogleSheetViaJsonp(GOOGLE_SHEET_ID, sheetName);
+      if (jsonpParsed && jsonpParsed.length) {
+        liveSheets[sheetName] = jsonpParsed;
+      }
+    }));
+
+    if (Object.keys(liveSheets).length > 0) {
+      applySheetsData(liveSheets);
+      return;
+    }
+
+    // Step 2: Fallback to local or GitHub Excel file if offline / Google Sheets unreachable
     const isSubpage = window.location.pathname.includes('/pages/');
     const localPath = (isSubpage ? '../' : '') + 'data/site-data.xlsx?t=' + Date.now();
     const githubRaw = 'https://raw.githubusercontent.com/topschoolexcel3-hue/caci-blida/main/data/site-data.xlsx?t=' + Date.now();
 
-    // Step 1: Load local or GitHub Excel file immediately
     let buf = null;
     try {
       const res = await fetch(localPath, { cache: 'no-store' });
@@ -1435,27 +1532,6 @@ function renderDynamicExcelContent(lang) {
         const sheets  = parseXlsxSheets(entries);
         applySheetsData(sheets);
       } catch (_) {}
-    }
-
-    // Step 2: Fetch live from Google Sheets (real-time updates without needing GitHub upload)
-    const sheetNames = ['Parametres', 'Actualites', 'Formations', 'Textes'];
-    const liveSheets = {};
-    await Promise.all(sheetNames.map(async (sheetName) => {
-      try {
-        const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}&t=${Date.now()}`;
-        const res = await fetch(url, { cache: 'no-store' });
-        if (res.ok) {
-          const csvText = await res.text();
-          const parsed = parseCsvToObjects(csvText);
-          if (parsed && parsed.length) {
-            liveSheets[sheetName] = parsed;
-          }
-        }
-      } catch (_) {}
-    }));
-
-    if (Object.keys(liveSheets).length > 0) {
-      applySheetsData(liveSheets);
     }
   }
 
