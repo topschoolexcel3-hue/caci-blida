@@ -825,31 +825,54 @@ function renderDynamicExcelContent(lang) {
   const L = (lang || currentLang || 'fr').toUpperCase();
   const dict = TRANSLATIONS[lang || currentLang] || TRANSLATIONS.fr;
 
-  // 1. Dynamic membership fees from Parametres
+  // 1. Dynamic parameters from Parametres sheet
   if (dynamicParams) {
-    const pPhys = dynamicParams['cotisation_physique'];
-    const pMor  = dynamicParams['cotisation_morale'];
+    const getParam = (key) => {
+      const p = dynamicParams[key];
+      if (!p) return '';
+      return p[L] || p.FR || '';
+    };
+
+    // Update all [data-param] elements across all pages
+    document.querySelectorAll('[data-param]').forEach(el => {
+      const pKey = el.getAttribute('data-param');
+      if (pKey === 'emails_pipe') {
+        const e1 = getParam('email_1');
+        const e2 = getParam('email_2');
+        const combined = [e1, e2].filter(Boolean).join(' | ');
+        if (combined) el.textContent = combined;
+      } else if (pKey === 'emails_br') {
+        const e1 = getParam('email_1');
+        const e2 = getParam('email_2');
+        const combined = [e1, e2].filter(Boolean).join('<br/>');
+        if (combined) el.innerHTML = combined;
+      } else {
+        const val = getParam(pKey);
+        if (val) el.textContent = val;
+      }
+    });
+
+    const pPhys = getParam('cotisation_physique');
+    const pMor  = getParam('cotisation_morale');
     if (pPhys) {
-      const val = pPhys[L] || pPhys.FR;
       document.querySelectorAll('.home-tarif-card:not(.home-tarif-card--gold) .home-tarif-card__price').forEach(el => {
-        el.innerHTML = `${val} <small data-i18n="adh_home.currency">${dict['adh_home.currency']}</small>`;
+        el.innerHTML = `${pPhys} <small data-i18n="adh_home.currency">${dict['adh_home.currency']}</small>`;
       });
       document.querySelectorAll('.tarif-card:not(.tarif-card--gold) .tarif-card__amount').forEach(el => {
-        el.textContent = val;
+        el.textContent = pPhys;
       });
     }
     if (pMor) {
-      const val = pMor[L] || pMor.FR;
       document.querySelectorAll('.home-tarif-card--gold .home-tarif-card__price').forEach(el => {
-        el.innerHTML = `${val} <small data-i18n="adh_home.currency">${dict['adh_home.currency']}</small>`;
+        el.innerHTML = `${pMor} <small data-i18n="adh_home.currency">${dict['adh_home.currency']}</small>`;
       });
       document.querySelectorAll('.tarif-card--gold .tarif-card__amount').forEach(el => {
-        el.textContent = val;
+        el.textContent = pMor;
       });
     }
   }
 
-  // 2. Dynamic Formations from Excel sheet "Formations"
+  // 2. Dynamic Formations from Excel/Google Sheet "Formations"
   if (dynamicFormations && dynamicFormations.length) {
     const homeList = document.querySelector('.formations-list');
     if (homeList) {
@@ -859,19 +882,31 @@ function renderDynamicExcelContent(lang) {
         return `<div class="formation-item"><i class="fas ${icon}"></i><span>${title}</span></div>`;
       }).join('');
     }
+    const missionsList = document.getElementById('missionsFormationsList');
+    if (missionsList) {
+      missionsList.innerHTML = dynamicFormations.map(f => {
+        const title = f[`Titre_${L}`] || f.Titre_FR || '';
+        const icon  = f.Icone || 'fa-graduation-cap';
+        return `<div class="doc-item"><i class="fas ${icon}"></i><span>${title}</span></div>`;
+      }).join('');
+    }
   }
 
-  // 3. Dynamic Actualites from Excel sheet "Actualites"
+  // 3. Dynamic Actualites from Excel/Google Sheet "Actualites"
   if (dynamicActualites && dynamicActualites.length) {
     const newsGrid = document.querySelector('.news-grid');
     if (newsGrid) {
+      const isSubpage = window.location.pathname.includes('/pages/');
       newsGrid.innerHTML = dynamicActualites.map(item => {
         const cat   = item[`Categorie_${L}`] || item.Categorie_FR || '';
         const title = item[`Titre_${L}`] || item.Titre_FR || '';
         const text  = item[`Resume_${L}`] || item.Resume_FR || '';
         const color = (item.Couleur || 'green').toLowerCase();
         const icon  = item.Icone || 'fa-newspaper';
-        const link  = item.Lien || '#';
+        let link    = item.Lien || '#';
+        if (!isSubpage && link && !link.startsWith('http') && !link.startsWith('#') && !link.startsWith('pages/')) {
+          link = 'pages/' + link;
+        }
         const imgClass = color === 'blue' ? ' news-card__img--blue' : (color === 'gold' ? ' news-card__img--gold' : '');
         const tagClass = `news-card__tag--${color === 'blue' || color === 'gold' ? color : 'green'}`;
         return `
@@ -1259,34 +1294,68 @@ function renderDynamicExcelContent(lang) {
     return sheets;
   }
 
-  async function loadExcelFile() {
-    const isSubpage = window.location.pathname.includes('/pages/');
-    const localPath = (isSubpage ? '../' : '') + 'data/site-data.xlsx?t=' + Date.now();
-    const githubRaw = 'https://raw.githubusercontent.com/topschoolexcel3-hue/caci-blida/main/data/site-data.xlsx?t=' + Date.now();
-
-    let buf = null;
-    try {
-      const res = await fetch(localPath, { cache: 'no-store' });
-      if (res.ok) buf = await res.arrayBuffer();
-    } catch (_) {}
-
-    if (!buf) {
-      try {
-        const res = await fetch(githubRaw, { cache: 'no-store' });
-        if (res.ok) buf = await res.arrayBuffer();
-      } catch (_) {}
+  function parseCsvToObjects(csvText) {
+    const rows = [];
+    let row = [];
+    let cell = '';
+    let inQuotes = false;
+    for (let i = 0; i < csvText.length; i++) {
+      const ch = csvText[i];
+      if (inQuotes) {
+        if (ch === '"') {
+          if (csvText[i + 1] === '"') {
+            cell += '"';
+            i++;
+          } else {
+            inQuotes = false;
+          }
+        } else {
+          cell += ch;
+        }
+      } else {
+        if (ch === '"') {
+          inQuotes = true;
+        } else if (ch === ',') {
+          row.push(cell.trim());
+          cell = '';
+        } else if (ch === '\n' || ch === '\r') {
+          if (ch === '\r' && csvText[i + 1] === '\n') i++;
+          row.push(cell.trim());
+          rows.push(row);
+          row = [];
+          cell = '';
+        } else {
+          cell += ch;
+        }
+      }
     }
+    if (cell.length > 0 || row.length > 0) {
+      row.push(cell.trim());
+      rows.push(row);
+    }
+    if (rows.length < 2) return [];
+    const headers = rows[0].map(h => (h || '').trim());
+    const objects = [];
+    for (let r = 1; r < rows.length; r++) {
+      const rArr = rows[r];
+      if (!rArr || rArr.every(c => !c)) continue;
+      const obj = {};
+      headers.forEach((h, c) => {
+        if (h) obj[h] = rArr[c] !== undefined ? rArr[c] : '';
+      });
+      objects.push(obj);
+    }
+    return objects;
+  }
 
-    if (!buf) return;
-
-    const entries = await unzipXlsx(buf);
-    const sheets  = parseXlsxSheets(entries);
+  function applySheetsData(sheets) {
+    if (!sheets) return;
 
     // 1. Apply "Parametres" sheet
-    if (sheets.Parametres) {
-      dynamicParams = {};
+    if (sheets.Parametres && sheets.Parametres.length) {
+      dynamicParams = dynamicParams || {};
       sheets.Parametres.forEach(row => {
-        const cle = row.Cle;
+        const cle = (row.Cle || '').trim();
         if (!cle) return;
         dynamicParams[cle] = {
           FR: row.Valeur_FR || '',
@@ -1313,9 +1382,9 @@ function renderDynamicExcelContent(lang) {
     }
 
     // 2. Apply "Textes" sheet
-    if (sheets.Textes) {
+    if (sheets.Textes && sheets.Textes.length) {
       sheets.Textes.forEach(row => {
-        const cle = row.Cle;
+        const cle = (row.Cle || '').trim();
         if (!cle) return;
         if (row.FR) TRANSLATIONS.fr[cle] = row.FR;
         if (row.AR) TRANSLATIONS.ar[cle] = row.AR;
@@ -1324,14 +1393,14 @@ function renderDynamicExcelContent(lang) {
     }
 
     // 3. Apply "Formations" sheet
-    if (sheets.Formations) {
+    if (sheets.Formations && sheets.Formations.length) {
       dynamicFormations = sheets.Formations.filter(
         f => (f.Actif || 'OUI').toUpperCase() !== 'NON' && f.Titre_FR
       );
     }
 
     // 4. Apply "Actualites" sheet
-    if (sheets.Actualites) {
+    if (sheets.Actualites && sheets.Actualites.length) {
       dynamicActualites = sheets.Actualites.filter(
         a => (a.Actif || 'OUI').toUpperCase() !== 'NON' && a.Titre_FR
       );
@@ -1340,5 +1409,55 @@ function renderDynamicExcelContent(lang) {
     applyLanguage(currentLang);
   }
 
-  loadExcelFile().catch(() => {});
+  async function loadExcelAndGoogleSheet() {
+    const GOOGLE_SHEET_ID = '1Nu6DSgcqwtmlOivf51qk5Oxk2g_B9Gms6McztBpjwKM';
+    const isSubpage = window.location.pathname.includes('/pages/');
+    const localPath = (isSubpage ? '../' : '') + 'data/site-data.xlsx?t=' + Date.now();
+    const githubRaw = 'https://raw.githubusercontent.com/topschoolexcel3-hue/caci-blida/main/data/site-data.xlsx?t=' + Date.now();
+
+    // Step 1: Load local or GitHub Excel file immediately
+    let buf = null;
+    try {
+      const res = await fetch(localPath, { cache: 'no-store' });
+      if (res.ok) buf = await res.arrayBuffer();
+    } catch (_) {}
+
+    if (!buf) {
+      try {
+        const res = await fetch(githubRaw, { cache: 'no-store' });
+        if (res.ok) buf = await res.arrayBuffer();
+      } catch (_) {}
+    }
+
+    if (buf) {
+      try {
+        const entries = await unzipXlsx(buf);
+        const sheets  = parseXlsxSheets(entries);
+        applySheetsData(sheets);
+      } catch (_) {}
+    }
+
+    // Step 2: Fetch live from Google Sheets (real-time updates without needing GitHub upload)
+    const sheetNames = ['Parametres', 'Actualites', 'Formations', 'Textes'];
+    const liveSheets = {};
+    await Promise.all(sheetNames.map(async (sheetName) => {
+      try {
+        const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}&t=${Date.now()}`;
+        const res = await fetch(url, { cache: 'no-store' });
+        if (res.ok) {
+          const csvText = await res.text();
+          const parsed = parseCsvToObjects(csvText);
+          if (parsed && parsed.length) {
+            liveSheets[sheetName] = parsed;
+          }
+        }
+      } catch (_) {}
+    }));
+
+    if (Object.keys(liveSheets).length > 0) {
+      applySheetsData(liveSheets);
+    }
+  }
+
+  loadExcelAndGoogleSheet().catch(() => {});
 })();
