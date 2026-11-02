@@ -176,7 +176,29 @@
 .info-box i { color: var(--clr-blue); font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
 .info-box p { font-size: var(--fs-sm); color: var(--clr-grey-700); margin: 0; line-height: 1.7; }
 
-/* Responsive page layout */
+/* Responsive page layout & RTL support */
+[dir="rtl"] .sidebar-nav li a:hover,
+[dir="rtl"] .sidebar-nav li a.active {
+  padding-left: var(--space-lg);
+  padding-right: calc(var(--space-lg) + 4px);
+}
+[dir="rtl"] .prose ul {
+  margin: var(--space-md) var(--space-lg) var(--space-md) 0;
+}
+[dir="rtl"] .prose ul li::before {
+  left: auto;
+  right: -1.2rem;
+}
+[dir="rtl"] .doc-item {
+  border-left: none;
+  border-right: 4px solid var(--clr-green);
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+}
+[dir="rtl"] .section-header[style*="text-align:left"],
+[dir="rtl"] .section-header__title[style*="text-align:left"] {
+  text-align: right !important;
+}
+
 @media (max-width: 900px) {
   .page-layout { grid-template-columns: 1fr; }
   .page-sidebar { order: -1; }
