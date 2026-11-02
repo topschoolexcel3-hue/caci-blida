@@ -1,6 +1,6 @@
 # 📊 Guide de Mise à Jour Dynamique (Google Sheets & Excel) – CCI Mitidja-Blida
 
-Votre site web (**https://caci-blida.pages.dev/**) est désormais connecté **en temps réel** à votre feuille **Google Sheets** ainsi qu'au fichier **`data/site-data.xlsx`** sur GitHub !
+Votre site web (**https://ccimitidjablida.pages.dev/**) est désormais connecté **en temps réel** à votre feuille **Google Sheets** ainsi qu'au fichier **`data/site-data.xlsx`** sur GitHub !
 
 ---
 
@@ -9,7 +9,7 @@ Votre site web (**https://caci-blida.pages.dev/**) est désormais connecté **en
 1. Ouvrez votre feuille Google Sheets connectée :
    👉 **[https://docs.google.com/spreadsheets/d/1Nu6DSgcqwtmlOivf51qk5Oxk2g_B9Gms6McztBpjwKM/edit](https://docs.google.com/spreadsheets/d/1Nu6DSgcqwtmlOivf51qk5Oxk2g_B9Gms6McztBpjwKM/edit)**
 2. Modifiez directement n'importe quelle cellule dans les 4 onglets (**`Parametres`**, **`Actualites`**, **`Formations`**, **`Textes`**).
-3. Actualisez votre site web (**`Ctrl + F5`** sur **https://caci-blida.pages.dev/**) : vos modifications apparaissent **immédiatement en direct** sans même avoir besoin de télécharger ou d'envoyer le fichier sur GitHub !
+3. Actualisez votre site web (**`Ctrl + F5`** sur **https://ccimitidjablida.pages.dev/**) : vos modifications apparaissent **immédiatement en direct** sans même avoir besoin de télécharger ou d'envoyer le fichier sur GitHub !
 
 > 💡 **Important pour Google Sheets** : Gardez le partage du document sur **« Tous les utilisateurs disposant du lien peuvent consulter » (Lecteur)** afin que le site web puisse lire les 4 feuilles en direct.
 
@@ -31,7 +31,7 @@ Modifiez les colonnes **`Valeur_FR`**, **`Valeur_AR`** et **`Valeur_EN`** :
 - `tel_fax` : Numéro de téléphone fixe / Fax (`020 49 18 28`)
 - `email_1` : Email principal (`cci-mitidja@caci.dz`)
 - `email_2` : Email secondaire (`ccimitidja.20@gmail.com`)
-- `site_web` : Adresse du site web (`https://caci-blida.pages.dev/`)
+- `site_web` : Adresse du site web (`https://ccimitidjablida.pages.dev/`)
 - `cotisation_physique` : Montant de la cotisation annuelle Personne Physique (`1 000`)
 - `cotisation_morale` : Montant de la cotisation annuelle Personne Morale (`3 000`)
 - `nom_court` : Nom principal (`CCI MITIDJA - BLIDA`)

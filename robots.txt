@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.cci-mitidja.dz/sitemap.xml
+Sitemap: https://ccimitidjablida.pages.dev/sitemap.xml
 
 Disallow: /.github/
