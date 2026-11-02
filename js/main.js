@@ -770,6 +770,10 @@ const TRANSLATIONS = {
 
 let currentLang = 'fr';
 
+let dynamicFormations = null;
+let dynamicActualites = null;
+let dynamicParams = null;
+
 function applyLanguage(lang) {
   if (!TRANSLATIONS[lang]) lang = 'fr';
   currentLang = lang;
@@ -812,6 +816,79 @@ function applyLanguage(lang) {
       el.setAttribute('placeholder', dict[key]);
     }
   });
+
+  // Render dynamic Excel sections if loaded
+  renderDynamicExcelContent(lang);
+}
+
+function renderDynamicExcelContent(lang) {
+  const L = (lang || currentLang || 'fr').toUpperCase();
+  const dict = TRANSLATIONS[lang || currentLang] || TRANSLATIONS.fr;
+
+  // 1. Dynamic membership fees from Parametres
+  if (dynamicParams) {
+    const pPhys = dynamicParams['cotisation_physique'];
+    const pMor  = dynamicParams['cotisation_morale'];
+    if (pPhys) {
+      const val = pPhys[L] || pPhys.FR;
+      document.querySelectorAll('.home-tarif-card:not(.home-tarif-card--gold) .home-tarif-card__price').forEach(el => {
+        el.innerHTML = `${val} <small data-i18n="adh_home.currency">${dict['adh_home.currency']}</small>`;
+      });
+      document.querySelectorAll('.tarif-card:not(.tarif-card--gold) .tarif-card__amount').forEach(el => {
+        el.textContent = val;
+      });
+    }
+    if (pMor) {
+      const val = pMor[L] || pMor.FR;
+      document.querySelectorAll('.home-tarif-card--gold .home-tarif-card__price').forEach(el => {
+        el.innerHTML = `${val} <small data-i18n="adh_home.currency">${dict['adh_home.currency']}</small>`;
+      });
+      document.querySelectorAll('.tarif-card--gold .tarif-card__amount').forEach(el => {
+        el.textContent = val;
+      });
+    }
+  }
+
+  // 2. Dynamic Formations from Excel sheet "Formations"
+  if (dynamicFormations && dynamicFormations.length) {
+    const homeList = document.querySelector('.formations-list');
+    if (homeList) {
+      homeList.innerHTML = dynamicFormations.map(f => {
+        const title = f[`Titre_${L}`] || f.Titre_FR || '';
+        const icon  = f.Icone || 'fa-graduation-cap';
+        return `<div class="formation-item"><i class="fas ${icon}"></i><span>${title}</span></div>`;
+      }).join('');
+    }
+  }
+
+  // 3. Dynamic Actualites from Excel sheet "Actualites"
+  if (dynamicActualites && dynamicActualites.length) {
+    const newsGrid = document.querySelector('.news-grid');
+    if (newsGrid) {
+      newsGrid.innerHTML = dynamicActualites.map(item => {
+        const cat   = item[`Categorie_${L}`] || item.Categorie_FR || '';
+        const title = item[`Titre_${L}`] || item.Titre_FR || '';
+        const text  = item[`Resume_${L}`] || item.Resume_FR || '';
+        const color = (item.Couleur || 'green').toLowerCase();
+        const icon  = item.Icone || 'fa-newspaper';
+        const link  = item.Lien || '#';
+        const imgClass = color === 'blue' ? ' news-card__img--blue' : (color === 'gold' ? ' news-card__img--gold' : '');
+        const tagClass = `news-card__tag--${color === 'blue' || color === 'gold' ? color : 'green'}`;
+        return `
+          <article class="news-card">
+            <div class="news-card__img${imgClass}">
+              <i class="fas ${icon}"></i>
+              <span class="news-card__tag ${tagClass}">${cat}</span>
+            </div>
+            <div class="news-card__body">
+              <h3 class="news-card__title">${title}</h3>
+              <p class="news-card__excerpt">${text}</p>
+              <a href="${link}" class="news-card__link"><span>${dict['common.read_more']}</span> <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </article>`;
+      }).join('');
+    }
+  }
 }
 
 /* ---- Initialize Language Switcher ---- */
@@ -1044,4 +1121,224 @@ function applyLanguage(lang) {
   }, { threshold: 0.1 });
 
   els.forEach(el => observer.observe(el));
+})();
+
+/* ============================================================
+   DYNAMIC EXCEL LOADER (data/site-data.xlsx)
+   Lit automatiquement le fichier Excel du dépôt GitHub sans base de données
+   ============================================================ */
+(function initExcelDataLoader() {
+  function colRefToIndex(ref) {
+    const match = (ref || '').match(/^[A-Z]+/i);
+    if (!match) return -1;
+    const letters = match[0].toUpperCase();
+    let idx = 0;
+    for (let i = 0; i < letters.length; i++) {
+      idx = idx * 26 + (letters.charCodeAt(i) - 64);
+    }
+    return idx - 1;
+  }
+
+  async function inflateRaw(uint8) {
+    const ds = new DecompressionStream('deflate-raw');
+    const writer = ds.writable.getWriter();
+    writer.write(uint8);
+    writer.close();
+    const outBuf = await new Response(ds.readable).arrayBuffer();
+    return new TextDecoder('utf-8').decode(outBuf);
+  }
+
+  async function unzipXlsx(arrayBuffer) {
+    const view = new DataView(arrayBuffer);
+    const bytes = new Uint8Array(arrayBuffer);
+    let eocd = bytes.length - 22;
+    while (eocd >= 0 && view.getUint32(eocd, true) !== 0x06054b50) eocd--;
+    if (eocd < 0) throw new Error('Invalid XLSX archive');
+
+    const cdCount = view.getUint16(eocd + 10, true);
+    let cdPos = view.getUint32(eocd + 16, true);
+    const entries = {};
+    const dec = new TextDecoder('utf-8');
+
+    for (let i = 0; i < cdCount; i++) {
+      if (view.getUint32(cdPos, true) !== 0x02014b50) break;
+      const method     = view.getUint16(cdPos + 10, true);
+      const compSize   = view.getUint32(cdPos + 20, true);
+      const nameLen    = view.getUint16(cdPos + 28, true);
+      const extraLen   = view.getUint16(cdPos + 30, true);
+      const commentLen = view.getUint16(cdPos + 32, true);
+      const localOff   = view.getUint32(cdPos + 42, true);
+
+      const name = dec.decode(bytes.subarray(cdPos + 46, cdPos + 46 + nameLen));
+      const lNameLen  = view.getUint16(localOff + 26, true);
+      const lExtraLen = view.getUint16(localOff + 28, true);
+      const dataStart = localOff + 30 + lNameLen + lExtraLen;
+      const slice     = bytes.subarray(dataStart, dataStart + compSize);
+
+      if (name.endsWith('.xml') || name.endsWith('.rels')) {
+        entries[name] = method === 0 ? dec.decode(slice) : await inflateRaw(slice);
+      }
+      cdPos += 46 + nameLen + extraLen + commentLen;
+    }
+    return entries;
+  }
+
+  function parseXlsxSheets(entries) {
+    const parser = new DOMParser();
+    const sharedStrings = [];
+
+    if (entries['xl/sharedStrings.xml']) {
+      const ssDoc = parser.parseFromString(entries['xl/sharedStrings.xml'], 'application/xml');
+      ssDoc.querySelectorAll('si').forEach(si => {
+        const texts = Array.from(si.querySelectorAll('t')).map(t => t.textContent || '');
+        sharedStrings.push(texts.join(''));
+      });
+    }
+
+    const relMap = {};
+    if (entries['xl/_rels/workbook.xml.rels']) {
+      const relDoc = parser.parseFromString(entries['xl/_rels/workbook.xml.rels'], 'application/xml');
+      relDoc.querySelectorAll('Relationship').forEach(rel => {
+        const id = rel.getAttribute('Id');
+        let target = rel.getAttribute('Target') || '';
+        if (!target.startsWith('xl/')) target = 'xl/' + target.replace(/^\/+/, '');
+        relMap[id] = target;
+      });
+    }
+
+    const sheets = {};
+    if (!entries['xl/workbook.xml']) return sheets;
+    const wbDoc = parser.parseFromString(entries['xl/workbook.xml'], 'application/xml');
+
+    wbDoc.querySelectorAll('sheet').forEach((sheetEl, idx) => {
+      const name = sheetEl.getAttribute('name');
+      const rId  = sheetEl.getAttribute('r:id') || sheetEl.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships', 'id');
+      const path = relMap[rId] || `xl/worksheets/sheet${idx + 1}.xml`;
+      const xml  = entries[path];
+      if (!xml) return;
+
+      const wsDoc = parser.parseFromString(xml, 'application/xml');
+      const rows = [];
+
+      wsDoc.querySelectorAll('row').forEach(rowEl => {
+        const rowArr = [];
+        rowEl.querySelectorAll('c').forEach((cEl, cIdx) => {
+          const ref = cEl.getAttribute('r');
+          const colIdx = ref ? colRefToIndex(ref) : cIdx;
+          const type = cEl.getAttribute('t');
+          let val = '';
+          if (type === 'inlineStr') {
+            val = Array.from(cEl.querySelectorAll('t')).map(t => t.textContent || '').join('');
+          } else if (type === 's') {
+            const v = cEl.querySelector('v')?.textContent;
+            val = v !== undefined ? (sharedStrings[parseInt(v, 10)] || '') : '';
+          } else {
+            val = cEl.querySelector('v')?.textContent || '';
+          }
+          rowArr[colIdx >= 0 ? colIdx : cIdx] = val.trim();
+        });
+        rows.push(rowArr);
+      });
+
+      if (rows.length > 1) {
+        const headers = rows[0].map(h => (h || '').trim());
+        const objects = [];
+        for (let r = 1; r < rows.length; r++) {
+          const row = rows[r];
+          if (!row || row.every(cell => !cell)) continue;
+          const obj = {};
+          headers.forEach((h, c) => {
+            if (h) obj[h] = row[c] !== undefined ? row[c] : '';
+          });
+          objects.push(obj);
+        }
+        sheets[name] = objects;
+      }
+    });
+
+    return sheets;
+  }
+
+  async function loadExcelFile() {
+    const isSubpage = window.location.pathname.includes('/pages/');
+    const localPath = (isSubpage ? '../' : '') + 'data/site-data.xlsx?t=' + Date.now();
+    const githubRaw = 'https://raw.githubusercontent.com/topschoolexcel3-hue/caci-blida/main/data/site-data.xlsx?t=' + Date.now();
+
+    let buf = null;
+    try {
+      const res = await fetch(localPath, { cache: 'no-store' });
+      if (res.ok) buf = await res.arrayBuffer();
+    } catch (_) {}
+
+    if (!buf) {
+      try {
+        const res = await fetch(githubRaw, { cache: 'no-store' });
+        if (res.ok) buf = await res.arrayBuffer();
+      } catch (_) {}
+    }
+
+    if (!buf) return;
+
+    const entries = await unzipXlsx(buf);
+    const sheets  = parseXlsxSheets(entries);
+
+    // 1. Apply "Parametres" sheet
+    if (sheets.Parametres) {
+      dynamicParams = {};
+      sheets.Parametres.forEach(row => {
+        const cle = row.Cle;
+        if (!cle) return;
+        dynamicParams[cle] = {
+          FR: row.Valeur_FR || '',
+          AR: row.Valeur_AR || row.Valeur_FR || '',
+          EN: row.Valeur_EN || row.Valeur_FR || ''
+        };
+      });
+
+      const mapParamToI18n = {
+        telephone_barre: 'topbar.phone',
+        adresse: 'contact.address_val',
+        nom_court: 'brand.short',
+        nom_complet: 'brand.sub'
+      };
+
+      Object.keys(mapParamToI18n).forEach(pKey => {
+        const i18nKey = mapParamToI18n[pKey];
+        if (dynamicParams[pKey]) {
+          if (dynamicParams[pKey].FR) TRANSLATIONS.fr[i18nKey] = dynamicParams[pKey].FR;
+          if (dynamicParams[pKey].AR) TRANSLATIONS.ar[i18nKey] = dynamicParams[pKey].AR;
+          if (dynamicParams[pKey].EN) TRANSLATIONS.en[i18nKey] = dynamicParams[pKey].EN;
+        }
+      });
+    }
+
+    // 2. Apply "Textes" sheet
+    if (sheets.Textes) {
+      sheets.Textes.forEach(row => {
+        const cle = row.Cle;
+        if (!cle) return;
+        if (row.FR) TRANSLATIONS.fr[cle] = row.FR;
+        if (row.AR) TRANSLATIONS.ar[cle] = row.AR;
+        if (row.EN) TRANSLATIONS.en[cle] = row.EN;
+      });
+    }
+
+    // 3. Apply "Formations" sheet
+    if (sheets.Formations) {
+      dynamicFormations = sheets.Formations.filter(
+        f => (f.Actif || 'OUI').toUpperCase() !== 'NON' && f.Titre_FR
+      );
+    }
+
+    // 4. Apply "Actualites" sheet
+    if (sheets.Actualites) {
+      dynamicActualites = sheets.Actualites.filter(
+        a => (a.Actif || 'OUI').toUpperCase() !== 'NON' && a.Titre_FR
+      );
+    }
+
+    applyLanguage(currentLang);
+  }
+
+  loadExcelFile().catch(() => {});
 })();
