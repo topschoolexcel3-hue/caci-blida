@@ -15,8 +15,8 @@
   <div class="top-bar">
     <div class="container top-bar__inner">
       <div class="top-bar__left">
-        <span><i class="fas fa-phone"></i> <span data-i18n="topbar.phone">Tél/Fax : 020 49 18 28 | Mob : 0661 61 32 05</span></span>
-        <span><i class="fas fa-envelope"></i> cci-mitidja@caci.dz | ccimitidja.20@gmail.com</span>
+        <span><i class="fas fa-phone"></i> <span data-i18n="topbar.phone" data-param="telephone_barre">Tél/Fax : 020 49 18 28 | Mob : 0661 61 32 05</span></span>
+        <span><i class="fas fa-envelope"></i> <span data-param="emails_pipe">cci-mitidja@caci.dz | ccimitidja.20@gmail.com</span></span>
       </div>
       <div class="top-bar__right">
         <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -115,9 +115,10 @@
 
         <h2 data-i18n="cert_page.contact_title">Contact du Service</h2>
         <div class="doc-list">
-          <div class="doc-item"><i class="fas fa-map-marker-alt"></i><span data-i18n="contact.address_val">35, Cité Mouloud Sidi Abdelkader, Blida, Algérie</span></div>
-          <div class="doc-item"><i class="fas fa-phone"></i><span>Tél/Fax : 020 49 18 28 | Mob : 0661 61 32 05</span></div>
-          <div class="doc-item"><i class="fas fa-envelope"></i><span>Emails : cci-mitidja@caci.dz | ccimitidja.20@gmail.com</span></div>
+          <div class="doc-item"><i class="fas fa-map-marker-alt"></i><span data-i18n="contact.address_val" data-param="adresse">35, Cité Mouloud Sidi Abdelkader, Blida, Algérie</span></div>
+          <div class="doc-item"><i class="fas fa-phone"></i><span data-param="telephone_barre">Tél/Fax : 020 49 18 28 | Mob : 0661 61 32 05</span></div>
+          <div class="doc-item"><i class="fas fa-envelope"></i><span data-param="emails_pipe">cci-mitidja@caci.dz | ccimitidja.20@gmail.com</span></div>
+          <div class="doc-item"><i class="fas fa-globe"></i><span data-param="site_web">https://caci-blida.pages.dev/</span></div>
         </div>
 
         <br />
@@ -138,11 +139,12 @@
         <div class="sidebar-widget">
           <div class="sidebar-widget__title"><i class="fas fa-phone-alt"></i> <span data-i18n="contact.find_us">Contactez-Nous</span></div>
           <ul class="sidebar-contact">
-            <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="contact.address_val">35, Cité Mouloud Sidi Abdelkader, Blida, Algérie</span></li>
-            <li><i class="fas fa-mobile-alt"></i> <span dir="ltr">0661 61 32 05</span></li>
-            <li><i class="fas fa-phone"></i> <span dir="ltr">020 49 18 28</span></li>
-            <li><i class="fas fa-envelope"></i> cci-mitidja@caci.dz</li>
-            <li><i class="fas fa-envelope"></i> ccimitidja.20@gmail.com</li>
+            <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="contact.address_val" data-param="adresse">35, Cité Mouloud Sidi Abdelkader, Blida, Algérie</span></li>
+            <li><i class="fas fa-mobile-alt"></i> <span dir="ltr" data-param="mobile">0661 61 32 05</span></li>
+            <li><i class="fas fa-phone"></i> <span dir="ltr" data-param="tel_fax">020 49 18 28</span></li>
+            <li><i class="fas fa-envelope"></i> <span data-param="email_1">cci-mitidja@caci.dz</span></li>
+            <li><i class="fas fa-envelope"></i> <span data-param="email_2">ccimitidja.20@gmail.com</span></li>
+            <li><i class="fas fa-globe"></i> <span data-param="site_web">https://caci-blida.pages.dev/</span></li>
           </ul>
         </div>
       </aside>
