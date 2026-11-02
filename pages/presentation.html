@@ -1,64 +1,70 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Présentation – CCIB</title>
+  <title data-i18n="meta.pres_title">Présentation – CCI Mitidja-Blida</title>
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/pages.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
 
+  <!-- TOP BAR -->
   <div class="top-bar">
     <div class="container top-bar__inner">
       <div class="top-bar__left">
-        <span><i class="fas fa-phone"></i> Tél/Fax : 020 49 18 28</span>
-        <span><i class="fas fa-envelope"></i> contact@ccib.dz</span>
+        <span><i class="fas fa-phone"></i> <span data-i18n="topbar.phone">Tél/Fax : 020 49 18 28 | Mob : 0661 61 32 05</span></span>
+        <span><i class="fas fa-envelope"></i> cci-mitidja@caci.dz | ccimitidja.20@gmail.com</span>
       </div>
       <div class="top-bar__right">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        <div class="lang-switcher">
-          <button class="lang-btn active">FR</button>
-          <button class="lang-btn">AR</button>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <div class="lang-switcher" role="group" aria-label="Language selector">
+          <button type="button" class="lang-btn active" data-lang="fr">FR</button>
+          <button type="button" class="lang-btn" data-lang="ar">AR</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- HEADER -->
   <header class="header" id="header">
     <div class="container header__inner">
       <a href="../index.html" class="header__logo">
-        <div class="logo-emblem"><div class="logo-shield"><span class="logo-star">★</span></div></div>
+        <div class="logo-emblem"><div class="logo-shield"><span class="logo-star">CCI</span></div></div>
         <div class="logo-text">
-          <span class="logo-text__main">CCIB</span>
-          <span class="logo-text__sub">Chambre de Commerce et d'Industrie de Blida</span>
+          <span class="logo-text__main" data-i18n="brand.short">CCI MITIDJA - BLIDA</span>
+          <span class="logo-text__sub" data-i18n="brand.sub">Chambre de Commerce et d'Industrie Mitidja-Blida</span>
+          <span class="logo-text__ar">الغرفة الولائية للتجارة والصناعة متيجة البليدة</span>
         </div>
       </a>
       <nav class="nav" id="nav">
         <ul class="nav__list">
-          <li class="nav__item"><a href="../index.html" class="nav__link">Accueil</a></li>
+          <li class="nav__item"><a href="../index.html" class="nav__link" data-i18n="nav.home">Accueil</a></li>
           <li class="nav__item nav__item--dropdown nav__item--active">
-            <a href="#" class="nav__link">La Chambre <i class="fas fa-chevron-down"></i></a>
+            <a href="presentation.html" class="nav__link"><span data-i18n="nav.chamber">La Chambre</span> <i class="fas fa-chevron-down"></i></a>
             <ul class="dropdown">
-              <li><a href="presentation.html" class="active">Présentation</a></li>
-              <li><a href="organisation.html">Organisation</a></li>
-              <li><a href="missions.html">Missions & Attributions</a></li>
+              <li><a href="presentation.html" class="active" data-i18n="nav.presentation">Présentation</a></li>
+              <li><a href="missions.html" data-i18n="nav.missions">Notre Mission & Nos 5 Engagements</a></li>
+              <li><a href="missions.html#difference" data-i18n="nav.difference">Notre Différence & Ambition</a></li>
             </ul>
           </li>
           <li class="nav__item nav__item--dropdown">
-            <a href="#" class="nav__link">Services <i class="fas fa-chevron-down"></i></a>
+            <a href="certificat-origine.html" class="nav__link"><span data-i18n="nav.services">Services & Formations</span> <i class="fas fa-chevron-down"></i></a>
             <ul class="dropdown">
-              <li><a href="certificat-origine.html">Certificat d'Origine</a></li>
-              <li><a href="carnet-ata.html">Carnet ATA</a></li>
-              <li><a href="legalisation.html">Légalisation</a></li>
-              <li><a href="formation.html">Formation</a></li>
+              <li><a href="certificat-origine.html" data-i18n="nav.cert_origin">Certificat d'Origine & Fabrication</a></li>
+              <li><a href="certificat-origine.html#legalisation" data-i18n="nav.legalisation">Légalisation & Documents Commerciaux</a></li>
+              <li><a href="missions.html#formations" data-i18n="nav.formations">Formations Professionnelles</a></li>
+              <li><a href="missions.html#engagements" data-i18n="nav.b2b">Business Connect & Rencontres B2B</a></li>
             </ul>
           </li>
-          <li class="nav__item"><a href="actualites.html" class="nav__link">Actualités</a></li>
-          <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
+          <li class="nav__item"><a href="adhesion.html" class="nav__link" data-i18n="nav.adhesion">Adhésion</a></li>
+          <li class="nav__item"><a href="actualites.html" class="nav__link" data-i18n="nav.news">Actualités</a></li>
+          <li class="nav__item"><a href="contact.html" class="nav__link" data-i18n="nav.contact">Contact</a></li>
         </ul>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
@@ -67,74 +73,72 @@
     </div>
   </header>
 
+  <!-- PAGE HERO -->
   <section class="page-hero">
     <div class="container page-hero__content">
       <div class="page-hero__breadcrumb">
-        <a href="../index.html">Accueil</a>
+        <a href="../index.html" data-i18n="nav.home">Accueil</a>
         <i class="fas fa-angle-right"></i>
-        <span>La Chambre</span>
+        <span data-i18n="nav.chamber">La Chambre</span>
         <i class="fas fa-angle-right"></i>
-        <span>Présentation</span>
+        <span data-i18n="nav.presentation">Présentation</span>
       </div>
-      <h1 class="page-hero__title"><i class="fas fa-landmark"></i> Présentation de la CCIB</h1>
+      <h1 class="page-hero__title"><i class="fas fa-landmark"></i> <span data-i18n="pres_page.hero_title">Présentation de la CCI Mitidja-Blida</span></h1>
     </div>
   </section>
 
+  <!-- PAGE CONTENT -->
   <section class="page-content">
     <div class="container page-layout">
       <main class="page-main prose">
-        <h2>Qui Sommes-Nous ?</h2>
-        <p>La <strong>Chambre de Commerce et d'Industrie de Blida (CCIB)</strong> est un établissement public à caractère industriel et commercial (EPIC), doté de la personnalité morale et de l'autonomie financière. Elle est placée sous la tutelle du Ministère du Commerce et sous la coordination nationale de la <strong>Chambre Algérienne de Commerce et d'Industrie (CACI)</strong>.</p>
-        <p>Fondée depuis plus de 40 ans, la CCIB représente et défend les intérêts des opérateurs économiques – commerçants, industriels, artisans et prestataires de services – de la wilaya de <strong>Blida</strong>.</p>
+        <h2 data-i18n="pres_page.who_title">Qui Sommes-Nous ?</h2>
+        <p data-i18n="pres_page.who_p1">La Chambre de Commerce et d'Industrie Mitidja-Blida (CCI Mitidja-Blida) est un établissement public à caractère industriel et commercial (EPIC), doté de la personnalité morale et de l'autonomie financière. Elle est placée sous la tutelle du Ministère du Commerce et sous la coordination nationale de la Chambre Algérienne de Commerce et d'Industrie (CACI).</p>
+        <p data-i18n="pres_page.who_p2">Au cœur du développement économique de la Mitidja, la CCI Mitidja-Blida est une Chambre qui crée de la valeur pour ses entreprises : commerçants, industriels, PME/PMI, startups, artisans et prestataires de services de la wilaya de Blida.</p>
 
-        <h2>Notre Mission Fondamentale</h2>
-        <p>La CCIB a pour mission principale de :</p>
-        <ul>
-          <li>Représenter les intérêts des commerçants et industriels auprès des pouvoirs publics locaux et nationaux</li>
-          <li>Faciliter les démarches administratives et commerciales des opérateurs économiques</li>
-          <li>Promouvoir le développement économique et commercial de la wilaya de Blida</li>
-          <li>Contribuer à l'amélioration de l'environnement des affaires en Algérie</li>
-          <li>Délivrer des documents officiels nécessaires aux transactions commerciales nationales et internationales</li>
-        </ul>
-
-        <h2>Notre Zone de Compétence</h2>
-        <p>La Chambre de Commerce et d'Industrie de Blida couvre l'ensemble du territoire de la <strong>wilaya de Blida</strong>, chef-lieu éponyme, comprenant toutes les communes relevant de cette circonscription administrative. La CCIB dispose d'une compétence exclusive pour les opérations relevant du ressort territorial de la wilaya.</p>
-
-        <div class="info-box">
-          <i class="fas fa-info-circle"></i>
-          <p>La CCIB est membre du réseau national des Chambres de Commerce et d'Industrie algériennes, coordonné par la <strong>CACI</strong> (Chambre Algérienne de Commerce et d'Industrie), dont le siège est à Alger. Ce réseau compte 48 chambres de wilaya réparties sur l'ensemble du territoire national.</p>
+        <h2 data-i18n="mission.title">NOTRE MISSION</h2>
+        <p data-i18n="mission.lead">La CCI Mitidja-Blida accompagne les entreprises de la région à chaque étape de leur développement en :</p>
+        <div class="doc-list">
+          <div class="doc-item"><i class="fas fa-check-circle"></i><span data-i18n="mission.p1">Créant des opportunités d'affaires</span></div>
+          <div class="doc-item"><i class="fas fa-check-circle"></i><span data-i18n="mission.p2">Facilitant les échanges entre opérateurs économiques</span></div>
+          <div class="doc-item"><i class="fas fa-check-circle"></i><span data-i18n="mission.p3">Accompagnant les projets de développement</span></div>
+          <div class="doc-item"><i class="fas fa-check-circle"></i><span data-i18n="mission.p4">Représentant les intérêts des entreprises auprès des institutions</span></div>
         </div>
 
-        <h2>Gouvernance</h2>
-        <p>La CCIB est administrée par une <strong>Assemblée Générale</strong> composée de membres élus représentant les différentes branches professionnelles (commerce, industrie, services, artisanat). Elle est dirigée par un <strong>Bureau exécutif</strong> élu en son sein, composé d'un Président, de Vice-Présidents, d'un Secrétaire Général et d'un Trésorier.</p>
+        <h2 data-i18n="ambition.title">NOTRE AMBITION</h2>
+        <div class="info-box">
+          <i class="fas fa-star"></i>
+          <p data-i18n="ambition.text">Faire de la CCI Mitidja-Blida le premier réseau économique de confiance de la région, où chaque adhérent trouve des opportunités, des partenaires et un accompagnement concret pour se développer durablement.</p>
+        </div>
 
-        <h2>Nos Valeurs</h2>
+        <h2 data-i18n="pres_page.zone_title">Notre Zone de Compétence & Réseau CACI</h2>
+        <p data-i18n="pres_page.zone_p1">La CCI Mitidja-Blida couvre l'ensemble du territoire économique de la région de la Mitidja et de la wilaya de Blida. Elle est membre du réseau national des Chambres de Commerce et d'Industrie algériennes coordonné par la CACI (Chambre Algérienne de Commerce et d'Industrie).</p>
+
+        <h2 data-i18n="eng.diff.title">NOTRE DIFFÉRENCE</h2>
+        <p data-i18n="eng.diff.lead">Nous ne mesurons pas notre réussite par le nombre d'événements organisés. Nous la mesurons par :</p>
         <div class="doc-list">
-          <div class="doc-item"><i class="fas fa-star"></i><span><strong>Excellence :</strong> Fournir des services de qualité à tous nos membres et partenaires dans les meilleurs délais.</span></div>
-          <div class="doc-item"><i class="fas fa-shield-alt"></i><span><strong>Intégrité :</strong> Agir avec transparence, équité et responsabilité dans toutes nos actions.</span></div>
-          <div class="doc-item"><i class="fas fa-users"></i><span><strong>Service :</strong> Placer les intérêts des opérateurs économiques au cœur de nos priorités.</span></div>
-          <div class="doc-item"><i class="fas fa-lightbulb"></i><span><strong>Innovation :</strong> Adopter les nouvelles technologies pour améliorer continuellement nos prestations.</span></div>
-          <div class="doc-item"><i class="fas fa-globe-africa"></i><span><strong>Ouverture :</strong> Favoriser les partenariats et les échanges économiques aux niveaux national et international.</span></div>
+          <div class="doc-item"><i class="fas fa-handshake"></i><span data-i18n="eng.diff.p1">Le nombre de mises en relation réalisées</span></div>
+          <div class="doc-item"><i class="fas fa-users"></i><span data-i18n="eng.diff.p2">Les partenariats créés entre adhérents</span></div>
+          <div class="doc-item"><i class="fas fa-chart-line"></i><span data-i18n="eng.diff.p3">Les opportunités d'affaires générées dans leur développement</span></div>
         </div>
       </main>
 
       <aside class="page-sidebar">
         <div class="sidebar-widget">
-          <div class="sidebar-widget__title"><i class="fas fa-landmark"></i> La Chambre</div>
+          <div class="sidebar-widget__title"><i class="fas fa-landmark"></i> <span data-i18n="nav.chamber">La Chambre</span></div>
           <ul class="sidebar-nav">
-            <li><a href="presentation.html" class="active">Présentation <i class="fas fa-angle-right"></i></a></li>
-            <li><a href="organisation.html">Organisation <i class="fas fa-angle-right"></i></a></li>
-            <li><a href="missions.html">Missions & Attributions <i class="fas fa-angle-right"></i></a></li>
-            <li><a href="bureau.html">Bureau de la Chambre <i class="fas fa-angle-right"></i></a></li>
+            <li><a href="presentation.html" class="active"><span data-i18n="nav.presentation">Présentation</span> <i class="fas fa-angle-right"></i></a></li>
+            <li><a href="missions.html"><span data-i18n="nav.missions">Missions & 5 Engagements</span> <i class="fas fa-angle-right"></i></a></li>
+            <li><a href="adhesion.html"><span data-i18n="nav.adhesion">Adhésion</span> <i class="fas fa-angle-right"></i></a></li>
           </ul>
         </div>
         <div class="sidebar-widget">
-          <div class="sidebar-widget__title"><i class="fas fa-phone-alt"></i> Nous Contacter</div>
+          <div class="sidebar-widget__title"><i class="fas fa-phone-alt"></i> <span data-i18n="contact.find_us">Contactez-Nous</span></div>
           <ul class="sidebar-contact">
-            <li><i class="fas fa-map-marker-alt"></i> Bvd Colonel Lotfi, Blida 09000</li>
-            <li><i class="fas fa-phone"></i> 020 49 18 28</li>
-            <li><i class="fas fa-envelope"></i> contact@ccib.dz</li>
-            <li><i class="fas fa-clock"></i> Dim – Jeu : 8h00 – 16h30</li>
+            <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="contact.address_val">35, Cité Mouloud Sidi Abdelkader, Blida, Algérie</span></li>
+            <li><i class="fas fa-mobile-alt"></i> <span dir="ltr">0661 61 32 05</span></li>
+            <li><i class="fas fa-phone"></i> <span dir="ltr">020 49 18 28</span></li>
+            <li><i class="fas fa-envelope"></i> cci-mitidja@caci.dz</li>
+            <li><i class="fas fa-envelope"></i> ccimitidja.20@gmail.com</li>
           </ul>
         </div>
       </aside>
@@ -144,7 +148,7 @@
   <footer class="footer">
     <div class="footer__bottom" style="border-top:none; padding: var(--space-xl) 0; background:var(--clr-grey-900);">
       <div class="container footer__bottom-inner">
-        <p style="color:rgba(255,255,255,.5); font-size:var(--fs-xs);">&copy; 2025 Chambre de Commerce et d'Industrie de Blida (CCIB). Tous droits réservés.</p>
+        <p data-i18n="footer.copy">&copy; 2026 Chambre de Commerce et d'Industrie Mitidja-Blida (CCI Mitidja-Blida). Tous droits réservés.</p>
       </div>
     </div>
   </footer>
