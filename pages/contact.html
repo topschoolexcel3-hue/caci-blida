@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact – CCIB</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .contact-page-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: var(--space-3xl);
+      align-items: start;
+    }
+    .contact-info-card {
+      background: linear-gradient(135deg, var(--clr-green-dark), var(--clr-green));
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      color: var(--clr-white);
+    }
+    .contact-info-card h2 {
+      font-size: var(--fs-2xl);
+      font-weight: 800;
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-md);
+      border-bottom: 2px solid rgba(255,255,255,.2);
+    }
+    .cinfo-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+    .cinfo-item__icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      color: var(--clr-gold);
+      flex-shrink: 0;
+    }
+    .cinfo-item__body strong { display: block; font-size: var(--fs-sm); color: var(--clr-gold); margin-bottom: .2rem; }
+    .cinfo-item__body span  { font-size: var(--fs-sm); color: rgba(255,255,255,.85); line-height: 1.6; }
+    .map-placeholder {
+      background: rgba(255,255,255,.1);
+      border-radius: var(--radius-lg);
+      height: 180px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      gap: var(--space-sm);
+      color: rgba(255,255,255,.6);
+      font-size: var(--fs-sm);
+      margin-top: var(--space-lg);
+      border: 2px dashed rgba(255,255,255,.25);
+    }
+    .map-placeholder i { font-size: 2.5rem; color: var(--clr-gold); }
+    .contact-form-card {
+      background: var(--clr-white);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--clr-grey-200);
+    }
+    .contact-form-card h2 {
+      font-size: var(--fs-2xl);
+      font-weight: 800;
+      color: var(--clr-grey-900);
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-md);
+      border-bottom: 3px solid var(--clr-green);
+    }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-md); }
+    @media(max-width:900px){
+      .contact-page-grid { grid-template-columns:1fr; }
+      .form-row-3 { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="container top-bar__inner">
+      <div class="top-bar__left">
+        <span><i class="fas fa-phone"></i> Tél/Fax : 020 49 18 28</span>
+        <span><i class="fas fa-envelope"></i> contact@ccib.dz</span>
+      </div>
+      <div class="top-bar__right">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <div class="lang-switcher">
+          <button class="lang-btn active">FR</button>
+          <button class="lang-btn">AR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="../index.html" class="header__logo">
+        <div class="logo-emblem"><div class="logo-shield"><span class="logo-star">★</span></div></div>
+        <div class="logo-text">
+          <span class="logo-text__main">CCIB</span>
+          <span class="logo-text__sub">Chambre de Commerce et d'Industrie de Blida</span>
+        </div>
+      </a>
+      <nav class="nav" id="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="../index.html" class="nav__link">Accueil</a></li>
+          <li class="nav__item nav__item--dropdown">
+            <a href="#" class="nav__link">La Chambre <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="presentation.html">Présentation</a></li>
+              <li><a href="missions.html">Missions</a></li>
+            </ul>
+          </li>
+          <li class="nav__item nav__item--dropdown">
+            <a href="#" class="nav__link">Services <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="certificat-origine.html">Certificat d'Origine</a></li>
+              <li><a href="carnet-ata.html">Carnet ATA</a></li>
+              <li><a href="legalisation.html">Légalisation</a></li>
+              <li><a href="formation.html">Formation</a></li>
+            </ul>
+          </li>
+          <li class="nav__item"><a href="actualites.html" class="nav__link">Actualités</a></li>
+          <li class="nav__item nav__item--active"><a href="contact.html" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container page-hero__content">
+      <div class="page-hero__breadcrumb">
+        <a href="../index.html">Accueil</a>
+        <i class="fas fa-angle-right"></i>
+        <span>Contact</span>
+      </div>
+      <h1 class="page-hero__title"><i class="fas fa-envelope"></i> Contactez-Nous</h1>
+    </div>
+  </section>
+
+  <section class="page-content">
+    <div class="container">
+      <div class="contact-page-grid">
+        <!-- INFO -->
+        <div class="contact-info-card">
+          <h2><i class="fas fa-map-marker-alt"></i> Nous Trouver</h2>
+          <div class="cinfo-item">
+            <div class="cinfo-item__icon"><i class="fas fa-building"></i></div>
+            <div class="cinfo-item__body">
+              <strong>Siège Social</strong>
+              <span>Boulevard Colonel Lotfi<br/>Blida 09000, Algérie</span>
+            </div>
+          </div>
+          <div class="cinfo-item">
+            <div class="cinfo-item__icon"><i class="fas fa-phone"></i></div>
+            <div class="cinfo-item__body">
+              <strong>Téléphone / Fax</strong>
+              <span>020 49 18 28<br/>020 49 18 28 (Fax)</span>
+            </div>
+          </div>
+          <div class="cinfo-item">
+            <div class="cinfo-item__icon"><i class="fas fa-envelope"></i></div>
+            <div class="cinfo-item__body">
+              <strong>Email</strong>
+              <span>contact@ccib.dz<br/>info@ccib.dz</span>
+            </div>
+          </div>
+          <div class="cinfo-item">
+            <div class="cinfo-item__icon"><i class="fas fa-clock"></i></div>
+            <div class="cinfo-item__body">
+              <strong>Horaires d'Ouverture</strong>
+              <span>Dimanche – Jeudi<br/>8h00 – 16h30<br/>Vendredi & Samedi : Fermé</span>
+            </div>
+          </div>
+          <div class="cinfo-item">
+            <div class="cinfo-item__icon"><i class="fas fa-globe"></i></div>
+            <div class="cinfo-item__body">
+              <strong>Site Web</strong>
+              <span>www.ccib.dz</span>
+            </div>
+          </div>
+          <div class="map-placeholder">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>Boulevard Colonel Lotfi, Blida</span>
+            <span style="font-size:11px;">Intégrer Google Maps ici</span>
+          </div>
+        </div>
+
+        <!-- FORM -->
+        <div class="contact-form-card">
+          <h2>Envoyer un Message</h2>
+          <form id="contactForm" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nom">Nom *</label>
+                <input type="text" id="nom" name="nom" placeholder="Votre nom" required />
+              </div>
+              <div class="form-group">
+                <label for="prenom">Prénom *</label>
+                <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" placeholder="votre@email.com" required />
+              </div>
+              <div class="form-group">
+                <label for="tel">Téléphone</label>
+                <input type="tel" id="tel" name="tel" placeholder="+213 XX XX XX XX" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="entreprise">Entreprise / Organisation</label>
+              <input type="text" id="entreprise" name="entreprise" placeholder="Nom de votre entreprise" />
+            </div>
+            <div class="form-group">
+              <label for="sujet">Sujet *</label>
+              <select id="sujet" name="sujet" required>
+                <option value="">-- Choisir un sujet --</option>
+                <option value="certificat-origine">Certificat d'Origine</option>
+                <option value="carnet-ata">Carnet ATA</option>
+                <option value="legalisation">Légalisation de Documents</option>
+                <option value="formation">Formation Professionnelle</option>
+                <option value="arbitrage">Médiation & Arbitrage</option>
+                <option value="foire">Foires & Événements</option>
+                <option value="adhesion">Adhésion à la Chambre</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" rows="5" placeholder="Détaillez votre demande ici..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full">
+              <i class="fas fa-paper-plane"></i> Envoyer le Message
+            </button>
+            <div class="form-feedback" id="formFeedback" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__bottom" style="border-top:none; padding: var(--space-xl) 0; background:var(--clr-grey-900);">
+      <div class="container footer__bottom-inner">
+        <p style="color:rgba(255,255,255,.5); font-size:var(--fs-xs);">&copy; 2025 Chambre de Commerce et d'Industrie de Blida (CCIB). Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+  <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adhésion – CCI Mitidja-Blida</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    /* ---- Tarifs Cards ---- */
+    .tarif-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      margin: var(--space-xl) 0;
+    }
+    .tarif-card {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 2px solid var(--clr-green);
+      text-align: center;
+    }
+    .tarif-card--gold { border-color: var(--clr-gold-dark); }
+    .tarif-card__header {
+      background: var(--clr-green);
+      color: var(--clr-white);
+      padding: var(--space-xl);
+    }
+    .tarif-card--gold .tarif-card__header { background: linear-gradient(135deg, var(--clr-gold-dark), var(--clr-gold)); color: var(--clr-grey-900); }
+    .tarif-card__icon { font-size: 2.5rem; margin-bottom: var(--space-sm); color: var(--clr-gold); }
+    .tarif-card--gold .tarif-card__icon { color: var(--clr-grey-900); }
+    .tarif-card__type { font-size: var(--fs-xl); font-weight: 800; }
+    .tarif-card__ar { font-size: var(--fs-sm); opacity: .85; margin-top: .3rem; direction: rtl; }
+    .tarif-card__price {
+      background: var(--clr-white);
+      padding: var(--space-xl);
+    }
+    .tarif-card__amount {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--clr-green);
+      line-height: 1;
+    }
+    .tarif-card--gold .tarif-card__amount { color: var(--clr-gold-dark); }
+    .tarif-card__currency { font-size: var(--fs-xl); font-weight: 700; color: var(--clr-grey-700); }
+    .tarif-card__period { font-size: var(--fs-sm); color: var(--clr-grey-500); margin-top: .25rem; }
+    .tarif-card__body { padding: var(--space-md) var(--space-xl) var(--space-xl); background: var(--clr-white); }
+    .tarif-card__features { display: flex; flex-direction: column; gap: var(--space-xs); text-align: left; }
+    .tarif-card__features li { display: flex; align-items: center; gap: .6rem; font-size: var(--fs-sm); color: var(--clr-grey-700); }
+    .tarif-card__features li i { color: var(--clr-green); flex-shrink: 0; }
+    .tarif-card--gold .tarif-card__features li i { color: var(--clr-gold-dark); }
+
+    /* ---- Dossier ---- */
+    .dossier-bilingue {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+    .dossier-col h3 { font-size: var(--fs-xl); font-weight: 700; color: var(--clr-green); margin-bottom: var(--space-md); }
+    .dossier-col--ar { direction: rtl; }
+    .dossier-col--ar h3 { color: var(--clr-gold-dark); }
+
+    /* ---- Avantages ---- */
+    .avantages-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-lg);
+      margin: var(--space-xl) 0;
+    }
+    .avantage-card {
+      background: var(--clr-white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--clr-grey-200);
+      transition: var(--transition);
+    }
+    .avantage-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--clr-green); }
+    .avantage-card__icon { font-size: 2rem; color: var(--clr-green); margin-bottom: var(--space-sm); }
+    .avantage-card__title { font-size: var(--fs-sm); font-weight: 700; color: var(--clr-grey-900); margin-bottom: .35rem; }
+    .avantage-card__ar { font-size: var(--fs-xs); color: var(--clr-grey-500); direction: rtl; }
+
+    @media (max-width: 768px) {
+      .tarif-grid { grid-template-columns: 1fr; }
+      .dossier-bilingue { grid-template-columns: 1fr; }
+      .avantages-grid { grid-template-columns: repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="container top-bar__inner">
+      <div class="top-bar__left">
+        <span><i class="fas fa-phone"></i> 020 49 18 28 | 0661 61 32 05</span>
+        <span><i class="fas fa-envelope"></i> cci-mitidja@caci.dz</span>
+      </div>
+      <div class="top-bar__right">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <div class="lang-switcher">
+          <button class="lang-btn active">FR</button>
+          <button class="lang-btn">AR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="../index.html" class="header__logo">
+        <div class="logo-emblem"><div class="logo-shield"><span class="logo-star">★</span></div></div>
+        <div class="logo-text">
+          <span class="logo-text__main">CCI</span>
+          <span class="logo-text__sub">Chambre de Commerce et d'Industrie Mitidja-Blida</span>
+        </div>
+      </a>
+      <nav class="nav" id="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="../index.html" class="nav__link">Accueil</a></li>
+          <li class="nav__item nav__item--dropdown">
+            <a href="#" class="nav__link">La Chambre <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="presentation.html">Présentation</a></li>
+              <li><a href="missions.html">Missions & Engagements</a></li>
+            </ul>
+          </li>
+          <li class="nav__item nav__item--dropdown">
+            <a href="#" class="nav__link">Services <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="certificat-origine.html">Certificat d'Origine</a></li>
+              <li><a href="carnet-ata.html">Carnet ATA</a></li>
+              <li><a href="legalisation.html">Légalisation</a></li>
+              <li><a href="formation.html">Formation Professionnelle</a></li>
+            </ul>
+          </li>
+          <li class="nav__item nav__item--active"><a href="adhesion.html" class="nav__link">Adhésion</a></li>
+          <li class="nav__item"><a href="actualites.html" class="nav__link">Actualités</a></li>
+          <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container page-hero__content">
+      <div class="page-hero__breadcrumb">
+        <a href="../index.html">Accueil</a>
+        <i class="fas fa-angle-right"></i>
+        <span>Adhésion</span>
+      </div>
+      <h1 class="page-hero__title">
+        <i class="fas fa-id-card"></i> Adhésion / الانخراط
+      </h1>
+      <p style="color:rgba(255,255,255,.85); margin-top:.75rem; font-size:var(--fs-lg);">Adhérez dès aujourd'hui et développez votre activité commerciale – Ensemble pour une économie forte</p>
+    </div>
+  </section>
+
+  <section class="page-content">
+    <div class="container page-layout">
+      <main class="page-main">
+
+        <!-- TARIFS -->
+        <div class="section-header" style="text-align:left; margin-bottom:var(--space-lg);">
+          <span class="section-header__tag">Cotisation Annuelle – رسوم الانخراط السنوي</span>
+          <h2 class="section-header__title" style="text-align:left;">Choisissez votre Type d'Adhésion</h2>
+        </div>
+
+        <div class="tarif-grid">
+          <div class="tarif-card">
+            <div class="tarif-card__header">
+              <div class="tarif-card__icon"><i class="fas fa-user"></i></div>
+              <div class="tarif-card__type">Personne Physique</div>
+              <div class="tarif-card__ar">الشخص الطبيعي</div>
+            </div>
+            <div class="tarif-card__price">
+              <div class="tarif-card__amount">1 000</div>
+              <div class="tarif-card__currency">DZD</div>
+              <div class="tarif-card__period">Par an / سنويًا</div>
+            </div>
+            <div class="tarif-card__body">
+              <ul class="tarif-card__features">
+                <li><i class="fas fa-check"></i> Commerçants individuels</li>
+                <li><i class="fas fa-check"></i> Artisans</li>
+                <li><i class="fas fa-check"></i> Prestataires de services indépendants</li>
+                <li><i class="fas fa-check"></i> Toutes les prestations de la CCI</li>
+              </ul>
+              <br/>
+              <a href="contact.html" class="btn btn--primary btn--full">S'inscrire</a>
+            </div>
+          </div>
+
+          <div class="tarif-card tarif-card--gold">
+            <div class="tarif-card__header">
+              <div class="tarif-card__icon"><i class="fas fa-building"></i></div>
+              <div class="tarif-card__type">Personne Morale</div>
+              <div class="tarif-card__ar">الشخص المعنوي</div>
+            </div>
+            <div class="tarif-card__price">
+              <div class="tarif-card__amount">3 000</div>
+              <div class="tarif-card__currency">DZD</div>
+              <div class="tarif-card__period">Par an / سنويًا</div>
+            </div>
+            <div class="tarif-card__body">
+              <ul class="tarif-card__features">
+                <li><i class="fas fa-check"></i> Sociétés & Entreprises (SARL, SPA…)</li>
+                <li><i class="fas fa-check"></i> Industries & PME/PMI</li>
+                <li><i class="fas fa-check"></i> Associations professionnelles</li>
+                <li><i class="fas fa-check"></i> Toutes les prestations + avantages partenaires</li>
+              </ul>
+              <br/>
+              <a href="contact.html" class="btn btn--primary btn--full" style="background:var(--clr-gold-dark); border-color:var(--clr-gold-dark);">S'inscrire</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- AVANTAGES -->
+        <div class="section-header" style="text-align:left; margin:var(--space-2xl) 0 var(--space-lg);">
+          <span class="section-header__tag">Avantages de l'Adhésion – مزايا الانخراط</span>
+          <h2 class="section-header__title" style="text-align:left;">Pourquoi Adhérer ?</h2>
+        </div>
+
+        <div class="avantages-grid">
+          <div class="avantage-card">
+            <div class="avantage-card__icon"><i class="fas fa-globe"></i></div>
+            <div class="avantage-card__title">Foires Nationales & Internationales</div>
+            <div class="avantage-card__ar">المشاركة في المعارض الوطنية والدولية</div>
+          </div>
+          <div class="avantage-card">
+            <div class="avantage-card__icon"><i class="fas fa-graduation-cap"></i></div>
+            <div class="avantage-card__title">Formations dans Divers Domaines</div>
+            <div class="avantage-card__ar">دورات تكوينية في مختلف المجالات</div>
+          </div>
+          <div class="avantage-card">
+            <div class="avantage-card__icon"><i class="fas fa-certificate"></i></div>
+            <div class="avantage-card__title">Certificats & Documents Officiels</div>
+            <div class="avantage-card__ar">استخراج شهادة المنشأ وشهادة التصنيع</div>
+          </div>
+          <div class="avantage-card">
+            <div class="avantage-card__icon"><i class="fas fa-stamp"></i></div>
+            <div class="avantage-card__title">Légalisation de Documents</div>
+            <div class="avantage-card__ar">المصادقة على الوثائق التجارية</div>
+          </div>
+          <div class="avantage-card">
+            <div class="avantage-card__icon"><i class="fas fa-handshake"></i></div>
+            <div class="avantage-card__title">Représentation & Défense des Intérêts</div>
+            <div class="avantage-card__ar">التمثيل والدفاع عن مصالح التجار</div>
+          </div>
+          <div class="avantage-card">
+            <div class="avantage-card__icon"><i class="fas fa-bullhorn"></i></div>
+            <div class="avantage-card__title">Information & Orientation</div>
+            <div class="avantage-card__ar">الإعلام والتوجيه والاستشارة</div>
+          </div>
+          <div class="avantage-card">
+            <div class="avantage-card__icon"><i class="fas fa-percent"></i></div>
+            <div class="avantage-card__title">Offres & Réductions Partenaires</div>
+            <div class="avantage-card__ar">الاستفادة من عروض وتخفيضات لدى الشركاء</div>
+          </div>
+          <div class="avantage-card">
+            <div class="avantage-card__icon"><i class="fas fa-balance-scale"></i></div>
+            <div class="avantage-card__title">Veille Juridique & Réglementaire</div>
+            <div class="avantage-card__ar">الاطلاع على المستجدات القانونية والتنظيمية</div>
+          </div>
+        </div>
+
+        <!-- DOSSIER -->
+        <div class="section-header" style="text-align:left; margin:var(--space-2xl) 0 var(--space-lg);">
+          <span class="section-header__tag">Documents Requis – ملف الانخراط</span>
+          <h2 class="section-header__title" style="text-align:left;">Dossier d'Adhésion</h2>
+        </div>
+
+        <div class="dossier-bilingue">
+          <div class="dossier-col">
+            <h3><i class="fas fa-folder-open"></i> Dossier en Français</h3>
+            <div class="doc-list">
+              <div class="doc-item"><i class="fas fa-file-alt"></i><span>Une copie du registre de commerce (à jour)</span></div>
+              <div class="doc-item"><i class="fas fa-id-card"></i><span>Une copie de la carte nationale d'identité ou du passeport</span></div>
+              <div class="doc-item"><i class="fas fa-receipt"></i><span>Une copie de la carte fiscale</span></div>
+              <div class="doc-item"><i class="fas fa-image"></i><span>Deux photos d'identité récentes</span></div>
+              <div class="doc-item"><i class="fas fa-university"></i><span>Reçu de paiement ou avis de virement de la cotisation (selon le cas)</span></div>
+            </div>
+          </div>
+          <div class="dossier-col dossier-col--ar">
+            <h3><i class="fas fa-folder-open"></i> ملف الانخراط بالعربية</h3>
+            <div class="doc-list">
+              <div class="doc-item"><i class="fas fa-file-alt"></i><span>نسخة من السجل التجاري (ساري المفعول)</span></div>
+              <div class="doc-item"><i class="fas fa-id-card"></i><span>نسخة من البطاقة الوطنية للتعريف أو جواز السفر</span></div>
+              <div class="doc-item"><i class="fas fa-receipt"></i><span>نسخة من البطاقة الجبائية</span></div>
+              <div class="doc-item"><i class="fas fa-image"></i><span>صورتان شمسيتان حديثتان</span></div>
+              <div class="doc-item"><i class="fas fa-university"></i><span>وصل دفع أو إشعار بالتحويل البنكي (حسب الحالة)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top: var(--space-xl);">
+          <i class="fas fa-info-circle"></i>
+          <p>Pour toute information complémentaire ou pour retirer votre dossier d'adhésion, rendez-vous directement au siège de la CCI Mitidja-Blida : <strong>35, Cité Mouloud Sidi Abdelkader, Blida</strong>. Tél : <strong>020 49 18 28</strong> | Mob : <strong>0661 61 32 05</strong> | Email : <strong>cci-mitidja@caci.dz</strong></p>
+        </div>
+
+      </main>
+
+      <aside class="page-sidebar">
+        <div class="sidebar-widget">
+          <div class="sidebar-widget__title"><i class="fas fa-star"></i> Adhésion Rapide</div>
+          <div style="padding:var(--space-lg);">
+            <p style="font-size:var(--fs-sm); color:var(--clr-grey-700); margin-bottom:var(--space-md);">Inscrivez-vous dès aujourd'hui et rejoignez le réseau des entreprises de la Mitidja-Blida !</p>
+            <a href="contact.html" class="btn btn--primary btn--full">Nous Contacter</a>
+          </div>
+        </div>
+        <div class="sidebar-widget">
+          <div class="sidebar-widget__title"><i class="fas fa-phone-alt"></i> Nous Joindre</div>
+          <ul class="sidebar-contact">
+            <li><i class="fas fa-map-marker-alt"></i> 35, Cité Mouloud Sidi Abdelkader, Blida</li>
+            <li><i class="fas fa-phone"></i> 020 49 18 28</li>
+            <li><i class="fas fa-mobile-alt"></i> 0661 61 32 05</li>
+            <li><i class="fas fa-envelope"></i> cci-mitidja@caci.dz</li>
+            <li><i class="fas fa-clock"></i> Dim – Jeu : 8h00 – 16h30</li>
+          </ul>
+        </div>
+        <div class="sidebar-widget">
+          <div class="sidebar-widget__title"><i class="fas fa-list"></i> Services</div>
+          <ul class="sidebar-nav">
+            <li><a href="certificat-origine.html">Certificat d'Origine <i class="fas fa-angle-right"></i></a></li>
+            <li><a href="carnet-ata.html">Carnet ATA <i class="fas fa-angle-right"></i></a></li>
+            <li><a href="legalisation.html">Légalisation <i class="fas fa-angle-right"></i></a></li>
+            <li><a href="formation.html">Formation <i class="fas fa-angle-right"></i></a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="container footer__top-grid">
+        <div class="footer-col footer-col--about">
+          <div class="footer-logo">
+            <div class="logo-emblem logo-emblem--sm"><div class="logo-shield"><span class="logo-star">★</span></div></div>
+            <div><span class="footer-logo__main">CCI</span><span class="footer-logo__sub">Chambre de Commerce et d'Industrie Mitidja-Blida</span></div>
+          </div>
+          <p class="footer-col__desc">Au cœur du développement économique de la Mitidja. Sous tutelle de la Chambre Algérienne de Commerce et d'Industrie (CACI).</p>
+          <div class="footer-social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col__title">Services</h3>
+          <ul class="footer-col__links">
+            <li><a href="certificat-origine.html"><i class="fas fa-angle-right"></i> Certificat d'Origine</a></li>
+            <li><a href="carnet-ata.html"><i class="fas fa-angle-right"></i> Carnet ATA</a></li>
+            <li><a href="legalisation.html"><i class="fas fa-angle-right"></i> Légalisation</a></li>
+            <li><a href="formation.html"><i class="fas fa-angle-right"></i> Formation</a></li>
+            <li><a href="adhesion.html"><i class="fas fa-angle-right"></i> Adhésion</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col__title">Contact</h3>
+          <ul class="footer-col__contact">
+            <li><i class="fas fa-map-marker-alt"></i> 35, Cité Mouloud Sidi Abdelkader, Blida</li>
+            <li><i class="fas fa-phone"></i> 020 49 18 28</li>
+            <li><i class="fas fa-mobile-alt"></i> 0661 61 32 05</li>
+            <li><i class="fas fa-envelope"></i> cci-mitidja@caci.dz</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container footer__bottom-inner">
+        <p>&copy; 2025 CCI Mitidja-Blida. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+  <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+  <script src="../js/main.js"></script>
+</body>
+</html>

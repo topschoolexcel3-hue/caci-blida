@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Missions & Engagements – CCI Mitidja-Blida</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .engagements-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      margin: var(--space-xl) 0;
+    }
+    .engagement-card {
+      background: var(--clr-white);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-sm);
+      border: 1.5px solid var(--clr-grey-200);
+      transition: var(--transition);
+      display: flex;
+      gap: var(--space-md);
+      align-items: flex-start;
+    }
+    .engagement-card:hover { box-shadow: var(--shadow-md); border-color: var(--clr-green); transform: translateY(-2px); }
+    .engagement-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--clr-green);
+      color: var(--clr-white);
+      font-size: var(--fs-xl);
+      font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .engagement-body strong { display: block; font-size: var(--fs-base); font-weight: 800; color: var(--clr-green); margin-bottom: .4rem; }
+    .engagement-body p { font-size: var(--fs-sm); color: var(--clr-grey-700); line-height: 1.7; margin: 0; }
+    @media (max-width: 768px) { .engagements-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="container top-bar__inner">
+      <div class="top-bar__left">
+        <span><i class="fas fa-phone"></i> 020 49 18 28 | 0661 61 32 05</span>
+        <span><i class="fas fa-envelope"></i> cci-mitidja@caci.dz</span>
+      </div>
+      <div class="top-bar__right">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <div class="lang-switcher">
+          <button class="lang-btn active">FR</button>
+          <button class="lang-btn">AR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="../index.html" class="header__logo">
+        <div class="logo-emblem"><div class="logo-shield"><span class="logo-star">★</span></div></div>
+        <div class="logo-text">
+          <span class="logo-text__main">CCI</span>
+          <span class="logo-text__sub">Chambre de Commerce et d'Industrie Mitidja-Blida</span>
+        </div>
+      </a>
+      <nav class="nav" id="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="../index.html" class="nav__link">Accueil</a></li>
+          <li class="nav__item nav__item--dropdown nav__item--active">
+            <a href="#" class="nav__link">La Chambre <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="presentation.html">Présentation</a></li>
+              <li><a href="missions.html" class="active">Missions & Engagements</a></li>
+            </ul>
+          </li>
+          <li class="nav__item nav__item--dropdown">
+            <a href="#" class="nav__link">Services <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="certificat-origine.html">Certificat d'Origine</a></li>
+              <li><a href="formation.html">Formation</a></li>
+            </ul>
+          </li>
+          <li class="nav__item"><a href="adhesion.html" class="nav__link">Adhésion</a></li>
+          <li class="nav__item"><a href="actualites.html" class="nav__link">Actualités</a></li>
+          <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container page-hero__content">
+      <div class="page-hero__breadcrumb">
+        <a href="../index.html">Accueil</a>
+        <i class="fas fa-angle-right"></i>
+        <span>La Chambre</span>
+        <i class="fas fa-angle-right"></i>
+        <span>Missions & Engagements</span>
+      </div>
+      <h1 class="page-hero__title"><i class="fas fa-bullseye"></i> Notre Mission & Nos 5 Engagements</h1>
+    </div>
+  </section>
+
+  <section class="page-content">
+    <div class="container page-layout">
+      <main class="page-main prose">
+
+        <h2>Notre Mission</h2>
+        <p>La <strong>CCI Mitidja-Blida</strong> accompagne les entreprises de la région à chaque étape de leur développement en :</p>
+        <ul>
+          <li>Créant des <strong>opportunités d'affaires</strong></li>
+          <li>Facilitant les <strong>échanges entre opérateurs économiques</strong></li>
+          <li>Accompagnant les <strong>projets de développement</strong></li>
+          <li>Représentant les <strong>intérêts des entreprises</strong> auprès des institutions</li>
+        </ul>
+
+        <div class="info-box">
+          <i class="fas fa-quote-left"></i>
+          <p><em>"Faire de la CCI Mitidja-Blida la première réseau économique de confiance, où la région, où chaque adhérent trouve des opportunités, des partenaires et un accompagnement concret pour se développer durablement."</em> – <strong>Notre Ambition</strong></p>
+        </div>
+
+        <h2>Nos 5 Engagements</h2>
+        <div class="engagements-grid">
+          <div class="engagement-card">
+            <div class="engagement-num">1</div>
+            <div class="engagement-body">
+              <strong>BUSINESS CONNECT</strong>
+              <p>Nous connectons les entreprises qui ont des besoins avec celles qui ont les solutions (fournisseurs, clients, sous-traitants, partenaires industriels, prestataires de services).</p>
+            </div>
+          </div>
+          <div class="engagement-card">
+            <div class="engagement-num">2</div>
+            <div class="engagement-body">
+              <strong>LES RENCONTRES ACHETEURS – FOURNISSEURS</strong>
+              <p>Rencontres B2B entre grandes entreprises, PME, startups et industriels. Objectif : favoriser les contrats locaux et créer des partenariats durables.</p>
+            </div>
+          </div>
+          <div class="engagement-card">
+            <div class="engagement-num">3</div>
+            <div class="engagement-body">
+              <strong>LES BUSINESS CHALLENGES</strong>
+              <p>Les entreprises présentent un défi concret. Les adhérents apportent leurs idées et solutions. La Chambre assure le suivi des mises en relation.</p>
+            </div>
+          </div>
+          <div class="engagement-card">
+            <div class="engagement-num">4</div>
+            <div class="engagement-body">
+              <strong>LES VISITES D'ENTREPRISES</strong>
+              <p>Découvrir les réussites locales. Partager les bonnes pratiques. Créer des collaborations industrielles et commerciales entre membres.</p>
+            </div>
+          </div>
+          <div class="engagement-card">
+            <div class="engagement-num">5</div>
+            <div class="engagement-body">
+              <strong>LE CONSEIL DES ENTREPRISES DE BLIDA</strong>
+              <p>La Chambre recueille les préoccupations des entreprises, les analyse et les porte auprès des autorités compétentes. Notre rôle est aussi d'être la voix des entreprises.</p>
+            </div>
+          </div>
+          <div class="engagement-card" style="border-color:var(--clr-gold-dark);">
+            <div class="engagement-num" style="background:var(--clr-gold-dark);">★</div>
+            <div class="engagement-body">
+              <strong>NOTRE DIFFÉRENCE</strong>
+              <p>Nous ne mesurons pas notre réussite par le nombre d'événements organisés. Nous la mesurons par : le nombre de mises en relation réalisées, les partenariats créés entre adhérents, et les opportunités d'affaires générées dans leur développement.</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>Les Formations Professionnelles</h2>
+        <p>Développez les compétences, renforcez la performance et accompagnez la croissance de votre entreprise grâce à nos formations :</p>
+        <div class="doc-list">
+          <div class="doc-item"><i class="fas fa-robot"></i><span><strong>Intelligence artificielle et transformation digitale</strong></span></div>
+          <div class="doc-item"><i class="fas fa-chart-bar"></i><span><strong>Gestion et management des entreprises</strong></span></div>
+          <div class="doc-item"><i class="fas fa-calculator"></i><span><strong>Comptabilité et fiscalité</strong></span></div>
+          <div class="doc-item"><i class="fas fa-bullhorn"></i><span><strong>Marketing digital et communication</strong></span></div>
+          <div class="doc-item"><i class="fas fa-users"></i><span><strong>Ressources humaines</strong></span></div>
+          <div class="doc-item"><i class="fas fa-shield-alt"></i><span><strong>Hygiène, sécurité et normes HACCP</strong></span></div>
+          <div class="doc-item"><i class="fas fa-handshake"></i><span><strong>Commerce, négociation et techniques de vente</strong></span></div>
+        </div>
+
+      </main>
+
+      <aside class="page-sidebar">
+        <div class="sidebar-widget">
+          <div class="sidebar-widget__title"><i class="fas fa-landmark"></i> La Chambre</div>
+          <ul class="sidebar-nav">
+            <li><a href="presentation.html">Présentation <i class="fas fa-angle-right"></i></a></li>
+            <li><a href="missions.html" class="active">Missions & Engagements <i class="fas fa-angle-right"></i></a></li>
+            <li><a href="adhesion.html">Adhésion <i class="fas fa-angle-right"></i></a></li>
+          </ul>
+        </div>
+        <div class="sidebar-widget">
+          <div class="sidebar-widget__title"><i class="fas fa-phone-alt"></i> Contact</div>
+          <ul class="sidebar-contact">
+            <li><i class="fas fa-map-marker-alt"></i> 35, Cité Mouloud Sidi Abdelkader, Blida</li>
+            <li><i class="fas fa-phone"></i> 020 49 18 28</li>
+            <li><i class="fas fa-mobile-alt"></i> 0661 61 32 05</li>
+            <li><i class="fas fa-envelope"></i> cci-mitidja@caci.dz</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__bottom" style="background:var(--clr-grey-900); border-top:none; padding:var(--space-xl) 0;">
+      <div class="container footer__bottom-inner">
+        <p style="color:rgba(255,255,255,.5); font-size:var(--fs-xs);">&copy; 2025 CCI Mitidja-Blida. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+  <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+  <script src="../js/main.js"></script>
+</body>
+</html>

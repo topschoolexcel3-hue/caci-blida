@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Actualités – CCIB</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/pages.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-xl);
+      margin-top: var(--space-xl);
+    }
+    .news-card {
+      background: var(--clr-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--clr-grey-200);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .news-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+    .news-card__img {
+      height: 200px;
+      background: linear-gradient(135deg, var(--clr-green-dark), var(--clr-green-light));
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+      color: rgba(255,255,255,.3);
+    }
+    .news-card__img--blue  { background: linear-gradient(135deg, var(--clr-blue), #2563b8); }
+    .news-card__img--gold  { background: linear-gradient(135deg, var(--clr-gold-dark), var(--clr-gold)); }
+    .news-card__date {
+      position: absolute;
+      bottom: var(--space-sm);
+      left: var(--space-sm);
+      background: var(--clr-white);
+      border-radius: var(--radius-md);
+      padding: .3rem .7rem;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      color: var(--clr-green);
+      display: flex; align-items: center; gap: .35rem;
+    }
+    .news-card__tag {
+      position: absolute;
+      top: var(--space-sm);
+      right: var(--space-sm);
+      font-size: 10px;
+      font-weight: 700;
+      padding: .25rem .7rem;
+      border-radius: var(--radius-full);
+      text-transform: uppercase;
+    }
+    .news-card__tag--green { background: var(--clr-green); color: var(--clr-white); }
+    .news-card__tag--blue  { background: var(--clr-blue);  color: var(--clr-white); }
+    .news-card__tag--gold  { background: var(--clr-gold);  color: var(--clr-grey-900); }
+    .news-card__body { padding: var(--space-lg); flex: 1; display: flex; flex-direction: column; }
+    .news-card__title {
+      font-size: var(--fs-base);
+      font-weight: 700;
+      color: var(--clr-grey-900);
+      margin-bottom: var(--space-sm);
+      line-height: 1.4;
+    }
+    .news-card__title a:hover { color: var(--clr-green); }
+    .news-card__excerpt {
+      font-size: var(--fs-sm);
+      color: var(--clr-grey-700);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: var(--space-md);
+    }
+    .news-card__link {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-size: var(--fs-sm); font-weight: 700;
+      color: var(--clr-green);
+      margin-top: auto;
+    }
+    .news-card__link:hover { gap: .8rem; }
+    .news-filters {
+      display: flex; gap: var(--space-sm); flex-wrap: wrap;
+      margin-bottom: var(--space-xl);
+    }
+    .filter-btn {
+      padding: .45rem 1.1rem;
+      border-radius: var(--radius-full);
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      border: 2px solid var(--clr-grey-200);
+      color: var(--clr-grey-700);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--clr-green);
+      border-color: var(--clr-green);
+      color: var(--clr-white);
+    }
+    @media (max-width: 900px) { .news-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 600px) { .news-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <div class="container top-bar__inner">
+      <div class="top-bar__left">
+        <span><i class="fas fa-phone"></i> Tél/Fax : 020 49 18 28</span>
+        <span><i class="fas fa-envelope"></i> contact@ccib.dz</span>
+      </div>
+      <div class="top-bar__right">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <div class="lang-switcher">
+          <button class="lang-btn active">FR</button>
+          <button class="lang-btn">AR</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="../index.html" class="header__logo">
+        <div class="logo-emblem"><div class="logo-shield"><span class="logo-star">★</span></div></div>
+        <div class="logo-text">
+          <span class="logo-text__main">CCIB</span>
+          <span class="logo-text__sub">Chambre de Commerce et d'Industrie de Blida</span>
+        </div>
+      </a>
+      <nav class="nav" id="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="../index.html" class="nav__link">Accueil</a></li>
+          <li class="nav__item nav__item--dropdown">
+            <a href="#" class="nav__link">La Chambre <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="presentation.html">Présentation</a></li>
+              <li><a href="missions.html">Missions</a></li>
+            </ul>
+          </li>
+          <li class="nav__item nav__item--dropdown">
+            <a href="#" class="nav__link">Services <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="certificat-origine.html">Certificat d'Origine</a></li>
+              <li><a href="carnet-ata.html">Carnet ATA</a></li>
+              <li><a href="legalisation.html">Légalisation</a></li>
+              <li><a href="formation.html">Formation</a></li>
+            </ul>
+          </li>
+          <li class="nav__item nav__item--active"><a href="actualites.html" class="nav__link">Actualités</a></li>
+          <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container page-hero__content">
+      <div class="page-hero__breadcrumb">
+        <a href="../index.html">Accueil</a>
+        <i class="fas fa-angle-right"></i>
+        <span>Actualités</span>
+      </div>
+      <h1 class="page-hero__title"><i class="fas fa-newspaper"></i> Actualités & Communiqués</h1>
+    </div>
+  </section>
+
+  <section class="page-content">
+    <div class="container">
+      <div class="news-filters">
+        <button class="filter-btn active">Tous</button>
+        <button class="filter-btn">Communiqués</button>
+        <button class="filter-btn">Formations</button>
+        <button class="filter-btn">Partenariats</button>
+        <button class="filter-btn">Foires & Salons</button>
+        <button class="filter-btn">Annonces</button>
+      </div>
+
+      <div class="news-grid">
+
+        <article class="news-card">
+          <div class="news-card__img">
+            <i class="fas fa-landmark"></i>
+            <span class="news-card__tag news-card__tag--green">Communiqué</span>
+            <span class="news-card__date"><i class="fas fa-calendar"></i> 28 Oct 2025</span>
+          </div>
+          <div class="news-card__body">
+            <h3 class="news-card__title"><a href="#">Réunion du Bureau de la CCIB – Bilan du 3ème Trimestre 2025</a></h3>
+            <p class="news-card__excerpt">Le bureau de la Chambre s'est réuni pour dresser le bilan des activités du troisième trimestre et définir les axes prioritaires pour la fin d'exercice 2025.</p>
+            <a href="#" class="news-card__link">Lire la suite <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <div class="news-card__img news-card__img--blue">
+            <i class="fas fa-graduation-cap"></i>
+            <span class="news-card__tag news-card__tag--blue">Formation</span>
+            <span class="news-card__date"><i class="fas fa-calendar"></i> 15 Oct 2025</span>
+          </div>
+          <div class="news-card__body">
+            <h3 class="news-card__title"><a href="#">Séminaire sur les Techniques d'Export et le Commerce International</a></h3>
+            <p class="news-card__excerpt">La CCIB a organisé un séminaire de deux jours sur les meilleures pratiques d'exportation à destination des PME de la wilaya de Blida.</p>
+            <a href="#" class="news-card__link">Lire la suite <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <div class="news-card__img news-card__img--gold">
+            <i class="fas fa-handshake"></i>
+            <span class="news-card__tag news-card__tag--gold">Partenariat</span>
+            <span class="news-card__date"><i class="fas fa-calendar"></i> 03 Oct 2025</span>
+          </div>
+          <div class="news-card__body">
+            <h3 class="news-card__title"><a href="#">Convention de Partenariat avec la Chambre de Commerce Française</a></h3>
+            <p class="news-card__excerpt">Signature d'un accord de coopération visant à faciliter les échanges commerciaux et les investissements bilatéraux entre les deux chambres partenaires.</p>
+            <a href="#" class="news-card__link">Lire la suite <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <div class="news-card__img">
+            <i class="fas fa-laptop"></i>
+            <span class="news-card__tag news-card__tag--green">Annonce</span>
+            <span class="news-card__date"><i class="fas fa-calendar"></i> 20 Sep 2025</span>
+          </div>
+          <div class="news-card__body">
+            <h3 class="news-card__title"><a href="#">Lancement du Service de Certification Électronique</a></h3>
+            <p class="news-card__excerpt">La CCIB inaugure son portail numérique permettant aux opérateurs de déposer leurs dossiers en ligne et de suivre leur traitement en temps réel.</p>
+            <a href="#" class="news-card__link">Lire la suite <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <div class="news-card__img news-card__img--blue">
+            <i class="fas fa-store"></i>
+            <span class="news-card__tag news-card__tag--blue">Foire</span>
+            <span class="news-card__date"><i class="fas fa-calendar"></i> 05 Sep 2025</span>
+          </div>
+          <div class="news-card__body">
+            <h3 class="news-card__title"><a href="#">Participation de la CCIB à la 55ème Foire Internationale d'Alger</a></h3>
+            <p class="news-card__excerpt">La CCIB a accompagné une délégation d'entreprises de la wilaya de Blida lors de la 55ème édition de la Foire Internationale d'Alger (FIA 2025).</p>
+            <a href="#" class="news-card__link">Lire la suite <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <div class="news-card__img news-card__img--gold">
+            <i class="fas fa-award"></i>
+            <span class="news-card__tag news-card__tag--gold">Distinction</span>
+            <span class="news-card__date"><i class="fas fa-calendar"></i> 18 Août 2025</span>
+          </div>
+          <div class="news-card__body">
+            <h3 class="news-card__title"><a href="#">La CCIB Distinguée pour ses Services en Commerce International</a></h3>
+            <p class="news-card__excerpt">La Chambre Algérienne de Commerce et d'Industrie (CACI) a distingué la CCIB pour ses performances dans la délivrance rapide des documents commerciaux.</p>
+            <a href="#" class="news-card__link">Lire la suite <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Pagination -->
+      <div style="display:flex; justify-content:center; gap:.5rem; margin-top:var(--space-2xl);">
+        <button class="btn btn--primary btn--sm">1</button>
+        <button class="btn btn--outline-green btn--sm">2</button>
+        <button class="btn btn--outline-green btn--sm">3</button>
+        <button class="btn btn--outline-green btn--sm"><i class="fas fa-angle-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__bottom" style="border-top:none; padding: var(--space-xl) 0;">
+      <div class="container footer__bottom-inner">
+        <p>&copy; 2025 Chambre de Commerce et d'Industrie de Blida (CCIB). Tous droits réservés.</p>
+        <div class="footer__bottom-links">
+          <a href="#">Mentions Légales</a>
+          <a href="#">Plan du Site</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
+  <script src="../js/main.js"></script>
+  <script>
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
