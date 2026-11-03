@@ -149,12 +149,12 @@ const TRANSLATIONS = {
     "brochures.b4.title": "Carte de Contact Officielle",
     "brochures.b4.sub": "Coordonnées & QR Code CCI",
 
-    "qlinks.tag": "Liens Institutionnels",
-    "qlinks.title": "Partenaires & Accès Rapide",
-    "qlinks.l1": "CACI – Chambre Algérienne",
-    "qlinks.l2": "Ministère du Commerce",
-    "qlinks.l3": "CNRC – Registre du Commerce",
-    "qlinks.l4": "Direction des Douanes",
+    "qlinks.tag": "Accès Direct",
+    "qlinks.title": "Services & Accès Rapide",
+    "qlinks.l1": "Formulaire d'Adhésion 2026",
+    "qlinks.l2": "Certificat d'Origine & Légalisation",
+    "qlinks.l3": "Formations Professionnelles",
+    "qlinks.l4": "Business Connect & Rencontres B2B",
 
     "contact.find_us": "Contactez-Nous",
     "contact.address_label": "Adresse du Siège",
@@ -222,7 +222,7 @@ const TRANSLATIONS = {
     "adh_page.d3": "Une copie de la carte fiscale",
     "adh_page.d4": "Deux photos d'identité récentes",
     "adh_page.d5": "Reçu de paiement ou avis de virement de la cotisation (selon le cas)",
-    "adh_page.info_box": "Pour déposer votre dossier d'adhésion ou obtenir des renseignements complémentaires, présentez-vous au siège de la CCI Mitidja-Blida : 35, Cité Mouloud Sidi Abdelkader, Blida. Tél/Fax : 020 49 18 28 | Mob : 0661 61 32 05 | Emails : cci-mitidja@caci.dz / ccimitidja.20@gmail.com",
+    "adh_page.info_box": "Pour déposer votre dossier d'adhésion ou obtenir des renseignements complémentaires, présentez-vous au siège de la CCI Mitidja-Blida : 35, Cité Mouloud Sidi Abdelkader, Blida. Tél/Fax : 020 49 18 28 | Mob : 0661 61 32 05 | Email : ccimitidja.20@gmail.com",
     "adh_page.poster_title": "Affiche Officielle d'Adhésion",
     "adh_page.form_tag": "Document Officiel 2026",
     "adh_page.form_title": "Formulaire d'Adhésion – إستمارة الإنخراط",
@@ -415,12 +415,12 @@ const TRANSLATIONS = {
     "brochures.b4.title": "بطاقة الاتصال الرسمية",
     "brochures.b4.sub": "بيانات الاتصال ورمز الاستجابة السريعة QR",
 
-    "qlinks.tag": "روابط مؤسساتية",
-    "qlinks.title": "الشركاء والوصول السريع",
-    "qlinks.l1": "الغرفة الجزائرية للتجارة والصناعة (CACI)",
-    "qlinks.l2": "وزارة التجارة وترقية الصادرات",
-    "qlinks.l3": "المركز الوطني للسجل التجاري (CNRC)",
-    "qlinks.l4": "المديرية العامة للجمارك",
+    "qlinks.tag": "وصول سريع",
+    "qlinks.title": "الخدمات والوصول السريع",
+    "qlinks.l1": "إستمارة الإنخراط 2026",
+    "qlinks.l2": "شهادة المنشأ والمصادقة",
+    "qlinks.l3": "التكوينات المهنية",
+    "qlinks.l4": "تواصل الأعمال ولقاءات B2B",
 
     "contact.find_us": "تواصلوا معنا",
     "contact.address_label": "عنوان المقر",
@@ -488,7 +488,7 @@ const TRANSLATIONS = {
     "adh_page.d3": "نسخة من البطاقة الجبائية",
     "adh_page.d4": "صورتان شمسيتان حديثتان",
     "adh_page.d5": "وصل دفع أو إشعار بالتحويل البنكي (حسب الحالة)",
-    "adh_page.info_box": "لإيداع ملف الانخراط أو للحصول على معلومات إضافية، يرجى التقرب من مقر غرفة التجارة والصناعة متيجة البليدة الكائن بـ : حي مولود سيدي عبد القادر رقم 35 - البليدة. الهاتف/الفاكس : 020 49 18 28 | النقال : 0661 61 32 05 | البريد الإلكتروني : cci-mitidja@caci.dz / ccimitidja.20@gmail.com",
+    "adh_page.info_box": "لإيداع ملف الانخراط أو للحصول على معلومات إضافية، يرجى التقرب من مقر غرفة التجارة والصناعة متيجة البليدة الكائن بـ : حي مولود سيدي عبد القادر رقم 35 - البليدة. الهاتف/الفاكس : 020 49 18 28 | النقال : 0661 61 32 05 | البريد الإلكتروني : ccimitidja.20@gmail.com",
     "adh_page.poster_title": "إعلان الانخراط الرسمي",
     "adh_page.form_tag": "وثيقة رسمية 2026",
     "adh_page.form_title": "إستمارة الإنخراط – Formulaire d'Adhésion",
@@ -681,12 +681,12 @@ const TRANSLATIONS = {
     "brochures.b4.title": "Official Business Card",
     "brochures.b4.sub": "Contact Details & CCI QR Code",
 
-    "qlinks.tag": "Institutional Links",
-    "qlinks.title": "Partners & Quick Access",
-    "qlinks.l1": "CACI – Algerian Chamber of Commerce",
-    "qlinks.l2": "Ministry of Trade",
-    "qlinks.l3": "CNRC – National Trade Register",
-    "qlinks.l4": "Algerian Customs Directorate",
+    "qlinks.tag": "Quick Access",
+    "qlinks.title": "Services & Quick Access",
+    "qlinks.l1": "2026 Membership Form",
+    "qlinks.l2": "Certificate of Origin & Legalization",
+    "qlinks.l3": "Professional Training",
+    "qlinks.l4": "Business Connect & B2B Meetings",
 
     "contact.find_us": "Contact Us",
     "contact.address_label": "Headquarters Address",
@@ -754,7 +754,7 @@ const TRANSLATIONS = {
     "adh_page.d3": "A copy of the Tax Card (Carte Fiscale)",
     "adh_page.d4": "Two recent passport-size photos",
     "adh_page.d5": "Payment receipt or bank transfer notice of the membership fee (as applicable)",
-    "adh_page.info_box": "To submit your membership application file or request additional information, visit the CCI Mitidja-Blida headquarters: 35, Cité Mouloud Sidi Abdelkader, Blida. Tel/Fax: 020 49 18 28 | Mob: 0661 61 32 05 | Emails: cci-mitidja@caci.dz / ccimitidja.20@gmail.com",
+    "adh_page.info_box": "To submit your membership application file or request additional information, visit the CCI Mitidja-Blida headquarters: 35, Cité Mouloud Sidi Abdelkader, Blida. Tel/Fax: 020 49 18 28 | Mob: 0661 61 32 05 | Email: ccimitidja.20@gmail.com",
     "adh_page.poster_title": "Official Membership Poster",
     "adh_page.form_tag": "Official Document 2026",
     "adh_page.form_title": "Membership Application Form – إستمارة الإنخراط",
@@ -954,9 +954,10 @@ function renderDynamicExcelContent(lang) {
         const text  = item[`Resume_${L}`] || item.Resume_FR || '';
         const color = (item.Couleur || 'green').toLowerCase();
         const icon  = item.Icone || 'fa-newspaper';
-        let link    = item.Lien || '#';
-        if (!isSubpage && link && !link.startsWith('http') && !link.startsWith('#') && !link.startsWith('pages/')) {
-          link = 'pages/' + link;
+        let link    = item.Lien || (isSubpage ? 'missions.html' : 'pages/missions.html');
+        if (link && !link.startsWith('http') && !link.startsWith('#')) {
+          const cleanRel = link.replace(/^(\.\.\/)?(pages\/)?/, '');
+          link = isSubpage ? cleanRel : 'pages/' + cleanRel;
         }
         const imgClass = color === 'blue' ? ' news-card__img--blue' : (color === 'gold' ? ' news-card__img--gold' : '');
         const tagClass = `news-card__tag--${color === 'blue' || color === 'gold' ? color : 'green'}`;
@@ -1039,25 +1040,96 @@ function renderDynamicExcelContent(lang) {
   }, { passive: true });
 })();
 
-/* ---- Hamburger / Mobile Nav ---- */
+/* ---- Hamburger / Mobile Nav & Smooth Hash Navigation ---- */
 (function initMobileNav() {
   const btn = document.getElementById('hamburger');
   const nav = document.getElementById('nav');
   if (!btn || !nav) return;
 
-  btn.addEventListener('click', () => {
+  function closeMenu() {
+    nav.classList.remove('is-open');
+    btn.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
     const isOpen = nav.classList.toggle('is-open');
     btn.classList.toggle('is-open', isOpen);
-    btn.setAttribute('aria-expanded', isOpen);
+    btn.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Always close mobile menu when clicking any link inside #nav
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      closeMenu();
+    });
   });
 
   document.addEventListener('click', (e) => {
     if (!nav.contains(e.target) && !btn.contains(e.target)) {
-      nav.classList.remove('is-open');
-      btn.classList.remove('is-open');
-      btn.setAttribute('aria-expanded', false);
+      closeMenu();
     }
   });
+})();
+
+/* ---- Smooth Same-Page Anchor Scrolling (handles Clean URLs without .html) ---- */
+(function initSmoothHashLinks() {
+  function normalizePath(p) {
+    return (p || '/')
+      .replace(/\/index\.html$/i, '/')
+      .replace(/\.html$/i, '')
+      .replace(/\/+$/, '') || '/';
+  }
+
+  function scrollToHash(hash, smooth) {
+    if (!hash || hash === '#') return false;
+    const id = decodeURIComponent(hash.replace(/^#/, ''));
+    const target = document.getElementById(id);
+    if (!target) return false;
+    const header = document.getElementById('header');
+    const offset = (header ? header.offsetHeight : 78) + 16;
+    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' });
+    return true;
+  }
+
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href]');
+    if (!link) return;
+    const rawHref = link.getAttribute('href') || '';
+    if (rawHref === '#') {
+      e.preventDefault();
+      return;
+    }
+    if (!rawHref.includes('#')) return;
+
+    let url;
+    try {
+      url = new URL(link.href, window.location.href);
+    } catch (_) {
+      return;
+    }
+    if (url.origin !== window.location.origin) return;
+
+    const currentPath = normalizePath(window.location.pathname);
+    const targetPath  = normalizePath(url.pathname);
+
+    if (currentPath === targetPath && url.hash) {
+      if (scrollToHash(url.hash, true)) {
+        e.preventDefault();
+        try {
+          history.pushState(null, '', url.hash);
+        } catch (_) {}
+      }
+    }
+  });
+
+  if (window.location.hash && window.location.hash.length > 1) {
+    window.addEventListener('load', () => {
+      setTimeout(() => scrollToHash(window.location.hash, true), 120);
+    });
+  }
 })();
 
 /* ---- Animated Counters (Stats Bar) ---- */
@@ -1183,30 +1255,15 @@ function renderDynamicExcelContent(lang) {
   });
 })();
 
-/* ---- Scroll Reveal (lightweight) ---- */
+/* ---- Ensure All Cards & Sections Are Immediately Visible ---- */
 (function initReveal() {
   const els = document.querySelectorAll(
-    '.service-card, .eng-card, .formation-item, .stat-item, .qlink-card, .brochure-card, .avantage-card'
+    '.service-card, .eng-card, .formation-item, .stat-item, .qlink-card, .brochure-card, .avantage-card, .news-card'
   );
-  if (!els.length) return;
-
-  els.forEach((el, i) => {
-    el.style.opacity    = '0';
-    el.style.transform  = 'translateY(20px)';
-    el.style.transition = `opacity .45s ease ${(i % 6) * 50}ms, transform .45s ease ${(i % 6) * 50}ms`;
+  els.forEach(el => {
+    el.style.opacity   = '1';
+    el.style.transform = 'none';
   });
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity   = '1';
-        entry.target.style.transform = 'translateY(0)';
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  els.forEach(el => observer.observe(el));
 })();
 
 /* ============================================================
@@ -1520,7 +1577,7 @@ function renderDynamicExcelContent(lang) {
     // Step 1: Fetch live from Google Sheets first (with credentials: 'omit' + JSONP fallback)
     await Promise.all(sheetNames.map(async (sheetName) => {
       try {
-        const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}&t=${Date.now()}`;
+        const url = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/gviz/tq?headers=1&tqx=out:csv&sheet=${encodeURIComponent(sheetName)}&t=${Date.now()}`;
         const res = await fetch(url, { cache: 'no-store', credentials: 'omit' });
         if (res.ok) {
           const csvText = await res.text();
