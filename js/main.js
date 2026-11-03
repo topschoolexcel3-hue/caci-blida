@@ -242,8 +242,10 @@ const TRANSLATIONS = {
 
     "pres_page.hero_title": "Présentation de la CCI Mitidja-Blida",
     "pres_page.who_title": "Qui Sommes-Nous ?",
-    "pres_page.who_p1": "La Chambre de Commerce et d'Industrie Mitidja-Blida (CCI Mitidja-Blida) est un établissement public à caractère industriel et commercial (EPIC), doté de la personnalité morale et de l'autonomie financière. Elle est placée sous la tutelle du Ministère du Commerce intérieur et de la Régulation du marché national et sous la coordination nationale de la Chambre Algérienne de Commerce et d'Industrie (CACI).",
-    "pres_page.who_p2": "Au cœur du développement économique de la Mitidja, la CCI Mitidja-Blida est une Chambre qui crée de la valeur pour ses entreprises : commerçants, industriels, PME/PMI, startups, artisans et prestataires de services de la wilaya de Blida.",
+    "pres_page.who_p1": "La Chambre de Commerce et d’Industrie Mitidja-Blida (CCI Mitidja-Blida) est une chambre de wilaya relevant de la Chambre Algérienne de Commerce et d’Industrie (CACI), conformément aux dispositions du décret exécutif n° 22-83 du 26 février 2022 portant réorganisation de la Chambre Algérienne de Commerce et d’Industrie. Elle s’inscrit dans le cadre institutionnel de la CACI, placée sous la tutelle du ministère chargé du commerce.",
+    "pres_page.who_p2": "Au cœur du développement économique de la Mitidja, la CCI Mitidja-Blida constitue un acteur de proximité et un partenaire stratégique des opérateurs économiques de la wilaya de Blida.",
+    "pres_page.who_p3": "Une Chambre qui crée de la valeur pour ses adhérents, elle contribue à la promotion, à l'accompagnement et au développement des entreprises, tout en représentant leurs intérêts auprès des autorités publiques locales.",
+    "pres_page.who_p4": "Elle s’adresse à l’ensemble des acteurs économiques : commerçants, industriels, PME/PMI, startups et prestataires de services, et œuvre activement en faveur du développement économique territorial, de l’investissement, de l’innovation et de la création de richesse.",
     "pres_page.zone_title": "Notre Zone de Compétence & Réseau CACI",
     "pres_page.zone_p1": "La CCI Mitidja-Blida couvre l'ensemble du territoire économique de la région de la Mitidja et de la wilaya de Blida. Elle est membre du réseau national des Chambres de Commerce et d'Industrie algériennes coordonné par la CACI (Chambre Algérienne de Commerce et d'Industrie).",
 
@@ -508,8 +510,10 @@ const TRANSLATIONS = {
 
     "pres_page.hero_title": "تقديم غرفة التجارة والصناعة متيجة البليدة",
     "pres_page.who_title": "من نحن؟",
-    "pres_page.who_p1": "الغرفة الولائية للتجارة والصناعة متيجة البليدة (CCI Mitidja-Blida) هي مؤسسة عمومية ذات طابع صناعي وتجاري (EPIC) تتمتع بالشخصية المعنوية والاستقلالية المالية، وتخضع لوصاية وزارة التجارة الداخلية وضبط السوق الوطنية والتنسيق الوطني للغرفة الجزائرية للتجارة والصناعة (CACI).",
-    "pres_page.who_p2": "في قلب التنمية الاقتصادية لمنطقة متيجة وولاية البليدة، تعد الغرفة شريكًا استراتيجيًا يخلق القيمة لمؤسساته من تجار، صناعيين، مؤسسات صغيرة ومتوسطة، شركات ناشئة، حرفيين ومقدمي خدمات.",
+    "pres_page.who_p1": "الغرفة الولائية للتجارة والصناعة متيجة-البليدة (CCI Mitidja-Blida) هي غرفة ولائية تابعة للغرفة الجزائرية للتجارة والصناعة (CACI)، طبقا لأحكام المرسوم التنفيذي رقم 22-83 المؤرخ في 26 فيفري 2022 المتضمن إعادة تنظيم الغرفة الجزائرية للتجارة والصناعة. وتندرج ضمن الإطار المؤسساتي للغرفة الجزائرية للتجارة والصناعة الموضوعة تحت وصاية الوزارة المكلفة بالتجارة.",
+    "pres_page.who_p2": "في قلب التنمية الاقتصادية لمنطقة متيجة، تشكل غرفة التجارة والصناعة متيجة-البليدة فاعلا جواريا وشريكا استراتيجيا للمتعاملين الاقتصاديين لولاية البليدة.",
+    "pres_page.who_p3": "باعتبارها غرفة تخلق القيمة لمنخرطيها، تساهم في ترقية ومرافقة وتطوير المؤسسات، مع تمثيل مصالحها لدى السلطات العمومية المحلية.",
+    "pres_page.who_p4": "وتتوجه إلى كافة الفاعلين الاقتصاديين من تجار، صناعيين، مؤسسات صغيرة ومتوسطة، شركات ناشئة ومقدمي خدمات، وتعمل بفعالية لصالح التنمية الاقتصادية الإقليمية، الاستثمار، الابتكار وخلق الثروة.",
     "pres_page.zone_title": "الاختصاص الإقليمي وشبكة الغرفة الجزائرية (CACI)",
     "pres_page.zone_p1": "تغطي غرفة التجارة والصناعة متيجة البليدة النسيج الاقتصادي لمنطقة متيجة وولاية البليدة، وهي عضو فاعل في الشبكة الوطنية لغرف التجارة والصناعة الجزائرية تحت إشراف الغرفة الجزائرية للتجارة والصناعة (CACI).",
 
@@ -774,8 +778,10 @@ const TRANSLATIONS = {
 
     "pres_page.hero_title": "About CCI Mitidja-Blida",
     "pres_page.who_title": "Who We Are",
-    "pres_page.who_p1": "The Chamber of Commerce and Industry of Mitidja-Blida (CCI Mitidja-Blida) is a Public Industrial and Commercial Establishment (EPIC) with legal personality and financial autonomy. It operates under the supervision of the Ministry of Domestic Trade and National Market Regulation and the national coordination of the Algerian Chamber of Commerce and Industry (CACI).",
-    "pres_page.who_p2": "At the heart of the economic development of the Mitidja region, CCI Mitidja-Blida creates value for its member companies: merchants, manufacturers, SMEs, startups, craftspeople, and service providers across the Wilaya of Blida.",
+    "pres_page.who_p1": "The Chamber of Commerce and Industry of Mitidja-Blida (CCI Mitidja-Blida) is a Wilaya Chamber under the Algerian Chamber of Commerce and Industry (CACI), in accordance with the provisions of Executive Decree No. 22-83 of February 26, 2022 reorganizing the Algerian Chamber of Commerce and Industry. It operates within the institutional framework of CACI, placed under the supervision of the Ministry in charge of Trade.",
+    "pres_page.who_p2": "At the heart of the economic development of the Mitidja region, CCI Mitidja-Blida serves as a local actor and strategic partner for the economic operators of the Wilaya of Blida.",
+    "pres_page.who_p3": "As a Chamber that creates value for its members, it contributes to promoting, supporting, and developing businesses while representing their interests before local public authorities.",
+    "pres_page.who_p4": "It serves all economic actors—merchants, industrialists, SMEs/SMIs, startups, and service providers—and actively works toward territorial economic development, investment, innovation, and wealth creation.",
     "pres_page.zone_title": "Our Jurisdiction & CACI Network",
     "pres_page.zone_p1": "CCI Mitidja-Blida covers the economic territory of the Mitidja region and the Wilaya of Blida. It is a member of the national network of Algerian Chambers of Commerce and Industry coordinated by CACI.",
 
