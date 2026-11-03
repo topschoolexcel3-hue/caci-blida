@@ -75,110 +75,9 @@
     .avantage-card__icon { font-size: 2rem; color: var(--clr-green); margin-bottom: var(--space-sm); }
     .avantage-card__title { font-size: var(--fs-sm); font-weight: 700; color: var(--clr-grey-900); line-height: 1.5; }
 
-    .form-download-box {
-      background: linear-gradient(135deg, #f4faf6 0%, #ffffff 60%, #fdf8e8 100%);
-      border: 2px solid var(--clr-green);
-      border-top: 5px solid var(--clr-gold);
-      border-radius: var(--radius-xl);
-      padding: var(--space-xl);
-      margin: var(--space-xl) 0 var(--space-2xl);
-      box-shadow: var(--shadow-lg);
-    }
-    .form-download-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: var(--space-xl);
-      align-items: center;
-    }
-    .form-download-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      background: rgba(20, 89, 38, 0.1);
-      color: var(--clr-green-dark);
-      font-weight: 800;
-      font-size: var(--fs-xs);
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      padding: .35rem .85rem;
-      border-radius: var(--radius-full);
-      margin-bottom: var(--space-sm);
-    }
-    .form-download-title {
-      font-size: var(--fs-xl);
-      font-weight: 900;
-      color: var(--clr-green-dark);
-      margin-bottom: var(--space-xs);
-      line-height: 1.3;
-    }
-    .form-download-desc {
-      color: var(--clr-grey-700);
-      font-size: var(--fs-base);
-      line-height: 1.7;
-      margin-bottom: var(--space-md);
-    }
-    .form-download-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-sm);
-      margin-top: var(--space-md);
-    }
-    .btn--doc-pdf {
-      background: var(--clr-green);
-      color: var(--clr-white);
-      border: 2px solid var(--clr-green);
-      display: inline-flex;
-      align-items: center;
-      gap: .55rem;
-      font-weight: 700;
-    }
-    .btn--doc-pdf:hover {
-      background: var(--clr-green-dark);
-      border-color: var(--clr-green-dark);
-      color: var(--clr-white);
-    }
-    .btn--doc-word {
-      background: var(--clr-white);
-      color: var(--clr-green-dark);
-      border: 2px solid var(--clr-green);
-      display: inline-flex;
-      align-items: center;
-      gap: .55rem;
-      font-weight: 700;
-    }
-    .btn--doc-word:hover {
-      background: var(--clr-green);
-      color: var(--clr-white);
-    }
-    .btn--doc-gdocs {
-      background: linear-gradient(135deg, var(--clr-gold-dark), var(--clr-gold));
-      color: var(--clr-grey-900);
-      border: 2px solid var(--clr-gold-dark);
-      display: inline-flex;
-      align-items: center;
-      gap: .55rem;
-      font-weight: 800;
-    }
-    .form-preview-card {
-      background: var(--clr-white);
-      border-radius: var(--radius-lg);
-      padding: var(--space-sm);
-      border: 1px solid var(--clr-grey-200);
-      box-shadow: var(--shadow-md);
-      text-align: center;
-    }
-    .form-preview-card img {
-      width: 100%;
-      max-height: 400px;
-      object-fit: contain;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--clr-grey-200);
-    }
-
     @media (max-width: 768px) {
       .tarif-grid { grid-template-columns: 1fr; }
       .avantages-grid { grid-template-columns: 1fr; }
-      .form-download-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -291,7 +190,7 @@
                 <li><i class="fas fa-check"></i> <span data-i18n="adh_page.t1_f4">Accès à tous les services et avantages de la CCI</span></li>
               </ul>
               <br/>
-              <a href="../docs/formulaire-adhesion-cci-mitidja-blida.pdf" download="Formulaire-Adhesion-CCI-Mitidja-Blida-2026.pdf" class="btn btn--primary btn--full"><i class="fas fa-file-download"></i> <span data-i18n="adh_page.form_btn_pdf">Télécharger le Formulaire (PDF)</span></a>
+              <a href="contact.html" class="btn btn--primary btn--full" data-i18n="adh_home.join_btn">Adhérer</a>
             </div>
           </div>
 
@@ -313,40 +212,7 @@
                 <li><i class="fas fa-check"></i> <span data-i18n="adh_page.t2_f4">Toutes les prestations, B2B & avantages partenaires</span></li>
               </ul>
               <br/>
-              <a href="../docs/formulaire-adhesion-cci-mitidja-blida.pdf" download="Formulaire-Adhesion-CCI-Mitidja-Blida-2026.pdf" class="btn btn--primary btn--full" style="background:var(--clr-gold-dark); border-color:var(--clr-gold-dark);"><i class="fas fa-file-download"></i> <span data-i18n="adh_page.form_btn_pdf">Télécharger le Formulaire (PDF)</span></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- FORMULAIRE D'ADHÉSION OFFICIEL TÉLÉCHARGEABLE -->
-        <div class="form-download-box" id="formulaire-adhesion">
-          <div class="form-download-grid">
-            <div class="form-download-info">
-              <span class="form-download-badge"><i class="fas fa-file-signature"></i> <span data-i18n="adh_page.form_tag">Document Officiel 2026</span></span>
-              <h2 class="form-download-title" data-i18n="adh_page.form_title">Formulaire d'Adhésion – إستمارة الإنخراط</h2>
-              <p class="form-download-desc" data-i18n="adh_page.form_desc">Téléchargez, remplissez et signez le formulaire officiel d'adhésion à la Chambre de Commerce et d'Industrie Mitidja-Blida (CCI Mitidja-Blida). Ce formulaire est disponible en format PDF prêt à imprimer, en format Word (.docx) modifiable et sur Google Docs.</p>
-              <div class="doc-list" style="margin-bottom: var(--space-md);">
-                <div class="doc-item" style="padding: .55rem .85rem;"><i class="fas fa-building"></i><span data-i18n="adh_page.form_item1">1. Identification de l'entreprise (RC, NIF, AI, coordonnées)</span></div>
-                <div class="doc-item" style="padding: .55rem .85rem;"><i class="fas fa-industry"></i><span data-i18n="adh_page.form_item2">2. Activité principale, produits fabriqués, capacité & exportation</span></div>
-                <div class="doc-item" style="padding: .55rem .85rem;"><i class="fas fa-stamp"></i><span data-i18n="adh_page.form_item3">3. Effectifs, chiffre d'affaires, signature du gérant & cachet</span></div>
-              </div>
-              <div class="form-download-buttons">
-                <a href="../docs/formulaire-adhesion-cci-mitidja-blida.pdf" download="Formulaire-Adhesion-CCI-Mitidja-Blida-2026.pdf" class="btn btn--doc-pdf">
-                  <i class="fas fa-file-pdf"></i> <span data-i18n="adh_page.form_btn_pdf">Télécharger le Formulaire (PDF)</span>
-                </a>
-                <a href="../docs/formulaire-adhesion-cci-mitidja-blida.docx" download="Formulaire-Adhesion-CCI-Mitidja-Blida-2026.docx" class="btn btn--doc-word">
-                  <i class="fas fa-file-word"></i> <span data-i18n="adh_page.form_btn_word">Télécharger en Word (.docx)</span>
-                </a>
-                <a href="https://docs.google.com/document/d/1iEQBquTIT7cieBGJR-qXBmQtsJY-JLEMfiDdp7_I6Bs/edit?usp=sharing" target="_blank" rel="noopener" class="btn btn--doc-gdocs">
-                  <i class="fas fa-external-link-alt"></i> <span data-i18n="adh_page.form_btn_gdocs">Ouvrir sur Google Docs</span>
-                </a>
-              </div>
-            </div>
-            <div class="form-preview-card">
-              <a href="../docs/formulaire-adhesion-cci-mitidja-blida.pdf" target="_blank" rel="noopener" title="Aperçu du Formulaire d'Adhésion">
-                <img src="../images/formulaire-adhesion-preview.png" alt="Aperçu du Formulaire d'Adhésion CCI Mitidja-Blida" />
-              </a>
-              <p style="font-size: var(--fs-xs); color: var(--clr-grey-500); margin-top: .5rem;" data-i18n="adh_page.form_preview_caption">Cliquez sur l'aperçu pour ouvrir le PDF plein écran</p>
+              <a href="contact.html" class="btn btn--primary btn--full" style="background:var(--clr-gold-dark); border-color:var(--clr-gold-dark);" data-i18n="adh_home.join_btn">Adhérer</a>
             </div>
           </div>
         </div>
@@ -418,15 +284,6 @@
         </div>
 
         <div class="doc-list">
-          <div class="doc-item" style="border-color: var(--clr-green); background: #f4faf6;">
-            <i class="fas fa-file-signature"></i>
-            <span>
-              <strong data-i18n="adh_page.d0">Formulaire d'adhésion dûment rempli et signé (إستمارة الإنخراط)</strong> —
-              <a href="../docs/formulaire-adhesion-cci-mitidja-blida.pdf" download="Formulaire-Adhesion-CCI-Mitidja-Blida-2026.pdf" style="color:var(--clr-green); font-weight:800; text-decoration:underline; margin-left:.35rem;">
-                <i class="fas fa-download"></i> <span data-i18n="adh_page.form_btn_pdf">Télécharger le Formulaire (PDF)</span>
-              </a>
-            </span>
-          </div>
           <div class="doc-item"><i class="fas fa-file-alt"></i><span data-i18n="adh_page.d1">Une copie du registre de commerce (à jour)</span></div>
           <div class="doc-item"><i class="fas fa-id-card"></i><span data-i18n="adh_page.d2">Une copie de la carte nationale d'identité ou du passeport</span></div>
           <div class="doc-item"><i class="fas fa-receipt"></i><span data-i18n="adh_page.d3">Une copie de la carte fiscale</span></div>
@@ -442,23 +299,6 @@
       </main>
 
       <aside class="page-sidebar">
-        <div class="sidebar-widget">
-          <div class="sidebar-widget__title"><i class="fas fa-file-download"></i> <span data-i18n="adh_page.form_sidebar_title">Formulaire d'Adhésion</span></div>
-          <div style="padding:var(--space-md); display:flex; flex-direction:column; gap:var(--space-sm);">
-            <a href="../docs/formulaire-adhesion-cci-mitidja-blida.pdf" target="_blank" rel="noopener">
-              <img src="../images/formulaire-adhesion-preview.png" alt="Formulaire d'Adhésion CCI Mitidja-Blida" style="border-radius:var(--radius-md); border:1px solid var(--clr-grey-200);" />
-            </a>
-            <a href="../docs/formulaire-adhesion-cci-mitidja-blida.pdf" download="Formulaire-Adhesion-CCI-Mitidja-Blida-2026.pdf" class="btn btn--primary btn--full">
-              <i class="fas fa-file-pdf"></i> <span data-i18n="adh_page.form_btn_pdf">Télécharger le Formulaire (PDF)</span>
-            </a>
-            <a href="../docs/formulaire-adhesion-cci-mitidja-blida.docx" download="Formulaire-Adhesion-CCI-Mitidja-Blida-2026.docx" class="btn btn--outline btn--full" style="color:var(--clr-green-dark); border-color:var(--clr-green);">
-              <i class="fas fa-file-word"></i> <span data-i18n="adh_page.form_btn_word">Télécharger en Word (.docx)</span>
-            </a>
-            <a href="https://docs.google.com/document/d/1iEQBquTIT7cieBGJR-qXBmQtsJY-JLEMfiDdp7_I6Bs/edit?usp=sharing" target="_blank" rel="noopener" class="btn btn--full" style="background:var(--clr-gold); color:var(--clr-grey-900); font-weight:800;">
-              <i class="fas fa-external-link-alt"></i> <span data-i18n="adh_page.form_btn_gdocs">Ouvrir sur Google Docs</span>
-            </a>
-          </div>
-        </div>
         <div class="sidebar-widget">
           <div class="sidebar-widget__title"><i class="fas fa-file-image"></i> <span data-i18n="adh_page.poster_title">Affiche Officielle d'Adhésion</span></div>
           <div style="padding:var(--space-md);">
