@@ -134,7 +134,9 @@ const TRANSLATIONS = {
     "form.excel.access_btn": "Accéder à la formation",
     "form.excel.cancel_btn": "Annuler",
     "form.reg.title": "Formulaire d'Inscription à la Formation",
+    "form.reg.phone_label": "Téléphone *",
     "form.reg.select_label": "Formation choisie *",
+    "form.reg.msg_label": "Message / Nombre de participants (facultatif)",
     "form.reg.msg_ph": "Précisez le nombre de participants ou vos besoins spécifiques...",
     "form.reg.submit": "Confirmer mon Inscription à la Formation",
     "form.reg.success": "✅ Votre demande d'inscription à la formation a été enregistrée avec succès. La CCI Mitidja-Blida vous contactera dans les plus brefs délais.",
@@ -206,7 +208,7 @@ const TRANSLATIONS = {
     "contact.f_subj_form": "Formations Professionnelles",
     "contact.f_subj_b2b": "Business Connect & Rencontres B2B",
     "contact.f_subj_other": "Autre demande",
-    "contact.f_msg": "Message *",
+    "contact.f_msg": "Message (facultatif)",
     "contact.f_msg_ph": "Votre message...",
     "contact.f_submit": "Envoyer le Message",
     "contact.err_empty": "Veuillez remplir tous les champs obligatoires.",
@@ -429,7 +431,9 @@ const TRANSLATIONS = {
     "form.excel.access_btn": "الانتقال إلى التكوين",
     "form.excel.cancel_btn": "إلغاء",
     "form.reg.title": "استمارة التسجيل في الدورة التكوينية",
+    "form.reg.phone_label": "رقم الهاتف *",
     "form.reg.select_label": "الدورة التكوينية المختارة *",
+    "form.reg.msg_label": "رسالة / عدد المشاركين (اختياري)",
     "form.reg.msg_ph": "حدد عدد المشاركين أو احتياجاتكم الخاصة...",
     "form.reg.submit": "تأكيد التسجيل في الدورة التكوينية",
     "form.reg.success": "✅ تم تسجيل طلب مشاركتكم في الدورة التكوينية بنجاح. ستتصل بكم غرفة التجارة والصناعة متيجة البليدة في أقرب الآجال.",
@@ -501,7 +505,7 @@ const TRANSLATIONS = {
     "contact.f_subj_form": "التكوينات المهنية",
     "contact.f_subj_b2b": "تواصل الأعمال ولقاءات B2B",
     "contact.f_subj_other": "استفسار آخر",
-    "contact.f_msg": "الرسالة *",
+    "contact.f_msg": "الرسالة (اختياري)",
     "contact.f_msg_ph": "اكتب رسالتك هنا...",
     "contact.f_submit": "إرسال الرسالة",
     "contact.err_empty": "يرجى ملء جميع الحقول الإجبارية.",
@@ -724,7 +728,9 @@ const TRANSLATIONS = {
     "form.excel.access_btn": "Access Training",
     "form.excel.cancel_btn": "Cancel",
     "form.reg.title": "Training Registration Form",
+    "form.reg.phone_label": "Phone *",
     "form.reg.select_label": "Selected Training *",
+    "form.reg.msg_label": "Message / Number of participants (optional)",
     "form.reg.msg_ph": "Specify the number of participants or your specific needs...",
     "form.reg.submit": "Confirm My Training Registration",
     "form.reg.success": "✅ Your training registration has been recorded successfully. CCI Mitidja-Blida will contact you shortly.",
@@ -796,7 +802,7 @@ const TRANSLATIONS = {
     "contact.f_subj_form": "Professional Training",
     "contact.f_subj_b2b": "Business Connect & B2B Meetings",
     "contact.f_subj_other": "Other inquiry",
-    "contact.f_msg": "Message *",
+    "contact.f_msg": "Message (optional)",
     "contact.f_msg_ph": "Your message...",
     "contact.f_submit": "Send Message",
     "contact.err_empty": "Please fill in all required fields.",
@@ -1096,26 +1102,34 @@ function applyLanguage(lang) {
 
   window.__cciScrollToHash = scrollToHash;
 
-  function triggerHashScroll() {
+  function isFormElementFocused() {
+    const active = document.activeElement;
+    if (!active) return false;
+    const tag = active.tagName;
+    return tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA';
+  }
+
+  let initialHashHandled = false;
+  function triggerInitialHashScroll() {
+    if (initialHashHandled || isFormElementFocused()) return;
     if (window.location.hash && window.location.hash.length > 1) {
-      scrollToHash(window.location.hash, true);
+      initialHashHandled = true;
+      scrollToHash(window.location.hash, false);
     }
   }
 
   if (window.location.hash && window.location.hash.length > 1) {
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => setTimeout(triggerHashScroll, 40));
+      document.addEventListener('DOMContentLoaded', () => setTimeout(triggerInitialHashScroll, 20), { once: true });
     } else {
-      setTimeout(triggerHashScroll, 40);
+      setTimeout(triggerInitialHashScroll, 20);
     }
-    window.addEventListener('load', () => {
-      setTimeout(triggerHashScroll, 120);
-      setTimeout(triggerHashScroll, 400);
-    });
   }
 
   window.addEventListener('hashchange', () => {
-    triggerHashScroll();
+    if (!isFormElementFocused() && window.location.hash && window.location.hash.length > 1) {
+      scrollToHash(window.location.hash, true);
+    }
   });
 })();
 
@@ -1216,9 +1230,8 @@ function applyLanguage(lang) {
     const data = new FormData(form);
     const nom  = data.get('nom')?.trim();
     const mail = data.get('email')?.trim();
-    const msg  = data.get('message')?.trim();
 
-    if (!nom || !mail || !msg) {
+    if (!nom || !mail) {
       showFeedback(dict['contact.err_empty'], 'error');
       return;
     }

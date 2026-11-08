@@ -234,31 +234,31 @@
           </div>
 
           <!-- FORMULAIRE D'INSCRIPTION DIRECTE AUX FORMATIONS -->
-          <div class="contact-form-card" id="inscription-formation" style="background:var(--clr-white); border-radius:var(--radius-xl); padding:var(--space-xl); box-shadow:var(--shadow-md); border:2px solid var(--clr-green); margin-bottom:var(--space-xl);">
-            <h3 style="font-size:var(--fs-xl); font-weight:800; color:var(--clr-green-dark); margin:0 0 var(--space-md); padding-bottom:var(--space-sm); border-bottom:2px solid var(--clr-green-xlight);"><i class="fas fa-user-check"></i> <span data-i18n="form.reg.title">Formulaire d'Inscription à la Formation</span></h3>
+          <div class="contact-form-card" id="inscription-formation">
+            <h3 class="reg-form-card__title"><i class="fas fa-user-check"></i> <span data-i18n="form.reg.title">Formulaire d'Inscription à la Formation</span></h3>
             <form id="formationRegForm" novalidate>
-              <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-md); margin-bottom:var(--space-md);">
+              <div class="form-row">
                 <div class="form-group">
-                  <label for="regNom" style="display:block; font-weight:700; font-size:var(--fs-sm); margin-bottom:.35rem;" data-i18n="contact.f_name">Nom &amp; Prénom *</label>
-                  <input type="text" id="regNom" name="nom" placeholder="Votre nom complet" data-i18n-placeholder="contact.f_name_ph" required />
+                  <label for="regNom" data-i18n="contact.f_name">Nom &amp; Prénom *</label>
+                  <input type="text" id="regNom" name="nom" autocomplete="name" placeholder="Votre nom complet" data-i18n-placeholder="contact.f_name_ph" required />
                 </div>
                 <div class="form-group">
-                  <label for="regEntreprise" style="display:block; font-weight:700; font-size:var(--fs-sm); margin-bottom:.35rem;" data-i18n="contact.f_company">Entreprise / Organisation</label>
-                  <input type="text" id="regEntreprise" name="entreprise" placeholder="Nom de votre entreprise" data-i18n-placeholder="contact.f_company_ph" />
-                </div>
-              </div>
-              <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-md); margin-bottom:var(--space-md);">
-                <div class="form-group">
-                  <label for="regTel" style="display:block; font-weight:700; font-size:var(--fs-sm); margin-bottom:.35rem;" data-i18n="contact.f_phone">Téléphone *</label>
-                  <input type="tel" id="regTel" name="tel" placeholder="06XX XX XX XX" required />
-                </div>
-                <div class="form-group">
-                  <label for="regEmail" style="display:block; font-weight:700; font-size:var(--fs-sm); margin-bottom:.35rem;" data-i18n="contact.f_email">Email *</label>
-                  <input type="email" id="regEmail" name="email" placeholder="votre@email.com" data-i18n-placeholder="contact.f_email_ph" required />
+                  <label for="regEntreprise" data-i18n="contact.f_company">Entreprise / Organisation</label>
+                  <input type="text" id="regEntreprise" name="entreprise" autocomplete="organization" placeholder="Nom de votre entreprise" data-i18n-placeholder="contact.f_company_ph" />
                 </div>
               </div>
-              <div class="form-group" style="margin-bottom:var(--space-md);">
-                <label for="regFormation" style="display:block; font-weight:700; font-size:var(--fs-sm); margin-bottom:.35rem;" data-i18n="form.reg.select_label">Formation choisie *</label>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="regTel" data-i18n="form.reg.phone_label">Téléphone *</label>
+                  <input type="tel" id="regTel" name="tel" inputmode="tel" autocomplete="tel" placeholder="06XX XX XX XX" required />
+                </div>
+                <div class="form-group">
+                  <label for="regEmail" data-i18n="contact.f_email">Email *</label>
+                  <input type="email" id="regEmail" name="email" inputmode="email" autocomplete="email" placeholder="votre@email.com" data-i18n-placeholder="contact.f_email_ph" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="regFormation" data-i18n="form.reg.select_label">Formation choisie *</label>
                 <select id="regFormation" name="formation" required>
                   <option value="Excel Avancé – Du 15 au 17 Novembre 2026 (BCRD – Université Blida 1)" data-i18n="form.f10">Excel Avancé – Du 15 au 17 Novembre 2026 (BCRD – Université Blida 1)</option>
                   <option value="Intelligence artificielle et transformation digitale" data-i18n="form.f1">Intelligence artificielle et transformation digitale</option>
@@ -272,14 +272,14 @@
                   <option value="Business English" data-i18n="form.f9">Business English</option>
                 </select>
               </div>
-              <div class="form-group" style="margin-bottom:var(--space-md);">
-                <label for="regMessage" style="display:block; font-weight:700; font-size:var(--fs-sm); margin-bottom:.35rem;" data-i18n="contact.f_msg">Message / Nombre de participants</label>
+              <div class="form-group">
+                <label for="regMessage" data-i18n="form.reg.msg_label">Message / Nombre de participants (facultatif)</label>
                 <textarea id="regMessage" name="message" rows="3" placeholder="Précisez le nombre de participants ou vos besoins spécifiques..." data-i18n-placeholder="form.reg.msg_ph"></textarea>
               </div>
               <button type="submit" class="btn btn--primary btn--full">
                 <i class="fas fa-paper-plane"></i> <span data-i18n="form.reg.submit">Confirmer mon Inscription à la Formation</span>
               </button>
-              <div class="form-feedback" id="regFormFeedback" aria-live="polite" style="margin-top:var(--space-sm);"></div>
+              <div class="form-feedback" id="regFormFeedback" aria-live="polite"></div>
             </form>
           </div>
 

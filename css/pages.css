@@ -47,8 +47,8 @@
   gap: var(--space-2xl);
   align-items: start;
 }
-.page-main { /* main content */ }
-.page-sidebar { /* sidebar */ }
+.page-main { min-width: 0; max-width: 100%; }
+.page-sidebar { min-width: 0; max-width: 100%; }
 
 /* Sidebar widget */
 .sidebar-widget {
@@ -258,5 +258,4 @@ a.doc-item--link:hover .doc-item__action i {
 
 @media (max-width: 900px) {
   .page-layout { grid-template-columns: 1fr; }
-  .page-sidebar { order: -1; }
 }
