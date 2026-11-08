@@ -114,6 +114,23 @@ const TRANSLATIONS = {
     "form.f7": "Commerce, négociation et techniques de vente",
     "form.f8": "Import et export",
     "form.f9": "Business English",
+    "form.f10": "Excel Avancé – Du 15 au 17 Novembre 2026 (BCRD – Université Blida 1)",
+    "form.excel.date": "Du 15 – 16 – 17 Novembre 2026",
+    "form.excel.loc": "BCRD – Université Blida 1",
+    "form.excel.title": "Formation : Excel Avancé – دورة تكوينية حول Excel Avancé",
+    "form.excel.sub": "Maîtrisez les outils avancés d'Excel pour aller plus loin dans votre productivité !",
+    "form.excel.obj_title": "Objectifs de la formation",
+    "form.excel.obj1": "Maîtriser les fonctions avancées",
+    "form.excel.obj2": "Exploiter les tableaux croisés dynamiques",
+    "form.excel.obj3": "Réaliser des analyses et des tableaux de bord",
+    "form.excel.obj4": "Automatiser vos tâches avec les macros",
+    "form.excel.pub_title": "Public ciblé",
+    "form.excel.pub1": "Cadres et responsables de services",
+    "form.excel.pub2": "Professionnels de la gestion et de l'analyse",
+    "form.excel.pub3": "Toute personne souhaitant approfondir ses compétences sur Excel",
+    "form.excel.slogan": "Investissez dans vos compétences, boostez votre performance !",
+    "form.excel.cta": "Inscrivez-vous dès maintenant !",
+    "form.excel.view_btn": "Accéder à la page Formation",
     "form.register_badge": "S'inscrire",
     "form.pillars_title": "Nos Garanties Pédagogiques",
     "form.p1": "Des experts qualifiés",
@@ -385,6 +402,23 @@ const TRANSLATIONS = {
     "form.f7": "التجارة، التفاوض وتقنيات البيع",
     "form.f8": "التجارة الدولية: الاستيراد والتصدير",
     "form.f9": "اللغة الإنجليزية للأعمال (Business English)",
+    "form.f10": "دورة تكوينية حول Excel Avancé – 15، 16 و17 نوفمبر 2026 (جامعة البليدة 1 - BCRD)",
+    "form.excel.date": "أيام 15 – 16 – 17 نوفمبر 2026",
+    "form.excel.loc": "BCRD – جامعة البليدة 1",
+    "form.excel.title": "دورة تكوينية حول Excel Avancé",
+    "form.excel.sub": "تحكموا في الأدوات المتقدمة لبرنامج Excel للرفع من إنتاجيتكم ومردوديتكم المهنية!",
+    "form.excel.obj_title": "أهداف الدورة التكوينية",
+    "form.excel.obj1": "إتقان الدوال والوظائف المتقدمة",
+    "form.excel.obj2": "استغلال الجداول المحورية الديناميكية (Tableaux croisés dynamiques)",
+    "form.excel.obj3": "إنجاز التحليلات ولوحات القيادة (Tableaux de bord)",
+    "form.excel.obj4": "أتمتة المهام باستخدام وحدات الماكرو (Macros)",
+    "form.excel.pub_title": "الفئة المستهدفة",
+    "form.excel.pub1": "الإطارات ومسؤولو المصالح والأقسام",
+    "form.excel.pub2": "مهنيو التسيير والإدارة والتحليل المالي والإحصائي",
+    "form.excel.pub3": "كل من يرغب في تعميق مهاراته في برنامج Excel",
+    "form.excel.slogan": "استثمروا في مهاراتكم، وعززوا أداءكم المهني!",
+    "form.excel.cta": "سجلوا الآن !",
+    "form.excel.view_btn": "الانتقال إلى صفحة التكوينات",
     "form.register_badge": "التسجيل",
     "form.pillars_title": "ضماناتنا البيداغوجية",
     "form.p1": "خبراء مؤهلون",
@@ -656,6 +690,23 @@ const TRANSLATIONS = {
     "form.f7": "Trade, negotiation, and sales techniques",
     "form.f8": "International trade: Import and Export",
     "form.f9": "Business English",
+    "form.f10": "Advanced Excel Training – November 15, 16 & 17, 2026 (BCRD – Blida 1 University)",
+    "form.excel.date": "November 15 – 16 – 17, 2026",
+    "form.excel.loc": "BCRD – Blida 1 University",
+    "form.excel.title": "Training: Advanced Excel (Excel Avancé)",
+    "form.excel.sub": "Master advanced Excel tools to take your productivity further!",
+    "form.excel.obj_title": "Training Objectives",
+    "form.excel.obj1": "Master advanced functions and formulas",
+    "form.excel.obj2": "Leverage Pivot Tables effectively",
+    "form.excel.obj3": "Build data analyses and interactive dashboards",
+    "form.excel.obj4": "Automate tasks using Macros",
+    "form.excel.pub_title": "Target Audience",
+    "form.excel.pub1": "Executives and department heads",
+    "form.excel.pub2": "Management and data analysis professionals",
+    "form.excel.pub3": "Anyone looking to deepen their Excel skills",
+    "form.excel.slogan": "Invest in your skills, boost your performance!",
+    "form.excel.cta": "Register Now!",
+    "form.excel.view_btn": "Go to Training Page",
     "form.register_badge": "Register",
     "form.pillars_title": "Our Training Guarantees",
     "form.p1": "Qualified experts",
@@ -1215,4 +1266,70 @@ function applyLanguage(lang) {
     el.style.transform = 'none';
   });
 })();
+
+/* ---- Pop-up Affiche Formation Excel Avancé ---- */
+(function initFormationPopup() {
+  const modal    = document.getElementById('formationPopupModal');
+  const closeBtn = document.getElementById('formationPopupClose');
+  const viewBtn  = document.getElementById('formationPopupViewBtn');
+  if (!modal) return;
+
+  const isMissionsPage = window.location.pathname.includes('missions');
+
+  function scrollToFormationsSection() {
+    const target = document.getElementById('formations') || document.getElementById('formation-excel-avance');
+    if (!target) return;
+    try {
+      history.replaceState(null, '', '#formations');
+    } catch (_) {}
+    const header = document.getElementById('header');
+    const offset = (header ? header.offsetHeight : 78) + 18;
+    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
+
+  function closePopupAndGoToFormation() {
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+    if (isMissionsPage) {
+      scrollToFormationsSection();
+    } else {
+      window.location.href = 'pages/missions.html?from_popup=1#formations';
+    }
+  }
+
+  function openPopup() {
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Open automatically when the page loads (unless arriving via ?from_popup=1)
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('from_popup') === '1') {
+    setTimeout(scrollToFormationsSection, 120);
+  } else {
+    setTimeout(openPopup, 150);
+  }
+
+  closeBtn && closeBtn.addEventListener('click', closePopupAndGoToFormation);
+  viewBtn && viewBtn.addEventListener('click', closePopupAndGoToFormation);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closePopupAndGoToFormation();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+      closePopupAndGoToFormation();
+    }
+  });
+
+  // Allow clicking the poster thumbnail inside the page to re-open the full poster popup
+  document.querySelectorAll('[data-open-formation-popup]').forEach(el => {
+    el.addEventListener('click', openPopup);
+  });
+})();
+
 

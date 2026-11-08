@@ -347,8 +347,53 @@
         <p class="section-header__desc" data-i18n="form.desc">Développez les compétences, renforcez la performance et accompagnez la croissance de votre entreprise.</p>
       </div>
 
+      <!-- FEATURED FORMATION: EXCEL AVANCÉ -->
+      <div class="featured-formation-card" style="margin-bottom:var(--space-2xl);">
+        <div class="featured-formation-card__poster" data-open-formation-popup="true" title="Cliquez pour agrandir l'affiche">
+          <img src="images/formation-excel-avance-nov-2026.jpeg" alt="Formation Excel Avancé – Du 15 au 17 Novembre 2026 – BCRD Université Blida 1" />
+        </div>
+        <div class="featured-formation-card__body">
+          <div class="featured-formation-card__badges">
+            <span class="ff-badge ff-badge--green"><i class="fas fa-calendar-alt"></i> <span data-i18n="form.excel.date">Du 15 – 16 – 17 Novembre 2026</span></span>
+            <span class="ff-badge ff-badge--gold"><i class="fas fa-map-marker-alt"></i> <span data-i18n="form.excel.loc">BCRD – Université Blida 1</span></span>
+          </div>
+          <h3 class="featured-formation-card__title" data-i18n="form.excel.title">Formation : Excel Avancé – دورة تكوينية حول Excel Avancé</h3>
+          <p class="featured-formation-card__sub" data-i18n="form.excel.sub">Maîtrisez les outils avancés d'Excel pour aller plus loin dans votre productivité !</p>
+
+          <div class="featured-formation-card__cols">
+            <div class="featured-formation-card__box">
+              <h4><i class="fas fa-bullseye"></i> <span data-i18n="form.excel.obj_title">Objectifs de la formation</span></h4>
+              <ul class="featured-formation-card__list">
+                <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj1">Maîtriser les fonctions avancées</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj2">Exploiter les tableaux croisés dynamiques</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj3">Réaliser des analyses et des tableaux de bord</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj4">Automatiser vos tâches avec les macros</span></li>
+              </ul>
+            </div>
+            <div class="featured-formation-card__box">
+              <h4><i class="fas fa-users"></i> <span data-i18n="form.excel.pub_title">Public ciblé</span></h4>
+              <ul class="featured-formation-card__list">
+                <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.pub1">Cadres et responsables de services</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.pub2">Professionnels de la gestion et de l'analyse</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.pub3">Toute personne souhaitant approfondir ses compétences sur Excel</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="featured-formation-card__footer">
+            <span class="featured-formation-card__slogan" data-i18n="form.excel.slogan">Investissez dans vos compétences, boostez votre performance !</span>
+            <a href="pages/contact.html?sujet=formation&amp;formation=Excel%20Avanc%C3%A9%20(15-16-17%20Novembre%202026%20-%20BCRD%20Universit%C3%A9%20Blida%201)" class="btn btn--primary"><i class="fas fa-edit"></i> <span data-i18n="form.excel.cta">Inscrivez-vous dès maintenant !</span></a>
+          </div>
+        </div>
+      </div>
+
       <div class="formations-layout">
         <div class="formations-list">
+          <a href="pages/contact.html?sujet=formation&amp;formation=Excel%20Avanc%C3%A9%20(15-16-17%20Novembre%202026%20-%20BCRD%20Universit%C3%A9%20Blida%201)" class="formation-item" style="border-left-color:var(--clr-gold-dark); background:#fffdf5;">
+            <i class="fas fa-file-excel"></i>
+            <span data-i18n="form.f10">Excel Avancé – Du 15 au 17 Novembre 2026 (BCRD – Université Blida 1)</span>
+            <i class="fas fa-arrow-right formation-item__arrow"></i>
+          </a>
           <a href="pages/contact.html?sujet=formation&amp;formation=Intelligence%20artificielle%20et%20transformation%20digitale" class="formation-item">
             <i class="fas fa-robot"></i>
             <span data-i18n="form.f1">Intelligence artificielle et transformation digitale</span>
@@ -689,6 +734,20 @@
   <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Aperçu du document">
     <button type="button" class="lightbox-modal__close" id="lightboxClose" aria-label="Fermer"><i class="fas fa-times"></i></button>
     <img src="" alt="Aperçu Brochure CCI Mitidja-Blida" class="lightbox-modal__img" id="lightboxImg" />
+  </div>
+
+  <!-- ===== POP-UP AFFICHE FORMATION EXCEL AVANCÉ ===== -->
+  <div class="formation-popup-modal" id="formationPopupModal" role="dialog" aria-modal="true" aria-label="Formation Excel Avancé – 15, 16 et 17 Novembre 2026">
+    <div class="formation-popup-card">
+      <button type="button" class="formation-popup-close" id="formationPopupClose" aria-label="Fermer et accéder à la formation">&times;</button>
+      <div class="formation-popup-img-wrap">
+        <img src="images/formation-excel-avance-nov-2026.jpeg" alt="Formation Excel Avancé – Du 15 au 17 Novembre 2026 – BCRD Université Blida 1" class="formation-popup-img" />
+      </div>
+      <div class="formation-popup-actions">
+        <a href="pages/contact.html?sujet=formation&amp;formation=Excel%20Avanc%C3%A9%20(15-16-17%20Novembre%202026%20-%20BCRD%20Universit%C3%A9%20Blida%201)" class="btn btn--primary btn--sm"><i class="fas fa-edit"></i> <span data-i18n="form.excel.cta">Inscrivez-vous dès maintenant !</span></a>
+        <button type="button" class="btn btn--outline btn--sm" id="formationPopupViewBtn" style="border-color:var(--clr-green); color:var(--clr-green);"><i class="fas fa-graduation-cap"></i> <span data-i18n="form.excel.view_btn">Accéder à la page Formation</span></button>
+      </div>
+    </div>
   </div>
 
   <!-- ===== BACK TO TOP ===== -->
