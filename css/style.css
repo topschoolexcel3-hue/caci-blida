@@ -1676,7 +1676,7 @@ textarea { resize: vertical; }
 @media (max-width: 640px) {
   :root { --header-h: 68px; --topbar-h: 36px; }
   .top-bar__left span:nth-child(2) { display: none; }
-  .top-bar__right > a { display: none; }
+  .top-bar__right > a:not([aria-label="Facebook"]) { display: none; }
   .services__grid { grid-template-columns: 1fr; }
   .engagements-home-grid { grid-template-columns: 1fr; }
   .mission-box__list { grid-template-columns: 1fr; }
