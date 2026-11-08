@@ -1267,48 +1267,43 @@ function applyLanguage(lang) {
   });
 })();
 
-/* ---- Pop-up Affiche Formation Excel Avancé ---- */
+/* ---- Pop-up Affiche Formation Excel Avancé (uniquement sur pages/missions) ---- */
 (function initFormationPopup() {
   const modal    = document.getElementById('formationPopupModal');
   const closeBtn = document.getElementById('formationPopupClose');
   const viewBtn  = document.getElementById('formationPopupViewBtn');
   if (!modal) return;
 
-  const isMissionsPage = window.location.pathname.includes('missions');
-
-  function scrollToFormationsSection() {
+  function scrollToFormationsSection(smooth) {
     const target = document.getElementById('formations') || document.getElementById('formation-excel-avance');
     if (!target) return;
     try {
-      history.replaceState(null, '', '#formations');
+      const cleanPath = window.location.pathname;
+      history.replaceState(null, '', cleanPath + '#formations');
     } catch (_) {}
     const header = document.getElementById('header');
     const offset = (header ? header.offsetHeight : 78) + 18;
     const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    window.scrollTo({ top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' });
   }
 
   function closePopupAndGoToFormation() {
     modal.classList.remove('is-open');
     document.body.style.overflow = '';
-    if (isMissionsPage) {
-      scrollToFormationsSection();
-    } else {
-      window.location.href = 'pages/missions.html?from_popup=1#formations';
-    }
+    scrollToFormationsSection(true);
   }
 
   function openPopup() {
+    scrollToFormationsSection(false);
     modal.classList.add('is-open');
     document.body.style.overflow = 'hidden';
   }
 
-  // Open automatically when the page loads (unless arriving via ?from_popup=1)
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('from_popup') === '1') {
-    setTimeout(scrollToFormationsSection, 120);
+  // Always open the pop-up when pages/missions (#formations or ?from_popup=1#formations) loads
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(openPopup, 80));
   } else {
-    setTimeout(openPopup, 150);
+    setTimeout(openPopup, 80);
   }
 
   closeBtn && closeBtn.addEventListener('click', closePopupAndGoToFormation);
