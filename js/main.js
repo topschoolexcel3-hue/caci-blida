@@ -112,6 +112,9 @@ const TRANSLATIONS = {
     "form.f5": "Ressources humaines",
     "form.f6": "Hygiène, sécurité et normes HACCP",
     "form.f7": "Commerce, négociation et techniques de vente",
+    "form.f8": "Import et export",
+    "form.f9": "Business English",
+    "form.register_badge": "S'inscrire",
     "form.pillars_title": "Nos Garanties Pédagogiques",
     "form.p1": "Des experts qualifiés",
     "form.p2": "Des formations pratiques et adaptées",
@@ -380,6 +383,9 @@ const TRANSLATIONS = {
     "form.f5": "الموارد البشرية",
     "form.f6": "النظافة والسلامة والمعايير (HACCP)",
     "form.f7": "التجارة، التفاوض وتقنيات البيع",
+    "form.f8": "التجارة الدولية: الاستيراد والتصدير",
+    "form.f9": "اللغة الإنجليزية للأعمال (Business English)",
+    "form.register_badge": "التسجيل",
     "form.pillars_title": "ضماناتنا البيداغوجية",
     "form.p1": "خبراء مؤهلون",
     "form.p2": "تكوينات تطبيقية ومكيفة",
@@ -648,6 +654,9 @@ const TRANSLATIONS = {
     "form.f5": "Human resources",
     "form.f6": "Hygiene, safety, and HACCP standards",
     "form.f7": "Trade, negotiation, and sales techniques",
+    "form.f8": "International trade: Import and Export",
+    "form.f9": "Business English",
+    "form.register_badge": "Register",
     "form.pillars_title": "Our Training Guarantees",
     "form.p1": "Qualified experts",
     "form.p2": "Practical and tailored training",
@@ -940,12 +949,16 @@ function renderDynamicExcelContent(lang) {
 
   // 2. Dynamic Formations from Excel/Google Sheet "Formations"
   if (dynamicFormations && dynamicFormations.length) {
+    const isSubpage = window.location.pathname.includes('/pages/');
+    const contactBase = isSubpage ? 'contact.html' : 'pages/contact.html';
+    const regBadge = dict['form.register_badge'] || "S'inscrire";
     const homeList = document.querySelector('.formations-list');
     if (homeList) {
       homeList.innerHTML = dynamicFormations.map(f => {
         const title = f[`Titre_${L}`] || f.Titre_FR || '';
         const icon  = f.Icone || 'fa-graduation-cap';
-        return `<div class="formation-item"><i class="fas ${icon}"></i><span>${title}</span></div>`;
+        const href  = `${contactBase}?sujet=formation&formation=${encodeURIComponent(title)}`;
+        return `<a href="${href}" class="formation-item"><i class="fas ${icon}"></i><span>${title}</span><i class="fas fa-arrow-right formation-item__arrow"></i></a>`;
       }).join('');
     }
     const missionsList = document.getElementById('missionsFormationsList');
@@ -953,7 +966,8 @@ function renderDynamicExcelContent(lang) {
       missionsList.innerHTML = dynamicFormations.map(f => {
         const title = f[`Titre_${L}`] || f.Titre_FR || '';
         const icon  = f.Icone || 'fa-graduation-cap';
-        return `<div class="doc-item"><i class="fas ${icon}"></i><span>${title}</span></div>`;
+        const href  = `${contactBase}?sujet=formation&formation=${encodeURIComponent(title)}`;
+        return `<a href="${href}" class="doc-item doc-item--link"><i class="fas ${icon}"></i><span>${title}</span><span class="doc-item__action"><span>${regBadge}</span> <i class="fas fa-arrow-right"></i></span></a>`;
       }).join('');
     }
   }
@@ -1140,11 +1154,29 @@ function renderDynamicExcelContent(lang) {
     }
   });
 
+  window.__cciScrollToHash = scrollToHash;
+
+  function triggerHashScroll() {
+    if (window.location.hash && window.location.hash.length > 1) {
+      scrollToHash(window.location.hash, true);
+    }
+  }
+
   if (window.location.hash && window.location.hash.length > 1) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => setTimeout(triggerHashScroll, 40));
+    } else {
+      setTimeout(triggerHashScroll, 40);
+    }
     window.addEventListener('load', () => {
-      setTimeout(() => scrollToHash(window.location.hash, true), 120);
+      setTimeout(triggerHashScroll, 120);
+      setTimeout(triggerHashScroll, 400);
     });
   }
+
+  window.addEventListener('hashchange', () => {
+    triggerHashScroll();
+  });
 })();
 
 /* ---- Animated Counters (Stats Bar) ---- */
@@ -1202,6 +1234,41 @@ function renderDynamicExcelContent(lang) {
   const form     = document.getElementById('contactForm');
   const feedback = document.getElementById('formFeedback');
   if (!form) return;
+
+  // Pre-fill subject and training topic from URL query parameters (?sujet=formation&formation=...)
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const rawSujet = (params.get('sujet') || '').trim().toLowerCase();
+    const formationTopic = (params.get('formation') || '').trim();
+    const sujetSelect = document.getElementById('sujet');
+    const msgArea = document.getElementById('message');
+
+    if (sujetSelect && (rawSujet || formationTopic)) {
+      const normalizedSujet = (rawSujet === 'formations' || (!rawSujet && formationTopic)) ? 'formation' : rawSujet;
+      const optExists = Array.from(sujetSelect.options).some(o => o.value === normalizedSujet);
+      if (optExists) sujetSelect.value = normalizedSujet;
+    }
+
+    if (msgArea && formationTopic && !msgArea.value.trim()) {
+      if (currentLang === 'ar') {
+        msgArea.value = `تحية طيبة، أود الحصول على برنامج وتفاصيل التسجيل في الدورة التكوينية: « ${formationTopic} ».`;
+      } else if (currentLang === 'en') {
+        msgArea.value = `Hello, I would like to receive the program and registration details for the training course: "${formationTopic}".`;
+      } else {
+        msgArea.value = `Bonjour, je souhaite obtenir le programme et les modalités d'inscription pour la formation : « ${formationTopic} ».`;
+      }
+    }
+
+    if (rawSujet || formationTopic) {
+      setTimeout(() => {
+        const card = form.closest('.contact-form-card') || form;
+        const header = document.getElementById('header');
+        const offset = (header ? header.offsetHeight : 78) + 20;
+        const top = card.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      }, 150);
+    }
+  } catch (_) {}
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -1530,6 +1597,9 @@ function renderDynamicExcelContent(lang) {
     }
 
     applyLanguage(currentLang);
+    if (window.location.hash && window.location.hash.length > 1 && typeof window.__cciScrollToHash === 'function') {
+      setTimeout(() => window.__cciScrollToHash(window.location.hash, true), 60);
+    }
   }
 
   function fetchGoogleSheetViaJsonp(sheetId, sheetName) {

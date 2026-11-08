@@ -75,6 +75,7 @@
 /* ---- Reset & Base ---- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
+section[id], h2[id], h3[id], div[id] { scroll-margin-top: calc(var(--header-h, 80px) + 24px); }
 body {
   font-family: var(--font-primary);
   color: var(--clr-grey-900);
@@ -1290,17 +1291,38 @@ textarea { resize: vertical; }
   font-size: var(--fs-sm);
   color: var(--clr-grey-900);
   transition: var(--transition);
+  text-decoration: none;
+  cursor: pointer;
 }
 .formation-item:hover {
   transform: translateX(4px);
   box-shadow: var(--shadow-md);
+  border-left-color: var(--clr-gold-dark);
+  color: var(--clr-green);
 }
-.formation-item i {
+.formation-item i:first-child {
   color: var(--clr-green);
   font-size: 1.15rem;
   width: 24px;
   text-align: center;
   flex-shrink: 0;
+}
+.formation-item__arrow {
+  margin-left: auto;
+  color: var(--clr-grey-400);
+  font-size: .85rem;
+  transition: var(--transition);
+}
+.formation-item:hover .formation-item__arrow {
+  color: var(--clr-green);
+  transform: translateX(3px);
+}
+[dir="rtl"] .formation-item__arrow {
+  margin-left: 0;
+  margin-right: auto;
+}
+[dir="rtl"] .formation-item:hover .formation-item__arrow {
+  transform: scaleX(-1) translateX(3px);
 }
 .pillars-box {
   background: var(--clr-white);
