@@ -228,9 +228,59 @@
 
               <div class="featured-formation-card__footer">
                 <span class="featured-formation-card__slogan" data-i18n="form.excel.slogan">Investissez dans vos compétences, boostez votre performance !</span>
-                <a href="contact.html?sujet=formation&amp;formation=Excel%20Avanc%C3%A9%20(15-16-17%20Novembre%202026%20-%20BCRD%20Universit%C3%A9%20Blida%201)" class="btn btn--primary"><i class="fas fa-edit"></i> <span data-i18n="form.excel.cta">Inscrivez-vous dès maintenant !</span></a>
+                <a href="#inscription-formation" class="btn btn--primary"><i class="fas fa-edit"></i> <span data-i18n="form.excel.cta">Inscrivez-vous dès maintenant !</span></a>
               </div>
             </div>
+          </div>
+
+          <!-- FORMULAIRE D'INSCRIPTION DIRECTE AUX FORMATIONS -->
+          <div class="contact-form-card" id="inscription-formation" style="background:var(--clr-white); border-radius:var(--radius-xl); padding:var(--space-xl); box-shadow:var(--shadow-md); border:2px solid var(--clr-green); margin-bottom:var(--space-xl);">
+            <h3 style="font-size:var(--fs-xl); font-weight:800; color:var(--clr-green-dark); margin:0 0 var(--space-md); padding-bottom:var(--space-sm); border-bottom:2px solid var(--clr-green-xlight);"><i class="fas fa-user-check"></i> <span data-i18n="form.reg.title">Formulaire d'Inscription à la Formation</span></h3>
+            <form id="formationRegForm" novalidate>
+              <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-md); margin-bottom:var(--space-md);">
+                <div class="form-group">
+                  <label for="regNom" style="display:block; font-weight:700; font-size:var(--fs-sm); margin-bottom:.35rem;" data-i18n="contact.f_name">Nom &amp; Prénom *</label>
+                  <input type="text" id="regNom" name="nom" placeholder="Votre nom complet" data-i18n-placeholder="contact.f_name_ph" required />
+                </div>
+                <div class="form-group">
+                  <label for="regEntreprise" style="display:block; font-weight:700; font-size:var(--fs-sm); margin-bottom:.35rem;" data-i18n="contact.f_company">Entreprise / Organisation</label>
+                  <input type="text" id="regEntreprise" name="entreprise" placeholder="Nom de votre entreprise" data-i18n-placeholder="contact.f_company_ph" />
+                </div>
+              </div>
+              <div class="form-row" style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-md); margin-bottom:var(--space-md);">
+                <div class="form-group">
+                  <label for="regTel" style="display:block; font-weight:700; font-size:var(--fs-sm); margin-bottom:.35rem;" data-i18n="contact.f_phone">Téléphone *</label>
+                  <input type="tel" id="regTel" name="tel" placeholder="06XX XX XX XX" required />
+                </div>
+                <div class="form-group">
+                  <label for="regEmail" style="display:block; font-weight:700; font-size:var(--fs-sm); margin-bottom:.35rem;" data-i18n="contact.f_email">Email *</label>
+                  <input type="email" id="regEmail" name="email" placeholder="votre@email.com" data-i18n-placeholder="contact.f_email_ph" required />
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom:var(--space-md);">
+                <label for="regFormation" style="display:block; font-weight:700; font-size:var(--fs-sm); margin-bottom:.35rem;" data-i18n="form.reg.select_label">Formation choisie *</label>
+                <select id="regFormation" name="formation" required>
+                  <option value="Excel Avancé – Du 15 au 17 Novembre 2026 (BCRD – Université Blida 1)" data-i18n="form.f10">Excel Avancé – Du 15 au 17 Novembre 2026 (BCRD – Université Blida 1)</option>
+                  <option value="Intelligence artificielle et transformation digitale" data-i18n="form.f1">Intelligence artificielle et transformation digitale</option>
+                  <option value="Gestion et management des entreprises" data-i18n="form.f2">Gestion et management des entreprises</option>
+                  <option value="Comptabilité et fiscalité" data-i18n="form.f3">Comptabilité et fiscalité</option>
+                  <option value="Marketing digital et communication" data-i18n="form.f4">Marketing digital et communication</option>
+                  <option value="Ressources humaines" data-i18n="form.f5">Ressources humaines</option>
+                  <option value="Hygiène, sécurité et normes HACCP" data-i18n="form.f6">Hygiène, sécurité et normes HACCP</option>
+                  <option value="Commerce, négociation et techniques de vente" data-i18n="form.f7">Commerce, négociation et techniques de vente</option>
+                  <option value="Import et export" data-i18n="form.f8">Import et export</option>
+                  <option value="Business English" data-i18n="form.f9">Business English</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom:var(--space-md);">
+                <label for="regMessage" style="display:block; font-weight:700; font-size:var(--fs-sm); margin-bottom:.35rem;" data-i18n="contact.f_msg">Message / Nombre de participants</label>
+                <textarea id="regMessage" name="message" rows="3" placeholder="Précisez le nombre de participants ou vos besoins spécifiques..." data-i18n-placeholder="form.reg.msg_ph"></textarea>
+              </div>
+              <button type="submit" class="btn btn--primary btn--full">
+                <i class="fas fa-paper-plane"></i> <span data-i18n="form.reg.submit">Confirmer mon Inscription à la Formation</span>
+              </button>
+              <div class="form-feedback" id="regFormFeedback" aria-live="polite" style="margin-top:var(--space-sm);"></div>
+            </form>
           </div>
 
           <div class="doc-list" id="missionsFormationsList">
@@ -302,20 +352,6 @@
       </div>
     </div>
   </footer>
-
-  <!-- ===== POP-UP AFFICHE FORMATION EXCEL AVANCÉ ===== -->
-  <div class="formation-popup-modal" id="formationPopupModal" role="dialog" aria-modal="true" aria-label="Formation Excel Avancé – 15, 16 et 17 Novembre 2026">
-    <div class="formation-popup-card">
-      <button type="button" class="formation-popup-close" id="formationPopupClose" aria-label="Fermer et accéder à la formation">&times;</button>
-      <div class="formation-popup-img-wrap">
-        <img src="../images/formation-excel-avance-nov-2026.jpeg" alt="Formation Excel Avancé – Du 15 au 17 Novembre 2026 – BCRD Université Blida 1" class="formation-popup-img" />
-      </div>
-      <div class="formation-popup-actions">
-        <a href="contact.html?sujet=formation&amp;formation=Excel%20Avanc%C3%A9%20(15-16-17%20Novembre%202026%20-%20BCRD%20Universit%C3%A9%20Blida%201)" class="btn btn--primary btn--sm"><i class="fas fa-edit"></i> <span data-i18n="form.excel.cta">Inscrivez-vous dès maintenant !</span></a>
-        <button type="button" class="btn btn--outline btn--sm" id="formationPopupViewBtn" style="border-color:var(--clr-green); color:var(--clr-green);"><i class="fas fa-graduation-cap"></i> <span data-i18n="form.excel.view_btn">Accéder à la page Formation</span></button>
-      </div>
-    </div>
-  </div>
 
   <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
   <script src="../js/main.js"></script>

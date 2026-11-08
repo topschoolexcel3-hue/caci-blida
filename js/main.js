@@ -131,6 +131,13 @@ const TRANSLATIONS = {
     "form.excel.slogan": "Investissez dans vos compétences, boostez votre performance !",
     "form.excel.cta": "Inscrivez-vous dès maintenant !",
     "form.excel.view_btn": "Accéder à la page Formation",
+    "form.excel.access_btn": "Accéder à la formation",
+    "form.excel.cancel_btn": "Annuler",
+    "form.reg.title": "Formulaire d'Inscription à la Formation",
+    "form.reg.select_label": "Formation choisie *",
+    "form.reg.msg_ph": "Précisez le nombre de participants ou vos besoins spécifiques...",
+    "form.reg.submit": "Confirmer mon Inscription à la Formation",
+    "form.reg.success": "✅ Votre demande d'inscription à la formation a été enregistrée avec succès. La CCI Mitidja-Blida vous contactera dans les plus brefs délais.",
     "form.register_badge": "S'inscrire",
     "form.pillars_title": "Nos Garanties Pédagogiques",
     "form.p1": "Des experts qualifiés",
@@ -419,6 +426,13 @@ const TRANSLATIONS = {
     "form.excel.slogan": "استثمروا في مهاراتكم، وعززوا أداءكم المهني!",
     "form.excel.cta": "سجلوا الآن !",
     "form.excel.view_btn": "الانتقال إلى صفحة التكوينات",
+    "form.excel.access_btn": "الانتقال إلى التكوين",
+    "form.excel.cancel_btn": "إلغاء",
+    "form.reg.title": "استمارة التسجيل في الدورة التكوينية",
+    "form.reg.select_label": "الدورة التكوينية المختارة *",
+    "form.reg.msg_ph": "حدد عدد المشاركين أو احتياجاتكم الخاصة...",
+    "form.reg.submit": "تأكيد التسجيل في الدورة التكوينية",
+    "form.reg.success": "✅ تم تسجيل طلب مشاركتكم في الدورة التكوينية بنجاح. ستتصل بكم غرفة التجارة والصناعة متيجة البليدة في أقرب الآجال.",
     "form.register_badge": "التسجيل",
     "form.pillars_title": "ضماناتنا البيداغوجية",
     "form.p1": "خبراء مؤهلون",
@@ -707,6 +721,13 @@ const TRANSLATIONS = {
     "form.excel.slogan": "Invest in your skills, boost your performance!",
     "form.excel.cta": "Register Now!",
     "form.excel.view_btn": "Go to Training Page",
+    "form.excel.access_btn": "Access Training",
+    "form.excel.cancel_btn": "Cancel",
+    "form.reg.title": "Training Registration Form",
+    "form.reg.select_label": "Selected Training *",
+    "form.reg.msg_ph": "Specify the number of participants or your specific needs...",
+    "form.reg.submit": "Confirm My Training Registration",
+    "form.reg.success": "✅ Your training registration has been recorded successfully. CCI Mitidja-Blida will contact you shortly.",
     "form.register_badge": "Register",
     "form.pillars_title": "Our Training Guarantees",
     "form.p1": "Qualified experts",
@@ -1267,63 +1288,112 @@ function applyLanguage(lang) {
   });
 })();
 
-/* ---- Pop-up Affiche Formation Excel Avancé (uniquement sur pages/missions) ---- */
+/* ---- Pop-up Affiche Formation Excel Avancé (sur l'Accueil index.html) ---- */
 (function initFormationPopup() {
-  const modal    = document.getElementById('formationPopupModal');
-  const closeBtn = document.getElementById('formationPopupClose');
-  const viewBtn  = document.getElementById('formationPopupViewBtn');
+  const modal     = document.getElementById('formationPopupModal');
+  const closeBtn  = document.getElementById('formationPopupClose');
+  const cancelBtn = document.getElementById('formationPopupCancel');
   if (!modal) return;
 
-  function scrollToFormationsSection(smooth) {
-    const target = document.getElementById('formations') || document.getElementById('formation-excel-avance');
-    if (!target) return;
-    try {
-      const cleanPath = window.location.pathname;
-      history.replaceState(null, '', cleanPath + '#formations');
-    } catch (_) {}
-    const header = document.getElementById('header');
-    const offset = (header ? header.offsetHeight : 78) + 18;
-    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-    window.scrollTo({ top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' });
-  }
-
-  function closePopupAndGoToFormation() {
+  function closePopupAndStayOnHome() {
     modal.classList.remove('is-open');
     document.body.style.overflow = '';
-    scrollToFormationsSection(true);
   }
 
   function openPopup() {
-    scrollToFormationsSection(false);
     modal.classList.add('is-open');
     document.body.style.overflow = 'hidden';
   }
 
-  // Always open the pop-up when pages/missions (#formations or ?from_popup=1#formations) loads
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => setTimeout(openPopup, 80));
+  // Open automatically when index.html loads
+  if (modal.classList.contains('is-open')) {
+    document.body.style.overflow = 'hidden';
   } else {
     setTimeout(openPopup, 80);
   }
 
-  closeBtn && closeBtn.addEventListener('click', closePopupAndGoToFormation);
-  viewBtn && viewBtn.addEventListener('click', closePopupAndGoToFormation);
+  // "Annuler" and the "×" cross simply close the pop-up and stay on Accueil (index.html)
+  closeBtn && closeBtn.addEventListener('click', closePopupAndStayOnHome);
+  cancelBtn && cancelBtn.addEventListener('click', closePopupAndStayOnHome);
 
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
-      closePopupAndGoToFormation();
+      closePopupAndStayOnHome();
     }
   });
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.classList.contains('is-open')) {
-      closePopupAndGoToFormation();
+      closePopupAndStayOnHome();
     }
   });
+})();
 
-  // Allow clicking the poster thumbnail inside the page to re-open the full poster popup
-  document.querySelectorAll('[data-open-formation-popup]').forEach(el => {
-    el.addEventListener('click', openPopup);
+/* ---- Formulaire d'Inscription Directe aux Formations (sur pages/missions.html#formations) ---- */
+(function initFormationRegistrationForm() {
+  const form     = document.getElementById('formationRegForm');
+  const feedback = document.getElementById('regFormFeedback');
+  const selectEl = document.getElementById('regFormation');
+  if (!form) return;
+
+  // Clicking a formation item on pages/missions.html selects it in the registration form and scrolls to it
+  document.querySelectorAll('#missionsFormationsList a.doc-item--link').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const span = a.querySelector('[data-i18n]');
+      if (span && selectEl) {
+        e.preventDefault();
+        const key = span.getAttribute('data-i18n');
+        const matchingOpt = selectEl.querySelector(`option[data-i18n="${key}"]`);
+        if (matchingOpt) {
+          selectEl.value = matchingOpt.value;
+        }
+        const card = document.getElementById('inscription-formation');
+        if (card) {
+          const header = document.getElementById('header');
+          const offset = (header ? header.offsetHeight : 78) + 18;
+          const top = card.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.fr;
+    const data = new FormData(form);
+    const nom  = data.get('nom')?.trim();
+    const tel  = data.get('tel')?.trim();
+    const mail = data.get('email')?.trim();
+
+    if (!nom || !tel || !mail) {
+      if (feedback) {
+        feedback.textContent = dict['contact.err_empty'];
+        feedback.className   = 'form-feedback error';
+      }
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) {
+      if (feedback) {
+        feedback.textContent = dict['contact.err_email'];
+        feedback.className   = 'form-feedback error';
+      }
+      return;
+    }
+
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> <span>${dict['contact.sending']}</span>`;
+
+    setTimeout(() => {
+      if (feedback) {
+        feedback.textContent = dict['form.reg.success'] || dict['contact.success'];
+        feedback.className   = 'form-feedback success';
+      }
+      form.reset();
+      btn.disabled = false;
+      btn.innerHTML = `<i class="fas fa-paper-plane"></i> <span data-i18n="form.reg.submit">${dict['form.reg.submit']}</span>`;
+    }, 900);
   });
 })();
 
