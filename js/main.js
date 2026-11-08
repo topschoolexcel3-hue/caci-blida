@@ -942,9 +942,13 @@ function applyLanguage(lang) {
     }
   });
 
-  // Keep formation links pointing directly to the Formation Registration Form (#inscription-formation)
+  // Keep formation links pointing directly to the dedicated Registration Page (pages/inscription.html) without any # anchor
+  const isSubpage = window.location.pathname.includes('/pages/');
+  const inscBase = isSubpage ? 'inscription.html' : 'pages/inscription.html';
   document.querySelectorAll('a.formation-item, #missionsFormationsList a.doc-item--link').forEach(a => {
-    a.setAttribute('href', '#inscription-formation');
+    const span = a.querySelector('[data-i18n]');
+    const key = span ? (span.getAttribute('data-i18n') || 'form.f10') : 'form.f10';
+    a.setAttribute('href', `${inscBase}?formation_key=${encodeURIComponent(key)}`);
   });
 }
 
@@ -1043,85 +1047,16 @@ function applyLanguage(lang) {
   });
 })();
 
-/* ---- Smooth Same-Page Anchor Scrolling (handles Clean URLs without .html) ---- */
+/* ---- Smooth Same-Page Anchor Scrolling (disabled auto-scroll to prevent mobile input focus jump) ---- */
 (function initSmoothHashLinks() {
-  function normalizePath(p) {
-    return (p || '/')
-      .replace(/\/index\.html$/i, '/')
-      .replace(/\.html$/i, '')
-      .replace(/\/+$/, '') || '/';
-  }
-
-  function scrollToHash(hash, smooth) {
-    if (!hash || hash === '#') return false;
-    const id = decodeURIComponent(hash.replace(/^#/, ''));
-    const target = document.getElementById(id);
-    if (!target) return false;
-    target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
-    return true;
-  }
-
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a[href]');
     if (!link) return;
     const rawHref = link.getAttribute('href') || '';
     if (rawHref === '#') {
       e.preventDefault();
-      return;
-    }
-    if (!rawHref.includes('#')) return;
-
-    let url;
-    try {
-      url = new URL(link.href, window.location.href);
-    } catch (_) {
-      return;
-    }
-    if (url.origin !== window.location.origin) return;
-
-    const currentPath = normalizePath(window.location.pathname);
-    const targetPath  = normalizePath(url.pathname);
-
-    if (currentPath === targetPath && url.hash) {
-      if (scrollToHash(url.hash, true)) {
-        e.preventDefault();
-        try {
-          history.replaceState(null, '', url.hash);
-        } catch (_) {}
-      }
     }
   });
-
-  window.__cciScrollToHash = scrollToHash;
-
-  let userHasInteracted = false;
-  ['touchstart', 'mousedown', 'wheel', 'keydown', 'focusin'].forEach(evt => {
-    window.addEventListener(evt, () => { userHasInteracted = true; }, { passive: true, once: true });
-  });
-
-  function isFormElementFocused() {
-    const active = document.activeElement;
-    if (!active) return false;
-    const tag = active.tagName;
-    return tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA';
-  }
-
-  let initialHashHandled = false;
-  function triggerInitialHashScroll() {
-    if (initialHashHandled || userHasInteracted || isFormElementFocused()) return;
-    if (window.location.hash && window.location.hash.length > 1) {
-      initialHashHandled = true;
-      scrollToHash(window.location.hash, false);
-    }
-  }
-
-  if (window.location.hash && window.location.hash.length > 1) {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', triggerInitialHashScroll, { once: true });
-    } else {
-      triggerInitialHashScroll();
-    }
-  }
 })();
 
 /* ---- Animated Counters (Stats Bar) ---- */
@@ -1297,30 +1232,15 @@ function applyLanguage(lang) {
   const modal     = document.getElementById('formationPopupModal');
   const closeBtn  = document.getElementById('formationPopupClose');
   const cancelBtn = document.getElementById('formationPopupCancel');
-  const accessBtn = document.getElementById('formationPopupAccess');
   if (!modal) return;
 
   function closePopupAndStayOnHome() {
     modal.classList.remove('is-open');
-    document.body.style.overflow = '';
-  }
-
-  function closePopupAndGoToFormation(e) {
-    if (e) e.preventDefault();
-    modal.classList.remove('is-open');
-    document.body.style.overflow = '';
-    const regCard = document.getElementById('inscription-formation') || document.getElementById('formations');
-    if (regCard) {
-      regCard.scrollIntoView({ behavior: 'auto', block: 'start' });
-    }
   }
 
   // "Annuler" and the "×" cross simply close the pop-up and stay on Accueil (index.html)
   closeBtn && closeBtn.addEventListener('click', closePopupAndStayOnHome);
   cancelBtn && cancelBtn.addEventListener('click', closePopupAndStayOnHome);
-
-  // "Accéder à la formation" closes the pop-up and jumps directly to the Registration Form (#inscription-formation)
-  accessBtn && accessBtn.addEventListener('click', closePopupAndGoToFormation);
 
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
@@ -1351,25 +1271,6 @@ function applyLanguage(lang) {
       if (opt) selectEl.value = opt.value;
     }
   } catch (_) {}
-
-  // Clicking a formation item selects it in the registration form and jumps to it
-  document.querySelectorAll('a.formation-item, #missionsFormationsList a.doc-item--link').forEach(a => {
-    a.addEventListener('click', (e) => {
-      const span = a.querySelector('[data-i18n]');
-      if (span && selectEl) {
-        e.preventDefault();
-        const key = span.getAttribute('data-i18n');
-        const matchingOpt = selectEl.querySelector(`option[data-i18n="${key}"]`);
-        if (matchingOpt) {
-          selectEl.value = matchingOpt.value;
-        }
-        const card = document.getElementById('inscription-formation');
-        if (card) {
-          card.scrollIntoView({ behavior: 'auto', block: 'start' });
-        }
-      }
-    });
-  });
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();

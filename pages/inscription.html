@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="form.reg.title">Formulaire d'Inscription à la Formation – CCI Mitidja-Blida</title>
+  <link rel="icon" type="image/jpeg" href="../images/logo.jpeg" />
+  <link rel="stylesheet" href="../css/style.css?v=20261104" />
+  <link rel="stylesheet" href="../css/pages.css?v=20261104" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="../css/fontawesome.min.css?v=20261104" />
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="container top-bar__inner">
+      <div class="top-bar__left">
+        <span><i class="fas fa-phone"></i> <span data-i18n="topbar.phone" data-param="telephone_barre">Tél/Fax : 020 49 18 28 | Mob : 0661 61 32 05</span></span>
+        <span><i class="fas fa-envelope"></i> <span data-param="emails_pipe">ccimitidja.20@gmail.com</span></span>
+      </div>
+      <div class="top-bar__right">
+        <a href="https://www.facebook.com/share/p/1DQ5W6xifT/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="contact.html" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="contact.html" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <div class="lang-switcher" role="group" aria-label="Language selector">
+          <button type="button" class="lang-btn active" data-lang="fr">FR</button>
+          <button type="button" class="lang-btn" data-lang="ar">AR</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="../index.html" class="header__logo">
+        <div class="logo-emblem"><img src="../images/logo.jpeg" alt="Logo CCI Mitidja-Blida" class="logo-img" /></div>
+        <div class="logo-text">
+          <span class="logo-text__main" data-i18n="brand.short">CCI MITIDJA - BLIDA</span>
+          <span class="logo-text__sub" data-i18n="brand.sub">Chambre de Commerce et d'Industrie Mitidja-Blida</span>
+          <span class="logo-text__ar">الغرفة الولائية للتجارة والصناعة متيجة البليدة</span>
+        </div>
+      </a>
+      <nav class="nav" id="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="../index.html" class="nav__link" data-i18n="nav.home">Accueil</a></li>
+          <li class="nav__item nav__item--dropdown">
+            <a href="presentation.html" class="nav__link"><span data-i18n="nav.chamber">La Chambre</span> <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="presentation.html" data-i18n="nav.presentation">Présentation</a></li>
+              <li><a href="missions.html" data-i18n="nav.missions">Notre Mission &amp; Nos 5 Engagements</a></li>
+              <li><a href="missions.html#difference" data-i18n="nav.difference">Notre Différence &amp; Ambition</a></li>
+            </ul>
+          </li>
+          <li class="nav__item nav__item--dropdown nav__item--active">
+            <a href="certificat-origine.html" class="nav__link"><span data-i18n="nav.services">Services &amp; Formations</span> <i class="fas fa-chevron-down"></i></a>
+            <ul class="dropdown">
+              <li><a href="certificat-origine.html" data-i18n="nav.cert_origin">Certificat d'Origine &amp; Fabrication</a></li>
+              <li><a href="certificat-origine.html#legalisation" data-i18n="nav.legalisation">Légalisation &amp; Documents Commerciaux</a></li>
+              <li><a href="inscription.html" class="active" data-i18n="nav.formations">Formations Professionnelles</a></li>
+              <li><a href="missions.html#engagements" data-i18n="nav.b2b">Business Connect &amp; Rencontres B2B</a></li>
+            </ul>
+          </li>
+          <li class="nav__item"><a href="adhesion.html" class="nav__link" data-i18n="nav.adhesion">Adhésion</a></li>
+          <li class="nav__item"><a href="actualites.html" class="nav__link" data-i18n="nav.news">Actualités</a></li>
+          <li class="nav__item"><a href="contact.html" class="nav__link" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENU PRINCIPAL : FORMULAIRE TOUT EN HAUT DE LA PAGE (ZÉRO ANCRE, ZÉRO DÉCALAGE SUR MOBILE) -->
+  <section class="page-content" style="padding: 1.5rem 0 3rem;">
+    <div class="container" style="max-width: 920px;">
+
+      <!-- FORMULAIRE D'INSCRIPTION DIRECTE EN TÊTE DE PAGE -->
+      <div class="contact-form-card" id="inscription-formation">
+        <h1 class="reg-form-card__title" style="font-size: 1.35rem;"><i class="fas fa-user-check"></i> <span data-i18n="form.reg.title">Formulaire d'Inscription à la Formation</span></h1>
+        <form id="formationRegForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="regNom" data-i18n="contact.f_name">Nom &amp; Prénom *</label>
+              <input type="text" id="regNom" name="nom" autocomplete="name" placeholder="Votre nom complet" data-i18n-placeholder="contact.f_name_ph" required />
+            </div>
+            <div class="form-group">
+              <label for="regEntreprise" data-i18n="contact.f_company">Entreprise / Organisation</label>
+              <input type="text" id="regEntreprise" name="entreprise" autocomplete="organization" placeholder="Nom de votre entreprise" data-i18n-placeholder="contact.f_company_ph" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="regTel" data-i18n="form.reg.phone_label">Téléphone *</label>
+              <input type="tel" id="regTel" name="tel" inputmode="tel" autocomplete="tel" placeholder="06XX XX XX XX" required />
+            </div>
+            <div class="form-group">
+              <label for="regEmail" data-i18n="contact.f_email">Email *</label>
+              <input type="email" id="regEmail" name="email" inputmode="email" autocomplete="email" placeholder="votre@email.com" data-i18n-placeholder="contact.f_email_ph" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="regFormation" data-i18n="form.reg.select_label">Formation choisie *</label>
+            <select id="regFormation" name="formation" required>
+              <option value="Excel Avancé – Du 15 au 17 Novembre 2026 (BCRD – Université Blida 1)" data-i18n="form.f10">Excel Avancé – Du 15 au 17 Novembre 2026 (BCRD – Université Blida 1)</option>
+              <option value="Intelligence artificielle et transformation digitale" data-i18n="form.f1">Intelligence artificielle et transformation digitale</option>
+              <option value="Gestion et management des entreprises" data-i18n="form.f2">Gestion et management des entreprises</option>
+              <option value="Comptabilité et fiscalité" data-i18n="form.f3">Comptabilité et fiscalité</option>
+              <option value="Marketing digital et communication" data-i18n="form.f4">Marketing digital et communication</option>
+              <option value="Ressources humaines" data-i18n="form.f5">Ressources humaines</option>
+              <option value="Hygiène, sécurité et normes HACCP" data-i18n="form.f6">Hygiène, sécurité et normes HACCP</option>
+              <option value="Commerce, négociation et techniques de vente" data-i18n="form.f7">Commerce, négociation et techniques de vente</option>
+              <option value="Import et export" data-i18n="form.f8">Import et export</option>
+              <option value="Business English" data-i18n="form.f9">Business English</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="regMessage" data-i18n="form.reg.msg_label">Message / Nombre de participants (facultatif)</label>
+            <textarea id="regMessage" name="message" rows="3" placeholder="Précisez le nombre de participants ou vos besoins spécifiques..." data-i18n-placeholder="form.reg.msg_ph"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">
+            <i class="fas fa-paper-plane"></i> <span data-i18n="form.reg.submit">Confirmer mon Inscription à la Formation</span>
+          </button>
+          <div class="form-feedback" id="regFormFeedback" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <!-- FICHE DÉTAILLÉE : FORMATION EXCEL AVANCÉ -->
+      <div class="featured-formation-card" id="formation-excel-avance">
+        <div class="featured-formation-card__poster">
+          <img src="../images/formation-excel-avance-nov-2026.jpeg" width="1080" height="1080" loading="lazy" decoding="async" alt="Formation Excel Avancé – Du 15 au 17 Novembre 2026 – BCRD Université Blida 1" />
+        </div>
+        <div class="featured-formation-card__body">
+          <div class="featured-formation-card__badges">
+            <span class="ff-badge ff-badge--green"><i class="fas fa-calendar-alt"></i> <span data-i18n="form.excel.date">Du 15 – 16 – 17 Novembre 2026</span></span>
+            <span class="ff-badge ff-badge--gold"><i class="fas fa-map-marker-alt"></i> <span data-i18n="form.excel.loc">BCRD – Université Blida 1</span></span>
+          </div>
+          <h2 class="featured-formation-card__title" data-i18n="form.excel.title">Formation : Excel Avancé – دورة تكوينية حول Excel Avancé</h2>
+          <p class="featured-formation-card__sub" data-i18n="form.excel.sub">Maîtrisez les outils avancés d'Excel pour aller plus loin dans votre productivité !</p>
+
+          <div class="featured-formation-card__cols">
+            <div class="featured-formation-card__box">
+              <h4><i class="fas fa-bullseye"></i> <span data-i18n="form.excel.obj_title">Objectifs de la formation</span></h4>
+              <ul class="featured-formation-card__list">
+                <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj1">Maîtriser les fonctions avancées</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj2">Exploiter les tableaux croisés dynamiques</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj3">Réaliser des analyses et des tableaux de bord</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj4">Automatiser vos tâches avec les macros</span></li>
+              </ul>
+            </div>
+            <div class="featured-formation-card__box">
+              <h4><i class="fas fa-users"></i> <span data-i18n="form.excel.pub_title">Public ciblé</span></h4>
+              <ul class="featured-formation-card__list">
+                <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.pub1">Cadres et responsables de services</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.pub2">Professionnels de la gestion et de l'analyse</span></li>
+                <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.pub3">Toute personne souhaitant approfondir ses compétences sur Excel</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="featured-formation-card__footer">
+            <span class="featured-formation-card__slogan" data-i18n="form.excel.slogan">Investissez dans vos compétences, boostez votre performance !</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer__bottom" style="background:var(--clr-grey-900); border-top:none; padding:var(--space-xl) 0;">
+      <div class="container footer__bottom-inner">
+        <p data-i18n="footer.copy">&copy; 2026 Chambre de Commerce et d'Industrie Mitidja-Blida (CCI Mitidja-Blida). Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js?v=20261104"></script>
+</body>
+</html>
