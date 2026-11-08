@@ -943,16 +943,7 @@ function applyLanguage(lang) {
   });
 
   // Keep formation links pointing directly to the Formation Registration Form (#inscription-formation)
-  const isSubpage = window.location.pathname.includes('/pages/');
-  document.querySelectorAll('a.formation-item').forEach(a => {
-    const span = a.querySelector('[data-i18n]');
-    if (span) {
-      const key = span.getAttribute('data-i18n') || 'form.f10';
-      const missionsUrl = isSubpage ? 'missions.html' : 'pages/missions.html';
-      a.setAttribute('href', `${missionsUrl}?v=20261103b&formation_key=${encodeURIComponent(key)}#inscription-formation`);
-    }
-  });
-  document.querySelectorAll('#missionsFormationsList a.doc-item--link').forEach(a => {
+  document.querySelectorAll('a.formation-item, #missionsFormationsList a.doc-item--link').forEach(a => {
     a.setAttribute('href', '#inscription-formation');
   });
 }
@@ -1306,6 +1297,7 @@ function applyLanguage(lang) {
   const modal     = document.getElementById('formationPopupModal');
   const closeBtn  = document.getElementById('formationPopupClose');
   const cancelBtn = document.getElementById('formationPopupCancel');
+  const accessBtn = document.getElementById('formationPopupAccess');
   if (!modal) return;
 
   function closePopupAndStayOnHome() {
@@ -1313,21 +1305,22 @@ function applyLanguage(lang) {
     document.body.style.overflow = '';
   }
 
-  function openPopup() {
-    modal.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  // Open automatically when index.html loads
-  if (modal.classList.contains('is-open')) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    setTimeout(openPopup, 80);
+  function closePopupAndGoToFormation(e) {
+    if (e) e.preventDefault();
+    modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+    const regCard = document.getElementById('inscription-formation') || document.getElementById('formations');
+    if (regCard) {
+      regCard.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }
   }
 
   // "Annuler" and the "×" cross simply close the pop-up and stay on Accueil (index.html)
   closeBtn && closeBtn.addEventListener('click', closePopupAndStayOnHome);
   cancelBtn && cancelBtn.addEventListener('click', closePopupAndStayOnHome);
+
+  // "Accéder à la formation" closes the pop-up and jumps directly to the Registration Form (#inscription-formation)
+  accessBtn && accessBtn.addEventListener('click', closePopupAndGoToFormation);
 
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
@@ -1342,7 +1335,7 @@ function applyLanguage(lang) {
   });
 })();
 
-/* ---- Formulaire d'Inscription Directe aux Formations (sur pages/missions.html#formations) ---- */
+/* ---- Formulaire d'Inscription Directe aux Formations ---- */
 (function initFormationRegistrationForm() {
   const form     = document.getElementById('formationRegForm');
   const feedback = document.getElementById('regFormFeedback');
@@ -1359,8 +1352,8 @@ function applyLanguage(lang) {
     }
   } catch (_) {}
 
-  // Clicking a formation item on pages/missions.html selects it in the registration form and scrolls to it
-  document.querySelectorAll('#missionsFormationsList a.doc-item--link').forEach(a => {
+  // Clicking a formation item selects it in the registration form and jumps to it
+  document.querySelectorAll('a.formation-item, #missionsFormationsList a.doc-item--link').forEach(a => {
     a.addEventListener('click', (e) => {
       const span = a.querySelector('[data-i18n]');
       if (span && selectEl) {
@@ -1372,7 +1365,7 @@ function applyLanguage(lang) {
         }
         const card = document.getElementById('inscription-formation');
         if (card) {
-          card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          card.scrollIntoView({ behavior: 'auto', block: 'start' });
         }
       }
     });

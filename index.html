@@ -10,11 +10,11 @@
   <meta property="og:type" content="website" />
   <title data-i18n="meta.home_title">CCI Mitidja-Blida – Chambre de Commerce et d'Industrie</title>
   <link rel="icon" type="image/jpeg" href="images/logo.jpeg" />
-  <link rel="stylesheet" href="css/style.css?v=20261103b" />
+  <link rel="stylesheet" href="css/style.css?v=20261103c" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/fontawesome.min.css?v=20261103c" />
 </head>
 <body>
 
@@ -347,10 +347,60 @@
         <p class="section-header__desc" data-i18n="form.desc">Développez les compétences, renforcez la performance et accompagnez la croissance de votre entreprise.</p>
       </div>
 
+      <!-- FORMULAIRE D'INSCRIPTION DIRECTE AUX FORMATIONS -->
+      <div class="contact-form-card" id="inscription-formation">
+        <h3 class="reg-form-card__title"><i class="fas fa-user-check"></i> <span data-i18n="form.reg.title">Formulaire d'Inscription à la Formation</span></h3>
+        <form id="formationRegForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="regNom" data-i18n="contact.f_name">Nom &amp; Prénom *</label>
+              <input type="text" id="regNom" name="nom" autocomplete="name" placeholder="Votre nom complet" data-i18n-placeholder="contact.f_name_ph" required />
+            </div>
+            <div class="form-group">
+              <label for="regEntreprise" data-i18n="contact.f_company">Entreprise / Organisation</label>
+              <input type="text" id="regEntreprise" name="entreprise" autocomplete="organization" placeholder="Nom de votre entreprise" data-i18n-placeholder="contact.f_company_ph" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="regTel" data-i18n="form.reg.phone_label">Téléphone *</label>
+              <input type="tel" id="regTel" name="tel" inputmode="tel" autocomplete="tel" placeholder="06XX XX XX XX" required />
+            </div>
+            <div class="form-group">
+              <label for="regEmail" data-i18n="contact.f_email">Email *</label>
+              <input type="email" id="regEmail" name="email" inputmode="email" autocomplete="email" placeholder="votre@email.com" data-i18n-placeholder="contact.f_email_ph" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="regFormation" data-i18n="form.reg.select_label">Formation choisie *</label>
+            <select id="regFormation" name="formation" required>
+              <option value="Excel Avancé – Du 15 au 17 Novembre 2026 (BCRD – Université Blida 1)" data-i18n="form.f10">Excel Avancé – Du 15 au 17 Novembre 2026 (BCRD – Université Blida 1)</option>
+              <option value="Intelligence artificielle et transformation digitale" data-i18n="form.f1">Intelligence artificielle et transformation digitale</option>
+              <option value="Gestion et management des entreprises" data-i18n="form.f2">Gestion et management des entreprises</option>
+              <option value="Comptabilité et fiscalité" data-i18n="form.f3">Comptabilité et fiscalité</option>
+              <option value="Marketing digital et communication" data-i18n="form.f4">Marketing digital et communication</option>
+              <option value="Ressources humaines" data-i18n="form.f5">Ressources humaines</option>
+              <option value="Hygiène, sécurité et normes HACCP" data-i18n="form.f6">Hygiène, sécurité et normes HACCP</option>
+              <option value="Commerce, négociation et techniques de vente" data-i18n="form.f7">Commerce, négociation et techniques de vente</option>
+              <option value="Import et export" data-i18n="form.f8">Import et export</option>
+              <option value="Business English" data-i18n="form.f9">Business English</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="regMessage" data-i18n="form.reg.msg_label">Message / Nombre de participants (facultatif)</label>
+            <textarea id="regMessage" name="message" rows="3" placeholder="Précisez le nombre de participants ou vos besoins spécifiques..." data-i18n-placeholder="form.reg.msg_ph"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">
+            <i class="fas fa-paper-plane"></i> <span data-i18n="form.reg.submit">Confirmer mon Inscription à la Formation</span>
+          </button>
+          <div class="form-feedback" id="regFormFeedback" aria-live="polite"></div>
+        </form>
+      </div>
+
       <!-- FEATURED FORMATION: EXCEL AVANCÉ -->
       <div class="featured-formation-card" style="margin-bottom:var(--space-2xl);">
         <div class="featured-formation-card__poster" data-lightbox="images/formation-excel-avance-nov-2026.jpeg" title="Cliquez pour agrandir l'affiche">
-          <img src="images/formation-excel-avance-nov-2026.jpeg" alt="Formation Excel Avancé – Du 15 au 17 Novembre 2026 – BCRD Université Blida 1" />
+          <img src="images/formation-excel-avance-nov-2026.jpeg" width="1080" height="1080" alt="Formation Excel Avancé – Du 15 au 17 Novembre 2026 – BCRD Université Blida 1" />
         </div>
         <div class="featured-formation-card__body">
           <div class="featured-formation-card__badges">
@@ -382,7 +432,7 @@
 
           <div class="featured-formation-card__footer">
             <span class="featured-formation-card__slogan" data-i18n="form.excel.slogan">Investissez dans vos compétences, boostez votre performance !</span>
-            <a href="pages/missions.html#inscription-formation" class="btn btn--primary"><i class="fas fa-edit"></i> <span data-i18n="form.excel.cta">Inscrivez-vous dès maintenant !</span></a>
+            <a href="#inscription-formation" class="btn btn--primary"><i class="fas fa-edit"></i> <span data-i18n="form.excel.cta">Inscrivez-vous dès maintenant !</span></a>
           </div>
         </div>
       </div>
@@ -744,7 +794,7 @@
         <img src="images/formation-excel-avance-nov-2026.jpeg" width="1080" height="1080" alt="Formation Excel Avancé – Du 15 au 17 Novembre 2026 – BCRD Université Blida 1" class="formation-popup-img" />
       </div>
       <div class="formation-popup-actions">
-        <a href="pages/missions.html?v=20261103b#inscription-formation" class="btn btn--primary btn--sm"><i class="fas fa-graduation-cap"></i> <span data-i18n="form.excel.access_btn">Accéder à la formation</span></a>
+        <a href="#inscription-formation" id="formationPopupAccess" class="btn btn--primary btn--sm"><i class="fas fa-graduation-cap"></i> <span data-i18n="form.excel.access_btn">Accéder à la formation</span></a>
         <button type="button" class="btn btn--outline btn--sm" id="formationPopupCancel" style="border-color:var(--clr-grey-700); color:var(--clr-grey-900);"><i class="fas fa-times"></i> <span data-i18n="form.excel.cancel_btn">Annuler</span></button>
       </div>
     </div>
@@ -755,6 +805,6 @@
     <i class="fas fa-chevron-up"></i>
   </button>
 
-  <script src="js/main.js?v=20261103b"></script>
+  <script src="js/main.js?v=20261103c"></script>
 </body>
 </html>
