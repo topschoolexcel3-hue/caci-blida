@@ -909,6 +909,15 @@ function renderDynamicExcelContent(lang) {
       }
     });
 
+    const fbUrl = getParam('facebook');
+    if (fbUrl) {
+      document.querySelectorAll('a[aria-label="Facebook"]').forEach(a => {
+        a.href = fbUrl;
+        a.target = '_blank';
+        a.rel = 'noopener';
+      });
+    }
+
     const pPhys = getParam('cotisation_physique');
     const pMor  = getParam('cotisation_morale');
     if (pPhys) {
