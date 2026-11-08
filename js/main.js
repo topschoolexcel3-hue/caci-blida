@@ -942,14 +942,18 @@ function applyLanguage(lang) {
     }
   });
 
-  // Keep formation link query parameters in sync with active language
+  // Keep formation links pointing directly to the Formation Registration Form (#inscription-formation)
   const isSubpage = window.location.pathname.includes('/pages/');
-  const contactBase = isSubpage ? 'contact.html' : 'pages/contact.html';
-  document.querySelectorAll('a.formation-item, #missionsFormationsList a.doc-item--link').forEach(a => {
+  document.querySelectorAll('a.formation-item').forEach(a => {
     const span = a.querySelector('[data-i18n]');
-    if (span && span.textContent) {
-      a.setAttribute('href', `${contactBase}?sujet=formation&formation=${encodeURIComponent(span.textContent.trim())}`);
+    if (span) {
+      const key = span.getAttribute('data-i18n') || 'form.f10';
+      const missionsUrl = isSubpage ? 'missions.html' : 'pages/missions.html';
+      a.setAttribute('href', `${missionsUrl}?v=20261103b&formation_key=${encodeURIComponent(key)}#inscription-formation`);
     }
+  });
+  document.querySelectorAll('#missionsFormationsList a.doc-item--link').forEach(a => {
+    a.setAttribute('href', '#inscription-formation');
   });
 }
 
@@ -1062,10 +1066,7 @@ function applyLanguage(lang) {
     const id = decodeURIComponent(hash.replace(/^#/, ''));
     const target = document.getElementById(id);
     if (!target) return false;
-    const header = document.getElementById('header');
-    const offset = (header ? header.offsetHeight : 78) + 16;
-    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-    window.scrollTo({ top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' });
+    target.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
     return true;
   }
 
@@ -1094,13 +1095,18 @@ function applyLanguage(lang) {
       if (scrollToHash(url.hash, true)) {
         e.preventDefault();
         try {
-          history.pushState(null, '', url.hash);
+          history.replaceState(null, '', url.hash);
         } catch (_) {}
       }
     }
   });
 
   window.__cciScrollToHash = scrollToHash;
+
+  let userHasInteracted = false;
+  ['touchstart', 'mousedown', 'wheel', 'keydown', 'focusin'].forEach(evt => {
+    window.addEventListener(evt, () => { userHasInteracted = true; }, { passive: true, once: true });
+  });
 
   function isFormElementFocused() {
     const active = document.activeElement;
@@ -1111,7 +1117,7 @@ function applyLanguage(lang) {
 
   let initialHashHandled = false;
   function triggerInitialHashScroll() {
-    if (initialHashHandled || isFormElementFocused()) return;
+    if (initialHashHandled || userHasInteracted || isFormElementFocused()) return;
     if (window.location.hash && window.location.hash.length > 1) {
       initialHashHandled = true;
       scrollToHash(window.location.hash, false);
@@ -1120,17 +1126,11 @@ function applyLanguage(lang) {
 
   if (window.location.hash && window.location.hash.length > 1) {
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => setTimeout(triggerInitialHashScroll, 20), { once: true });
+      document.addEventListener('DOMContentLoaded', triggerInitialHashScroll, { once: true });
     } else {
-      setTimeout(triggerInitialHashScroll, 20);
+      triggerInitialHashScroll();
     }
   }
-
-  window.addEventListener('hashchange', () => {
-    if (!isFormElementFocused() && window.location.hash && window.location.hash.length > 1) {
-      scrollToHash(window.location.hash, true);
-    }
-  });
 })();
 
 /* ---- Animated Counters (Stats Bar) ---- */
@@ -1349,6 +1349,16 @@ function applyLanguage(lang) {
   const selectEl = document.getElementById('regFormation');
   if (!form) return;
 
+  // Pre-select formation from query parameter (?formation_key=form.f1, etc.)
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const fKey = (params.get('formation_key') || '').trim();
+    if (fKey && selectEl) {
+      const opt = selectEl.querySelector(`option[data-i18n="${fKey}"]`);
+      if (opt) selectEl.value = opt.value;
+    }
+  } catch (_) {}
+
   // Clicking a formation item on pages/missions.html selects it in the registration form and scrolls to it
   document.querySelectorAll('#missionsFormationsList a.doc-item--link').forEach(a => {
     a.addEventListener('click', (e) => {
@@ -1362,10 +1372,7 @@ function applyLanguage(lang) {
         }
         const card = document.getElementById('inscription-formation');
         if (card) {
-          const header = document.getElementById('header');
-          const offset = (header ? header.offsetHeight : 78) + 18;
-          const top = card.getBoundingClientRect().top + window.pageYOffset - offset;
-          window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+          card.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
     });

@@ -81,7 +81,7 @@ body {
   color: var(--clr-grey-900);
   background: var(--clr-white);
   line-height: 1.7;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration: none; transition: var(--transition); }
@@ -1873,6 +1873,8 @@ textarea { resize: vertical; }
 .featured-formation-card__poster img {
   width: 100%;
   height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
   display: block;
   transition: transform 0.35s ease;
 }
