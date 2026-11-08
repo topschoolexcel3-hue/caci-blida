@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title data-i18n="meta.missions_title">Missions, 5 Engagements & Formations – CCI Mitidja-Blida</title>
   <link rel="icon" type="image/jpeg" href="../images/logo.jpeg" />
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/pages.css" />
+  <link rel="stylesheet" href="../css/style.css?v=20261103b" />
+  <link rel="stylesheet" href="../css/pages.css?v=20261103b" />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
@@ -193,46 +193,6 @@
           <h2 data-i18n="form.title">Les Formations Professionnelles</h2>
           <p data-i18n="form.desc">Développez les compétences, renforcez la performance et accompagnez la croissance de votre entreprise.</p>
 
-          <!-- FEATURED FORMATION: EXCEL AVANCÉ -->
-          <div class="featured-formation-card" id="formation-excel-avance">
-            <div class="featured-formation-card__poster" data-open-formation-popup="true" title="Cliquez pour agrandir l'affiche">
-              <img src="../images/formation-excel-avance-nov-2026.jpeg" alt="Formation Excel Avancé – Du 15 au 17 Novembre 2026 – BCRD Université Blida 1" />
-            </div>
-            <div class="featured-formation-card__body">
-              <div class="featured-formation-card__badges">
-                <span class="ff-badge ff-badge--green"><i class="fas fa-calendar-alt"></i> <span data-i18n="form.excel.date">Du 15 – 16 – 17 Novembre 2026</span></span>
-                <span class="ff-badge ff-badge--gold"><i class="fas fa-map-marker-alt"></i> <span data-i18n="form.excel.loc">BCRD – Université Blida 1</span></span>
-              </div>
-              <h3 class="featured-formation-card__title" data-i18n="form.excel.title">Formation : Excel Avancé – دورة تكوينية حول Excel Avancé</h3>
-              <p class="featured-formation-card__sub" data-i18n="form.excel.sub">Maîtrisez les outils avancés d'Excel pour aller plus loin dans votre productivité !</p>
-
-              <div class="featured-formation-card__cols">
-                <div class="featured-formation-card__box">
-                  <h4><i class="fas fa-bullseye"></i> <span data-i18n="form.excel.obj_title">Objectifs de la formation</span></h4>
-                  <ul class="featured-formation-card__list">
-                    <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj1">Maîtriser les fonctions avancées</span></li>
-                    <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj2">Exploiter les tableaux croisés dynamiques</span></li>
-                    <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj3">Réaliser des analyses et des tableaux de bord</span></li>
-                    <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj4">Automatiser vos tâches avec les macros</span></li>
-                  </ul>
-                </div>
-                <div class="featured-formation-card__box">
-                  <h4><i class="fas fa-users"></i> <span data-i18n="form.excel.pub_title">Public ciblé</span></h4>
-                  <ul class="featured-formation-card__list">
-                    <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.pub1">Cadres et responsables de services</span></li>
-                    <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.pub2">Professionnels de la gestion et de l'analyse</span></li>
-                    <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.pub3">Toute personne souhaitant approfondir ses compétences sur Excel</span></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="featured-formation-card__footer">
-                <span class="featured-formation-card__slogan" data-i18n="form.excel.slogan">Investissez dans vos compétences, boostez votre performance !</span>
-                <a href="#inscription-formation" class="btn btn--primary"><i class="fas fa-edit"></i> <span data-i18n="form.excel.cta">Inscrivez-vous dès maintenant !</span></a>
-              </div>
-            </div>
-          </div>
-
           <!-- FORMULAIRE D'INSCRIPTION DIRECTE AUX FORMATIONS -->
           <div class="contact-form-card" id="inscription-formation">
             <h3 class="reg-form-card__title"><i class="fas fa-user-check"></i> <span data-i18n="form.reg.title">Formulaire d'Inscription à la Formation</span></h3>
@@ -283,17 +243,57 @@
             </form>
           </div>
 
+          <!-- FEATURED FORMATION: EXCEL AVANCÉ -->
+          <div class="featured-formation-card" id="formation-excel-avance">
+            <div class="featured-formation-card__poster" data-open-formation-popup="true" title="Cliquez pour agrandir l'affiche">
+              <img src="../images/formation-excel-avance-nov-2026.jpeg" width="1080" height="1080" alt="Formation Excel Avancé – Du 15 au 17 Novembre 2026 – BCRD Université Blida 1" />
+            </div>
+            <div class="featured-formation-card__body">
+              <div class="featured-formation-card__badges">
+                <span class="ff-badge ff-badge--green"><i class="fas fa-calendar-alt"></i> <span data-i18n="form.excel.date">Du 15 – 16 – 17 Novembre 2026</span></span>
+                <span class="ff-badge ff-badge--gold"><i class="fas fa-map-marker-alt"></i> <span data-i18n="form.excel.loc">BCRD – Université Blida 1</span></span>
+              </div>
+              <h3 class="featured-formation-card__title" data-i18n="form.excel.title">Formation : Excel Avancé – دورة تكوينية حول Excel Avancé</h3>
+              <p class="featured-formation-card__sub" data-i18n="form.excel.sub">Maîtrisez les outils avancés d'Excel pour aller plus loin dans votre productivité !</p>
+
+              <div class="featured-formation-card__cols">
+                <div class="featured-formation-card__box">
+                  <h4><i class="fas fa-bullseye"></i> <span data-i18n="form.excel.obj_title">Objectifs de la formation</span></h4>
+                  <ul class="featured-formation-card__list">
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj1">Maîtriser les fonctions avancées</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj2">Exploiter les tableaux croisés dynamiques</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj3">Réaliser des analyses et des tableaux de bord</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.obj4">Automatiser vos tâches avec les macros</span></li>
+                  </ul>
+                </div>
+                <div class="featured-formation-card__box">
+                  <h4><i class="fas fa-users"></i> <span data-i18n="form.excel.pub_title">Public ciblé</span></h4>
+                  <ul class="featured-formation-card__list">
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.pub1">Cadres et responsables de services</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.pub2">Professionnels de la gestion et de l'analyse</span></li>
+                    <li><i class="fas fa-check-circle"></i> <span data-i18n="form.excel.pub3">Toute personne souhaitant approfondir ses compétences sur Excel</span></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="featured-formation-card__footer">
+                <span class="featured-formation-card__slogan" data-i18n="form.excel.slogan">Investissez dans vos compétences, boostez votre performance !</span>
+                <a href="#inscription-formation" class="btn btn--primary"><i class="fas fa-edit"></i> <span data-i18n="form.excel.cta">Inscrivez-vous dès maintenant !</span></a>
+              </div>
+            </div>
+          </div>
+
           <div class="doc-list" id="missionsFormationsList">
-            <a href="contact.html?sujet=formation&amp;formation=Excel%20Avanc%C3%A9%20(15-16-17%20Novembre%202026%20-%20BCRD%20Universit%C3%A9%20Blida%201)" class="doc-item doc-item--link" style="border-left-color:var(--clr-gold-dark); background:#fffdf5;"><i class="fas fa-file-excel"></i><span data-i18n="form.f10">Excel Avancé – Du 15 au 17 Novembre 2026 (BCRD – Université Blida 1)</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
-            <a href="contact.html?sujet=formation&amp;formation=Intelligence%20artificielle%20et%20transformation%20digitale" class="doc-item doc-item--link"><i class="fas fa-robot"></i><span data-i18n="form.f1">Intelligence artificielle et transformation digitale</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
-            <a href="contact.html?sujet=formation&amp;formation=Gestion%20et%20management%20des%20entreprises" class="doc-item doc-item--link"><i class="fas fa-briefcase"></i><span data-i18n="form.f2">Gestion et management des entreprises</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
-            <a href="contact.html?sujet=formation&amp;formation=Comptabilit%C3%A9%20et%20fiscalit%C3%A9" class="doc-item doc-item--link"><i class="fas fa-calculator"></i><span data-i18n="form.f3">Comptabilité et fiscalité</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
-            <a href="contact.html?sujet=formation&amp;formation=Marketing%20digital%20et%20communication" class="doc-item doc-item--link"><i class="fas fa-bullhorn"></i><span data-i18n="form.f4">Marketing digital et communication</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
-            <a href="contact.html?sujet=formation&amp;formation=Ressources%20humaines" class="doc-item doc-item--link"><i class="fas fa-user-tie"></i><span data-i18n="form.f5">Ressources humaines</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
-            <a href="contact.html?sujet=formation&amp;formation=Hygi%C3%A8ne%2C%20s%C3%A9curit%C3%A9%20et%20normes%20HACCP" class="doc-item doc-item--link"><i class="fas fa-shield-alt"></i><span data-i18n="form.f6">Hygiène, sécurité et normes HACCP</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
-            <a href="contact.html?sujet=formation&amp;formation=Commerce%2C%20n%C3%A9gociation%20et%20techniques%20de%20vente" class="doc-item doc-item--link"><i class="fas fa-handshake"></i><span data-i18n="form.f7">Commerce, négociation et techniques de vente</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
-            <a href="contact.html?sujet=formation&amp;formation=Import%20et%20export" class="doc-item doc-item--link"><i class="fas fa-globe-africa"></i><span data-i18n="form.f8">Import et export</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
-            <a href="contact.html?sujet=formation&amp;formation=Business%20English" class="doc-item doc-item--link"><i class="fas fa-language"></i><span data-i18n="form.f9">Business English</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
+            <a href="#inscription-formation" class="doc-item doc-item--link" style="border-left-color:var(--clr-gold-dark); background:#fffdf5;"><i class="fas fa-file-excel"></i><span data-i18n="form.f10">Excel Avancé – Du 15 au 17 Novembre 2026 (BCRD – Université Blida 1)</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
+            <a href="#inscription-formation" class="doc-item doc-item--link"><i class="fas fa-robot"></i><span data-i18n="form.f1">Intelligence artificielle et transformation digitale</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
+            <a href="#inscription-formation" class="doc-item doc-item--link"><i class="fas fa-briefcase"></i><span data-i18n="form.f2">Gestion et management des entreprises</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
+            <a href="#inscription-formation" class="doc-item doc-item--link"><i class="fas fa-calculator"></i><span data-i18n="form.f3">Comptabilité et fiscalité</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
+            <a href="#inscription-formation" class="doc-item doc-item--link"><i class="fas fa-bullhorn"></i><span data-i18n="form.f4">Marketing digital et communication</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
+            <a href="#inscription-formation" class="doc-item doc-item--link"><i class="fas fa-user-tie"></i><span data-i18n="form.f5">Ressources humaines</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
+            <a href="#inscription-formation" class="doc-item doc-item--link"><i class="fas fa-shield-alt"></i><span data-i18n="form.f6">Hygiène, sécurité et normes HACCP</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
+            <a href="#inscription-formation" class="doc-item doc-item--link"><i class="fas fa-handshake"></i><span data-i18n="form.f7">Commerce, négociation et techniques de vente</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
+            <a href="#inscription-formation" class="doc-item doc-item--link"><i class="fas fa-globe-africa"></i><span data-i18n="form.f8">Import et export</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
+            <a href="#inscription-formation" class="doc-item doc-item--link"><i class="fas fa-language"></i><span data-i18n="form.f9">Business English</span><span class="doc-item__action"><span data-i18n="form.register_badge">S'inscrire</span> <i class="fas fa-arrow-right"></i></span></a>
           </div>
 
           <div class="pillars-box" style="margin-top:var(--space-xl);">
@@ -354,6 +354,6 @@
   </footer>
 
   <button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
-  <script src="../js/main.js"></script>
+  <script src="../js/main.js?v=20261103b"></script>
 </body>
 </html>
