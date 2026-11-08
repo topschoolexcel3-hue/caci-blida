@@ -387,8 +387,9 @@ textarea { resize: vertical; }
   border-bottom-color: var(--clr-green);
 }
 .nav__item { position: relative; }
-.nav__item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.nav__item:hover .dropdown { display: block; opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
 .dropdown {
+  display: none;
   position: absolute;
   top: calc(100% + 3px);
   left: 0;
@@ -399,6 +400,7 @@ textarea { resize: vertical; }
   border-top: 3px solid var(--clr-green);
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transform: translateY(-8px);
   transition: var(--transition);
   z-index: 50;
@@ -1125,12 +1127,14 @@ textarea { resize: vertical; }
   font-size: var(--fs-base);
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transform: translateY(10px);
   transition: var(--transition);
 }
 .back-to-top.is-visible {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
   transform: translateY(0);
 }
 .back-to-top:hover {
@@ -1539,17 +1543,20 @@ textarea { resize: vertical; }
   inset: 0;
   background: rgba(0,0,0,.85);
   z-index: 2000;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: var(--space-xl);
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition: var(--transition);
 }
 .lightbox-modal.is-open {
+  display: flex;
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 .lightbox-modal__img {
   max-width: 92vw;
@@ -1655,6 +1662,7 @@ textarea { resize: vertical; }
   .about-strip__visual { max-width: 480px; }
   .hamburger { display: flex; }
   .nav {
+    display: none;
     position: absolute;
     top: 100%;
     left: 0; right: 0;
@@ -1662,16 +1670,21 @@ textarea { resize: vertical; }
     padding: var(--space-sm) 0 var(--space-md);
     box-shadow: var(--shadow-xl);
     border-bottom: 3px solid var(--clr-green);
-    transform: translateY(-10px);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: var(--transition);
     max-height: calc(100vh - var(--header-h));
     overflow-y: auto;
     z-index: 999;
   }
+  .nav:not(.is-open),
+  .nav:not(.is-open) * {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
   .nav.is-open {
+    display: block !important;
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
@@ -1685,9 +1698,9 @@ textarea { resize: vertical; }
     border-bottom: 1px solid var(--clr-grey-100);
     padding: .85rem var(--space-xl);
   }
-  .dropdown,
-  .nav__item:hover .dropdown,
-  .nav__item.is-open .dropdown {
+  .nav.is-open .dropdown,
+  .nav.is-open .nav__item:hover .dropdown,
+  .nav.is-open .nav__item.is-open .dropdown {
     position: static;
     display: block;
     opacity: 1;
@@ -1766,7 +1779,7 @@ textarea { resize: vertical; }
   background: rgba(0, 0, 0, 0.82);
   backdrop-filter: blur(4px);
   z-index: 9999;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 1rem;
@@ -1776,6 +1789,7 @@ textarea { resize: vertical; }
   transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 .formation-popup-modal.is-open {
+  display: flex;
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
