@@ -1192,7 +1192,7 @@ function applyLanguage(lang) {
       `${nom}`
     ].join('\n');
 
-    const mailtoUrl = `mailto:ccimitidja.20@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    const mailtoUrl = `mailto:ccimitidja.20@gmail.com,Cci-mitidja@caci.dz?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
     const waUrl = `https://wa.me/213661613205?text=${encodeURIComponent(emailBody)}`;
 
     const btn = form.querySelector('button[type="submit"]');
@@ -1211,6 +1211,7 @@ function applyLanguage(lang) {
         },
         body: JSON.stringify({
           _subject: emailSubject,
+          _cc: 'Cci-mitidja@caci.dz',
           _template: 'table',
           _captcha: 'false',
           _replyto: mail,
@@ -1239,7 +1240,7 @@ function applyLanguage(lang) {
       feedback.innerHTML = `
         <div style="margin-bottom:.65rem;">${dict['contact.success']}</div>
         <div style="display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin-top:.5rem;">
-          <a href="${mailtoUrl}" class="btn btn--primary btn--sm" style="text-decoration:none;"><i class="fas fa-envelope"></i> Envoyer par Email (ccimitidja.20@gmail.com)</a>
+          <a href="${mailtoUrl}" class="btn btn--primary btn--sm" style="text-decoration:none;"><i class="fas fa-envelope"></i> Envoyer par Email (ccimitidja.20@gmail.com / Cci-mitidja@caci.dz)</a>
           <a href="${waUrl}" target="_blank" rel="noopener" class="btn btn--outline-green btn--sm" style="text-decoration:none;"><i class="fab fa-whatsapp"></i> WhatsApp (0661 61 32 05)</a>
         </div>
       `;
@@ -1386,7 +1387,7 @@ function applyLanguage(lang) {
       `${nom}`
     ].join('\n');
 
-    const mailtoUrl = `mailto:ccimitidja.20@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    const mailtoUrl = `mailto:ccimitidja.20@gmail.com,Cci-mitidja@caci.dz?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
     const waUrl = `https://wa.me/213661613205?text=${encodeURIComponent(emailBody)}`;
 
     const btn = form.querySelector('button[type="submit"]');
@@ -1405,6 +1406,7 @@ function applyLanguage(lang) {
         },
         body: JSON.stringify({
           _subject: emailSubject,
+          _cc: 'Cci-mitidja@caci.dz',
           _template: 'table',
           _captcha: 'false',
           _replyto: mail,
@@ -1433,7 +1435,7 @@ function applyLanguage(lang) {
       feedback.innerHTML = `
         <div style="margin-bottom:.65rem;">${dict['form.reg.success'] || dict['contact.success']}</div>
         <div style="display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin-top:.5rem;">
-          <a href="${mailtoUrl}" class="btn btn--primary btn--sm" style="text-decoration:none;"><i class="fas fa-envelope"></i> Envoyer par Email (ccimitidja.20@gmail.com)</a>
+          <a href="${mailtoUrl}" class="btn btn--primary btn--sm" style="text-decoration:none;"><i class="fas fa-envelope"></i> Envoyer par Email (ccimitidja.20@gmail.com / Cci-mitidja@caci.dz)</a>
           <a href="${waUrl}" target="_blank" rel="noopener" class="btn btn--outline-green btn--sm" style="text-decoration:none;"><i class="fab fa-whatsapp"></i> WhatsApp (0661 61 32 05)</a>
         </div>
       `;
