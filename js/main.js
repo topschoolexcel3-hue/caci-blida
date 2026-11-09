@@ -1150,12 +1150,16 @@ function applyLanguage(lang) {
     }
   } catch (_) {}
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.fr;
     const data = new FormData(form);
-    const nom  = data.get('nom')?.trim();
-    const mail = data.get('email')?.trim();
+    const nom        = (data.get('nom') || '').toString().trim();
+    const mail       = (data.get('email') || '').toString().trim();
+    const tel        = (data.get('tel') || '').toString().trim();
+    const entreprise = (data.get('entreprise') || '').toString().trim();
+    const sujetVal   = (data.get('sujet') || '').toString().trim();
+    const msg        = (data.get('message') || '').toString().trim();
 
     if (!nom || !mail) {
       showFeedback(dict['contact.err_empty'], 'error');
@@ -1166,23 +1170,90 @@ function applyLanguage(lang) {
       return;
     }
 
+    const sujetSelect = form.querySelector('#sujet');
+    const sujetLabel = (sujetSelect && sujetSelect.selectedIndex >= 0 && sujetVal)
+      ? sujetSelect.options[sujetSelect.selectedIndex].textContent.trim()
+      : (sujetVal || 'Contact Site Web CCI Mitidja-Blida');
+
+    const emailSubject = `[Site Web CCI Mitidja-Blida] ${sujetLabel} – ${nom}`;
+    const emailBody = [
+      `Bonjour CCI Mitidja-Blida,`,
+      ``,
+      `Nouveau message envoyé depuis le site web (https://ccimitidjablida.pages.dev/) :`,
+      ``,
+      `• Sujet : ${sujetLabel}`,
+      `• Nom & Prénom : ${nom}`,
+      `• Email : ${mail}`,
+      `• Téléphone : ${tel || 'Non renseigné'}`,
+      `• Entreprise / Organisation : ${entreprise || 'Non renseignée'}`,
+      `• Message : ${msg || 'Aucun message supplémentaire'}`,
+      ``,
+      `Cordialement,`,
+      `${nom}`
+    ].join('\n');
+
+    const mailtoUrl = `mailto:ccimitidja.20@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    const waUrl = `https://wa.me/213661613205?text=${encodeURIComponent(emailBody)}`;
+
     const btn = form.querySelector('button[type="submit"]');
     btn.disabled = true;
     btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> <span>${dict['contact.sending']}</span>`;
 
-    setTimeout(() => {
-      showFeedback(dict['contact.success'], 'success');
-      form.reset();
-      btn.disabled = false;
-      btn.innerHTML = `<i class="fas fa-paper-plane"></i> <span data-i18n="contact.f_submit">${dict['contact.f_submit']}</span>`;
-    }, 1200);
+    let sentByServer = false;
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 8000);
+      const res = await fetch('https://formsubmit.co/ajax/ccimitidja.20@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: emailSubject,
+          _template: 'table',
+          _captcha: 'false',
+          _replyto: mail,
+          'Sujet': sujetLabel,
+          'Nom et Prénom': nom,
+          'Email': mail,
+          'Téléphone': tel || 'Non renseigné',
+          'Entreprise / Organisation': entreprise || 'Non renseignée',
+          'Message': msg || 'Aucun message supplémentaire'
+        }),
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      const result = await res.json().catch(() => ({}));
+      if (res.ok && (result.success === true || result.success === 'true')) {
+        sentByServer = true;
+      }
+    } catch (_) {}
+
+    if (!sentByServer) {
+      window.location.href = mailtoUrl;
+    }
+
+    if (feedback) {
+      feedback.className = 'form-feedback success';
+      feedback.innerHTML = `
+        <div style="margin-bottom:.65rem;">${dict['contact.success']}</div>
+        <div style="display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin-top:.5rem;">
+          <a href="${mailtoUrl}" class="btn btn--primary btn--sm" style="text-decoration:none;"><i class="fas fa-envelope"></i> Envoyer par Email (ccimitidja.20@gmail.com)</a>
+          <a href="${waUrl}" target="_blank" rel="noopener" class="btn btn--outline-green btn--sm" style="text-decoration:none;"><i class="fab fa-whatsapp"></i> WhatsApp (0661 61 32 05)</a>
+        </div>
+      `;
+    }
+
+    form.reset();
+    btn.disabled = false;
+    btn.innerHTML = `<i class="fas fa-paper-plane"></i> <span data-i18n="contact.f_submit">${dict['contact.f_submit']}</span>`;
   });
 
   function showFeedback(msg, type) {
     if (!feedback) return;
     feedback.textContent = msg;
     feedback.className   = 'form-feedback ' + type;
-    feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 })();
 
@@ -1272,13 +1343,16 @@ function applyLanguage(lang) {
     }
   } catch (_) {}
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.fr;
     const data = new FormData(form);
-    const nom  = data.get('nom')?.trim();
-    const tel  = data.get('tel')?.trim();
-    const mail = data.get('email')?.trim();
+    const nom        = (data.get('nom') || '').toString().trim();
+    const entreprise = (data.get('entreprise') || '').toString().trim();
+    const tel        = (data.get('tel') || '').toString().trim();
+    const mail       = (data.get('email') || '').toString().trim();
+    const formation  = (data.get('formation') || '').toString().trim();
+    const msg        = (data.get('message') || '').toString().trim();
 
     if (!nom || !tel || !mail) {
       if (feedback) {
@@ -1295,19 +1369,79 @@ function applyLanguage(lang) {
       return;
     }
 
+    const emailSubject = `Inscription Formation CCI Mitidja-Blida : ${formation} – ${nom}`;
+    const emailBody = [
+      `Bonjour CCI Mitidja-Blida,`,
+      ``,
+      `Nouvelle inscription à une formation depuis le site web (https://ccimitidjablida.pages.dev/) :`,
+      ``,
+      `• Formation choisie : ${formation}`,
+      `• Nom & Prénom : ${nom}`,
+      `• Entreprise / Organisation : ${entreprise || 'Non renseignée'}`,
+      `• Téléphone : ${tel}`,
+      `• Email : ${mail}`,
+      `• Message / Nombre de participants : ${msg || 'Aucun message supplémentaire'}`,
+      ``,
+      `Cordialement,`,
+      `${nom}`
+    ].join('\n');
+
+    const mailtoUrl = `mailto:ccimitidja.20@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    const waUrl = `https://wa.me/213661613205?text=${encodeURIComponent(emailBody)}`;
+
     const btn = form.querySelector('button[type="submit"]');
     btn.disabled = true;
     btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> <span>${dict['contact.sending']}</span>`;
 
-    setTimeout(() => {
-      if (feedback) {
-        feedback.textContent = dict['form.reg.success'] || dict['contact.success'];
-        feedback.className   = 'form-feedback success';
+    let sentByServer = false;
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 8000);
+      const res = await fetch('https://formsubmit.co/ajax/ccimitidja.20@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: emailSubject,
+          _template: 'table',
+          _captcha: 'false',
+          _replyto: mail,
+          'Formation choisie': formation,
+          'Nom et Prénom': nom,
+          'Entreprise / Organisation': entreprise || 'Non renseignée',
+          'Téléphone': tel,
+          'Email': mail,
+          'Message / Nombre de participants': msg || 'Aucun message supplémentaire'
+        }),
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      const result = await res.json().catch(() => ({}));
+      if (res.ok && (result.success === true || result.success === 'true')) {
+        sentByServer = true;
       }
-      form.reset();
-      btn.disabled = false;
-      btn.innerHTML = `<i class="fas fa-paper-plane"></i> <span data-i18n="form.reg.submit">${dict['form.reg.submit']}</span>`;
-    }, 900);
+    } catch (_) {}
+
+    if (!sentByServer) {
+      window.location.href = mailtoUrl;
+    }
+
+    if (feedback) {
+      feedback.className = 'form-feedback success';
+      feedback.innerHTML = `
+        <div style="margin-bottom:.65rem;">${dict['form.reg.success'] || dict['contact.success']}</div>
+        <div style="display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; margin-top:.5rem;">
+          <a href="${mailtoUrl}" class="btn btn--primary btn--sm" style="text-decoration:none;"><i class="fas fa-envelope"></i> Envoyer par Email (ccimitidja.20@gmail.com)</a>
+          <a href="${waUrl}" target="_blank" rel="noopener" class="btn btn--outline-green btn--sm" style="text-decoration:none;"><i class="fab fa-whatsapp"></i> WhatsApp (0661 61 32 05)</a>
+        </div>
+      `;
+    }
+
+    form.reset();
+    btn.disabled = false;
+    btn.innerHTML = `<i class="fas fa-paper-plane"></i> <span data-i18n="form.reg.submit">${dict['form.reg.submit']}</span>`;
   });
 })();
 
